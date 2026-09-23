@@ -71,8 +71,10 @@ impl PyTdxF10Client {
     /// - start: 起始位置
     /// - length: 数据长度
     fn get_category(&self, py: Python<'_>, market: u8, code: &str) -> PyResult<Py<PyList>> {
-        let categories = self.client.get_category(market, code).map_err(|e| {
-            pyo3::exceptions::PyRuntimeError::new_err(format!("获取分类失败: {}", e))
+        let categories = py.detach(|| {
+            self.client.get_category(market, code).map_err(|e| {
+                pyo3::exceptions::PyRuntimeError::new_err(format!("获取分类失败: {}", e))
+            })
         })?;
 
         let list = PyList::empty(py);
@@ -133,8 +135,10 @@ impl PyTdxF10Client {
 
         let cat = F10Category::new(name, filename, start, length);
 
-        let content = self.client.get_content(market, code, &cat).map_err(|e| {
-            pyo3::exceptions::PyRuntimeError::new_err(format!("获取内容失败: {}", e))
+        let content = py.detach(|| {
+            self.client.get_content(market, code, &cat).map_err(|e| {
+                pyo3::exceptions::PyRuntimeError::new_err(format!("获取内容失败: {}", e))
+            })
         })?;
 
         Ok(content.content)
@@ -149,9 +153,11 @@ impl PyTdxF10Client {
     ///
     /// # 返回
     /// 文本内容
-    fn get_content_by_name(&self, market: u8, code: &str, name: &str) -> PyResult<String> {
-        let content = self.client.get_content_by_name(market, code, name).map_err(|e| {
-            pyo3::exceptions::PyRuntimeError::new_err(format!("获取内容失败: {}", e))
+    fn get_content_by_name(&self, py: Python<'_>, market: u8, code: &str, name: &str) -> PyResult<String> {
+        let content = py.detach(|| {
+            self.client.get_content_by_name(market, code, name).map_err(|e| {
+                pyo3::exceptions::PyRuntimeError::new_err(format!("获取内容失败: {}", e))
+            })
         })?;
 
         Ok(content.content)
@@ -187,8 +193,10 @@ impl PyTdxF10Client {
     /// # 返回
     /// F10Data 包含所有分类的内容
     fn get_all_data(&self, py: Python<'_>, market: u8, code: &str) -> PyResult<Py<PyDict>> {
-        let data = self.client.get_all_data(market, code).map_err(|e| {
-            pyo3::exceptions::PyRuntimeError::new_err(format!("获取所有数据失败: {}", e))
+        let data = py.detach(|| {
+            self.client.get_all_data(market, code).map_err(|e| {
+                pyo3::exceptions::PyRuntimeError::new_err(format!("获取所有数据失败: {}", e))
+            })
         })?;
 
         let dict = PyDict::new(py);
