@@ -28,7 +28,7 @@ use tokio::sync::{mpsc, oneshot, Mutex};
 use crate::error::{Result, TdxError};
 use crate::logw;
 use crate::net::packet::{ResponseHeader, RSP_HEADER_LEN};
-use crate::net::utils::{self, TradingPhase};
+use crate::net::utils::{self, fq_cache_insert, FqCacheEntry, FQ_CACHE_MAX_ENTRIES, TradingPhase};
 use crate::protocol::constants::*;
 use crate::protocol::parsers::*;
 use crate::protocol::types::*;
@@ -240,6 +240,10 @@ pub struct AsyncTdxHqClient {
     connected: Arc<std::sync::atomic::AtomicBool>,
     /// 复权上下文数据量档位 (默认 Mid ≈ 20 年), 以 u8 存储
     fq_context_tier: AtomicU8,
+    /// 除权除息数据缓存 (复权路径专用): (market, code) -> 事件列表
+    xdxr_cache: Mutex<HashMap<(u8, String), FqCacheEntry<Vec<XdXrInfo>>>>,
+    /// 复权上下文 K 线缓存: (category, market, code, tier) -> 历史 K 线
+    context_cache: Mutex<HashMap<(u8, u8, String, u8), FqCacheEntry<Vec<SecurityBar>>>>,
 }
 
 impl AsyncTdxHqClient {
@@ -260,6 +264,8 @@ impl AsyncTdxHqClient {
             heartbeat_stop: tokio::sync::Mutex::new(None),
             connected: Arc::new(std::sync::atomic::AtomicBool::new(false)),
             fq_context_tier: AtomicU8::new(utils::FqContextTier::default() as u8),
+            xdxr_cache: Mutex::new(HashMap::new()),
+            context_cache: Mutex::new(HashMap::new()),
         }
     }
 
@@ -575,6 +581,111 @@ impl AsyncTdxHqClient {
         }
     }
 
+    /// 获取除权除息数据 (带 TTL 缓存, 供复权路径复用)
+    ///
+    /// 除权除息数据仅在上市公司公告新事件时变化, 对同一 (market, code)
+    /// 在 TTL 内直接复用缓存, 使重复的复权请求省去 1 次 xdxr 往返。
+    /// TTL 沿用 `cache_ttl` 字段 (默认 30 秒), 可用 `clear_fq_cache`
+    /// 强制失效。
+    async fn get_xdxr_info_cached(&self, market: u8, code: &str) -> Result<Arc<Vec<XdXrInfo>>> {
+        let key = (market, code.to_string());
+        let now = Instant::now();
+        {
+            let mut cache = self.xdxr_cache.lock().await;
+            if let Some(entry) = cache.get_mut(&key) {
+                if now < entry.expires_at {
+                    entry.last_used = now;
+                    return Ok(Arc::clone(&entry.data));
+                }
+            }
+        }
+
+        let info = Arc::new(self.get_xdxr_info(market, code).await?);
+        {
+            let mut cache = self.xdxr_cache.lock().await;
+            fq_cache_insert(
+                &mut cache,
+                key,
+                Arc::clone(&info),
+                self.cache_ttl,
+                FQ_CACHE_MAX_ENTRIES,
+            );
+        }
+        Ok(info)
+    }
+
+    /// 获取复权上下文 K 线 (带 TTL 缓存)
+    ///
+    /// 上下文拉取范围只取决于 (category, market, code, 最早除权日, tier),
+    /// 与当次请求的 start/count 无关, 因此可按 (category, market, code, tier)
+    /// 缓存复用。门控判断与 `fetch_context_bars_for_adjust` 保持一致:
+    /// 无需上下文时不查缓存、不发包。
+    async fn fetch_context_bars_for_adjust_cached(
+        &self,
+        category: u8,
+        market: u8,
+        code: &str,
+        bars: &[SecurityBar],
+        xdxr: &[XdXrInfo],
+    ) -> Vec<SecurityBar> {
+        if bars.is_empty() || xdxr.is_empty() {
+            return Vec::new();
+        }
+        let earliest_event = xdxr
+            .iter()
+            .filter(|x| x.category == 1)
+            .map(|x| x.year as u32 * 10000 + x.month as u32 * 100 + x.day as u32)
+            .min();
+        let Some(ee_date) = earliest_event else { return Vec::new() };
+        let first_bar_date =
+            bars[0].year as u32 * 10000 + bars[0].month as u32 * 100 + bars[0].day as u32;
+        if first_bar_date <= ee_date {
+            return Vec::new();
+        }
+
+        let key = (
+            category,
+            market,
+            code.to_string(),
+            self.fq_context_tier.load(Ordering::SeqCst),
+        );
+        let now = Instant::now();
+        {
+            let mut cache = self.context_cache.lock().await;
+            if let Some(entry) = cache.get_mut(&key) {
+                if now < entry.expires_at {
+                    entry.last_used = now;
+                    return (*entry.data).clone();
+                }
+            }
+        }
+
+        let context = Arc::new(
+            self.fetch_context_bars_for_adjust(category, market, code, bars, xdxr)
+                .await,
+        );
+        {
+            let mut cache = self.context_cache.lock().await;
+            fq_cache_insert(
+                &mut cache,
+                key,
+                Arc::clone(&context),
+                self.cache_ttl,
+                FQ_CACHE_MAX_ENTRIES,
+            );
+        }
+        (*context).clone()
+    }
+
+    /// 清空复权辅助数据缓存 (除权除息 + 复权上下文)
+    ///
+    /// 长驻客户端在上市公司公告除权除息事件后调用, 可立即刷新
+    /// 复权计算的输入数据, 无需等待 TTL 自然过期。
+    pub async fn clear_fq_cache(&self) {
+        self.xdxr_cache.lock().await.clear();
+        self.context_cache.lock().await.clear();
+    }
+
     // ================================================================
     // API 方法
     // ================================================================
@@ -592,12 +703,14 @@ impl AsyncTdxHqClient {
         let packet = utils::build_security_bars_packet(category, market, code, start, count, fq);
         let body = self.send_and_recv(&packet).await?;
         let mut bars = parse_security_bars(&body, category)?;
-        if fq != 0 {
-            if let Ok(xdxr) = self.get_xdxr_info(market, code).await {
+        // 客户端侧复权计算; xdxr/context 走 TTL 缓存
+        // (重复请求从 2+6 RTT 降为 1 RTT); 空数据不触发复权辅助请求
+        if fq != 0 && !bars.is_empty() {
+            if let Ok(xdxr) = self.get_xdxr_info_cached(market, code).await {
                 use crate::protocol::adjuster::{adjust_security_bars, FqType};
                 let fq_enum = if fq == 2 { FqType::Hfq } else { FqType::Qfq };
                 let context = self
-                    .fetch_context_bars_for_adjust(category, market, code, &bars, &xdxr)
+                    .fetch_context_bars_for_adjust_cached(category, market, code, &bars, &xdxr)
                     .await;
                 adjust_security_bars(&mut bars, &context, &xdxr, fq_enum);
             }

@@ -86,6 +86,14 @@ impl PyAsyncTdxHqClient {
         self.rt.block_on(self.client.disconnect());
     }
 
+    /// 清空复权辅助数据缓存 (除权除息 + 复权上下文)
+    ///
+    /// 长驻客户端在上市公司公告除权除息事件后调用, 可立即刷新
+    /// 复权计算的输入数据, 无需等待 TTL 自然过期。
+    fn clear_fq_cache(&self) {
+        self.rt.block_on(self.client.clear_fq_cache());
+    }
+
     /// 当前连接数
     fn connection_count(&self) -> usize {
         self.rt.block_on(self.client.connection_count())
