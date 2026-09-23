@@ -33,12 +33,10 @@ impl PyTdxHqClient {
         }
     }
 
-    /// 连接到 TDX 服务器
+    /// 连接到 TDX 服务器 (TCP 握手在 GIL 外完成)
     #[pyo3(signature = (ip, port, timeout=None))]
-    fn connect(&self, ip: &str, port: u16, timeout: Option<f64>) -> PyResult<bool> {
-        self.client
-            .connect(ip, port, timeout)
-            .map_err(to_py_err)
+    fn connect(&self, py: Python<'_>, ip: &str, port: u16, timeout: Option<f64>) -> PyResult<bool> {
+        py.detach(|| self.client.connect(ip, port, timeout).map_err(to_py_err))
     }
 
     /// 断开连接
@@ -51,12 +49,10 @@ impl PyTdxHqClient {
         self.client.is_connected()
     }
 
-    /// 连接到任意可用服务器 (从默认列表中选择)
+    /// 连接到任意可用服务器 (逐台探测在 GIL 外完成, 可耗时数秒)
     #[pyo3(signature = (timeout=None))]
-    fn connect_to_any(&self, timeout: Option<f64>) -> PyResult<bool> {
-        self.client
-            .connect_to_any(timeout)
-            .map_err(to_py_err)
+    fn connect_to_any(&self, py: Python<'_>, timeout: Option<f64>) -> PyResult<bool> {
+        py.detach(|| self.client.connect_to_any(timeout).map_err(to_py_err))
     }
 
     /// 设置是否自动重试
@@ -161,13 +157,15 @@ impl PyTdxHqClient {
     ///
     /// 返回: list of (name, ip, port, tcp_ms, hs_ms, api_ms)
     /// 不会自动修改优先列表, 用户根据结果自行调用 reorder_servers()
+    ///
+    /// 探测期间释放 GIL (全列表探测可耗时数十秒)。
     #[pyo3(signature = (timeout=3.0))]
     fn probe_servers(
         &self,
         py: Python<'_>,
         timeout: f64,
     ) -> PyResult<Py<PyAny>> {
-        let results = self.client.probe_servers(timeout);
+        let results = py.detach(|| self.client.probe_servers(timeout));
         let list = PyList::empty(py);
         for (name, ip, port, tcp_ms, hs_ms, api_ms) in &results {
             let tuple = PyTuple::new(py, &[
@@ -208,10 +206,11 @@ impl PyTdxHqClient {
         count: u16,
         fq: u8,
     ) -> PyResult<Py<PyAny>> {
-        let bars = self
-            .client
-            .get_security_bars(category, market, code, start, count, fq)
-            .map_err(to_py_err)?;
+        let bars = py.detach(|| {
+            self.client
+                .get_security_bars(category, market, code, start, count, fq)
+                .map_err(to_py_err)
+        })?;
 
         let list = PyList::empty(py);
         for b in &bars {
@@ -233,7 +232,7 @@ impl PyTdxHqClient {
         Ok(list.into())
     }
 
-    /// 获取K线数据 (自动分页)
+    /// 获取K线数据 (自动分页, 网络阶段释放 GIL)
     #[pyo3(signature = (category, market, code, count=800, fq=1))]
     fn get_security_bars_all(
         &self,
@@ -244,10 +243,11 @@ impl PyTdxHqClient {
         count: u16,
         fq: u8,
     ) -> PyResult<Py<PyAny>> {
-        let bars = self
-            .client
-            .get_security_bars_all(category, market, code, count, fq)
-            .map_err(to_py_err)?;
+        let bars = py.detach(|| {
+            self.client
+                .get_security_bars_all(category, market, code, count, fq)
+                .map_err(to_py_err)
+        })?;
 
         let list = PyList::empty(py);
         for b in &bars {
@@ -269,7 +269,7 @@ impl PyTdxHqClient {
         Ok(list.into())
     }
 
-    /// 获取指数K线
+    /// 获取指数K线 (网络阶段释放 GIL)
     #[pyo3(signature = (category, market, code, start=0, count=800, fq=1))]
     fn get_index_bars(
         &self,
@@ -281,10 +281,11 @@ impl PyTdxHqClient {
         count: u16,
         fq: u8,
     ) -> PyResult<Py<PyAny>> {
-        let bars = self
-            .client
-            .get_index_bars(category, market, code, start, count, fq)
-            .map_err(to_py_err)?;
+        let bars = py.detach(|| {
+            self.client
+                .get_index_bars(category, market, code, start, count, fq)
+                .map_err(to_py_err)
+        })?;
 
         let list = PyList::empty(py);
         for b in &bars {
@@ -308,7 +309,7 @@ impl PyTdxHqClient {
         Ok(list.into())
     }
 
-    /// 获取指数K线 (自动分页)
+    /// 获取指数K线 (自动分页, 网络阶段释放 GIL)
     #[pyo3(signature = (category, market, code, count=800, fq=1))]
     fn get_index_bars_all(
         &self,
@@ -319,10 +320,11 @@ impl PyTdxHqClient {
         count: u16,
         fq: u8,
     ) -> PyResult<Py<PyAny>> {
-        let bars = self
-            .client
-            .get_index_bars_all(category, market, code, count, fq)
-            .map_err(to_py_err)?;
+        let bars = py.detach(|| {
+            self.client
+                .get_index_bars_all(category, market, code, count, fq)
+                .map_err(to_py_err)
+        })?;
 
         let list = PyList::empty(py);
         for b in &bars {
@@ -399,7 +401,7 @@ impl PyTdxHqClient {
         Ok(list.into())
     }
 
-    /// 获取证券列表
+    /// 获取证券列表 (网络阶段释放 GIL)
     #[pyo3(signature = (market, start=0))]
     fn get_security_list(
         &self,
@@ -407,10 +409,11 @@ impl PyTdxHqClient {
         market: u8,
         start: u16,
     ) -> PyResult<Py<PyAny>> {
-        let list_data = self
-            .client
-            .get_security_list(market, start)
-            .map_err(to_py_err)?;
+        let list_data = py.detach(|| {
+            self.client
+                .get_security_list(market, start)
+                .map_err(to_py_err)
+        })?;
 
         let list = PyList::empty(py);
         for s in &list_data {
@@ -510,7 +513,7 @@ impl PyTdxHqClient {
         Ok(list.into())
     }
 
-    /// 获取历史逐笔成交
+    /// 获取历史逐笔成交 (网络阶段释放 GIL)
     #[pyo3(signature = (market, code, start=0, count=2000, date=0))]
     fn get_history_transaction_data(
         &self,
@@ -521,10 +524,11 @@ impl PyTdxHqClient {
         count: u16,
         date: u32,
     ) -> PyResult<Py<PyAny>> {
-        let data = self
-            .client
-            .get_history_transaction_data(market, code, start, count, date)
-            .map_err(to_py_err)?;
+        let data = py.detach(|| {
+            self.client
+                .get_history_transaction_data(market, code, start, count, date)
+                .map_err(to_py_err)
+        })?;
 
         let list = PyList::empty(py);
         for d in &data {
@@ -540,17 +544,18 @@ impl PyTdxHqClient {
         Ok(list.into())
     }
 
-    /// 获取财务信息
+    /// 获取财务信息 (网络阶段释放 GIL)
     fn get_finance_info(
         &self,
         py: Python<'_>,
         market: u8,
         code: &str,
     ) -> PyResult<Py<PyAny>> {
-        let info = self
-            .client
-            .get_finance_info(market, code)
-            .map_err(to_py_err)?;
+        let info = py.detach(|| {
+            self.client
+                .get_finance_info(market, code)
+                .map_err(to_py_err)
+        })?;
 
         let dict = PyDict::new(py);
         dict.set_item("market", info.market)?;
@@ -592,17 +597,18 @@ impl PyTdxHqClient {
         Ok(dict.into())
     }
 
-    /// 获取除权除息
+    /// 获取除权除息 (网络阶段释放 GIL)
     fn get_xdxr_info(
         &self,
         py: Python<'_>,
         market: u8,
         code: &str,
     ) -> PyResult<Py<PyAny>> {
-        let data = self
-            .client
-            .get_xdxr_info(market, code)
-            .map_err(to_py_err)?;
+        let data = py.detach(|| {
+            self.client
+                .get_xdxr_info(market, code)
+                .map_err(to_py_err)
+        })?;
 
         let list = PyList::empty(py);
         for d in &data {
@@ -729,10 +735,11 @@ impl PyTdxHqClient {
         all_stock: Vec<(u8, String)>,
     ) -> PyResult<Py<PyAny>> {
         let refs: Vec<(u8, &str)> = all_stock.iter().map(|(m, c)| (*m, c.as_str())).collect();
-        let quotes = self
-            .client
-            .get_security_quotes(&refs)
-            .map_err(to_py_err)?;
+        let quotes = py.detach(|| {
+            self.client
+                .get_security_quotes(&refs)
+                .map_err(to_py_err)
+        })?;
 
         let list = PyList::empty(py);
         for q in &quotes {
@@ -781,9 +788,11 @@ impl PyTdxHqClient {
         &self, py: Python<'_>, category: u8, market: u8, code: &str,
         start: u32, count: u16, fq: u8,
     ) -> PyResult<Py<PyAny>> {
-        let bars = self.client
-            .get_index_bars(category, market, code, start, count, fq)
-            .map_err(to_py_err)?;
+        let bars = py.detach(|| {
+            self.client
+                .get_index_bars(category, market, code, start, count, fq)
+                .map_err(to_py_err)
+        })?;
         crate::python::py_dataframe::index_bars_to_df(py, &bars)
     }
 
@@ -792,9 +801,11 @@ impl PyTdxHqClient {
         &self, py: Python<'_>, all_stock: Vec<(u8, String)>,
     ) -> PyResult<Py<PyAny>> {
         let refs: Vec<(u8, &str)> = all_stock.iter().map(|(m, c)| (*m, c.as_str())).collect();
-        let quotes = self.client
-            .get_security_quotes(&refs)
-            .map_err(to_py_err)?;
+        let quotes = py.detach(|| {
+            self.client
+                .get_security_quotes(&refs)
+                .map_err(to_py_err)
+        })?;
         crate::python::py_dataframe::quotes_to_df(py, &quotes)
     }
 
@@ -894,23 +905,27 @@ impl PyTdxHqClient {
         start: u32,
         count: u16,
     ) -> PyResult<Py<PyAny>> {
-        // 1. 获取 K 线数据 (未复权)
-        let bars = self.client
-            .get_security_bars(4, market, code, start, count, 0)  // category=4 (日K), fq=0 (未复权)
-            .map_err(to_py_err)?;
-
-        // 2. 获取 XDXR 数据
-        let xdxr = self.client
-            .get_xdxr_info(market, code)
-            .map_err(to_py_err)?;
-
-        // 3. 获取上下文数据 (自动检测档位)
+        // 1-4. 网络获取 + 因子计算全部在 GIL 外完成
         use crate::protocol::fq_service::FqService;
-        let context = self.client.fetch_context_for_factors(4, market, code, &bars, &xdxr)
-            .map_err(to_py_err)?;
+        let (_, _, result) = py.detach(|| {
+            // 1. 获取 K 线数据 (未复权)
+            let bars = self.client
+                .get_security_bars(4, market, code, start, count, 0)  // category=4 (日K), fq=0 (未复权)
+                .map_err(to_py_err)?;
 
-        // 4. 计算因子
-        let result = FqService::calc_factors(&xdxr, &bars, &context);
+            // 2. 获取 XDXR 数据
+            let xdxr = self.client
+                .get_xdxr_info(market, code)
+                .map_err(to_py_err)?;
+
+            // 3. 获取上下文数据 (自动检测档位)
+            let context = self.client.fetch_context_for_factors(4, market, code, &bars, &xdxr)
+                .map_err(to_py_err)?;
+
+            // 4. 计算因子
+            let result = FqService::calc_factors(&xdxr, &bars, &context);
+            Ok::<_, PyErr>((bars, xdxr, result))
+        })?;
 
         // 5. 转换为 Python dict
         let dict = PyDict::new(py);
