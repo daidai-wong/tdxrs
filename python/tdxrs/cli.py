@@ -20,7 +20,7 @@ from tdxrs._internal import (
     BlockReader,
 )
 from tdxrs.constants import (
-    MARKET_SH, MARKET_SZ,
+    MARKET_SH, MARKET_SZ, MARKET_BJ,
     KLINE_5MIN, KLINE_15MIN, KLINE_30MIN, KLINE_1HOUR,
     KLINE_DAILY, KLINE_WEEKLY, KLINE_MONTHLY, KLINE_YEARLY, KLINE_3MONTH,
     FQ_NONE, FQ_QFQ, FQ_HFQ,
@@ -89,7 +89,15 @@ def check_limit(key, value):
 
 
 def auto_market(code):
-    """根据代码自动判断市场"""
+    """根据代码自动判断市场
+
+    规则:
+    - 北交所: 43xxxx (老三板平移) / 83xxxx / 87xxxx / 920xxx (新股)
+    - 上海:   6xxxxx (股票) / 5xxxxx (基金) / 9xxxxx (B股, 920 除外)
+    - 深圳:   其余 (0 主板 / 3 创业板 / 1 深转债 / 15 基金)
+    """
+    if code.startswith(("43", "83", "87", "920")):
+        return MARKET_BJ
     if code.startswith(("6", "5", "9")):
         return MARKET_SH
     return MARKET_SZ
