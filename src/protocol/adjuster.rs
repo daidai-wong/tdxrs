@@ -165,34 +165,36 @@ fn calc_qfq_factor(close_before: f64, parts: &FactorParts) -> f64 {
 }
 
 /// 将价格四舍五入到指定小数位数 (不影响 f64 内部精度, 仅消除浮点尾噪声)
+/// scale 由调用方预先计算 (10^places), 避免循环内重复 powi
 #[inline]
-fn round_price(p: f64, places: u32) -> f64 {
-    let scale = 10_f64.powi(places as i32);
+fn round_with_scale(p: f64, scale: f64) -> f64 {
     (p * scale).round() / scale
 }
 
 /// 查找事件前一交易日的收盘价
 ///
 /// 先在 `bars` (主数据) 中搜索, 取最后一个日期 < date_key 的 bar；
-/// 若未找到, 再在 `context_bars` (更早的历史数据) 中搜索。
+/// 若未找到, 再在 `context_bars` (更早的历史 K 线) 中反向搜索。
+/// bars 按日期升序 (调用契约), 用 partition_point 二分, O(log B)。
 fn find_close_before_event(
     bars: &[SecurityBar],
     context_bars: &[SecurityBar],
     date_key: u32,
 ) -> Option<f64> {
-    // bars 中找 (正向迭代, 取最后一个日期 < date_key 的)
-    if let Some(bar) = bars
-        .iter()
-        .take_while(|b| b.year as u32 * 10000 + b.month as u32 * 100 + (b.day as u32) < date_key)
-        .last()
-    {
-        return Some(bar.close);
+    #[inline]
+    fn bar_key(b: &SecurityBar) -> u32 {
+        b.year as u32 * 10000 + b.month as u32 * 100 + b.day as u32
+    }
+    // bars 中找 (二分: 第一个 >= date_key 的位置, 其前一个即最后一个 < date_key 的)
+    let pos = bars.partition_point(|b| bar_key(b) < date_key);
+    if pos > 0 {
+        return Some(bars[pos - 1].close);
     }
     // context_bars 中找 (反向迭代, 找最后一个日期 < date_key 的)
     context_bars
         .iter()
         .rev()
-        .find(|b| b.year as u32 * 10000 + b.month as u32 * 100 + (b.day as u32) < date_key)
+        .find(|b| bar_key(b) < date_key)
         .map(|b| b.close)
 }
 
@@ -302,12 +304,13 @@ pub fn adjust_security_bars(
         FqType::None => {}
     }
 
-    // 4. 最终精度控制: 消除浮点尾噪声
+    // 4. 最终精度控制: 消除浮点尾噪声 (scale 外提, 避免每 bar 重复 powi)
+    let scale = 10_f64.powi(FQ_PRICE_PRECISION as i32);
     for bar in bars.iter_mut() {
-        bar.open = round_price(bar.open, FQ_PRICE_PRECISION);
-        bar.high = round_price(bar.high, FQ_PRICE_PRECISION);
-        bar.low = round_price(bar.low, FQ_PRICE_PRECISION);
-        bar.close = round_price(bar.close, FQ_PRICE_PRECISION);
+        bar.open = round_with_scale(bar.open, scale);
+        bar.high = round_with_scale(bar.high, scale);
+        bar.low = round_with_scale(bar.low, scale);
+        bar.close = round_with_scale(bar.close, scale);
     }
 }
 
