@@ -3,9 +3,10 @@
 //! 提取 client.rs / direct_client.rs / async_client.rs 中的重复逻辑
 
 use flate2::read::ZlibDecoder;
+use std::collections::HashMap;
 use std::io::Read;
 use std::sync::atomic::{AtomicBool, Ordering};
-use std::sync::Mutex;
+use std::sync::{Arc, Mutex};
 use std::time::{Duration, Instant};
 
 use crate::error::Result;
@@ -476,6 +477,61 @@ pub fn fetch_context_bars_for_adjust_with_tier<F: Fn(&[u8]) -> Result<Vec<u8>>>(
 }
 
 // ================================================================
+// 复权辅助数据缓存原语 (同步/异步客户端共用)
+// ================================================================
+
+/// 复权辅助数据缓存条目 (带 LRU 淘汰时间戳)
+///
+/// 数据以 `Arc` 共享, 命中时仅需克隆引用计数; `last_used` 供容量满时
+/// 淘汰最久未用的条目。
+pub(crate) struct FqCacheEntry<T> {
+    pub data: Arc<T>,
+    pub expires_at: std::time::Instant,
+    pub last_used: std::time::Instant,
+}
+
+/// 复权缓存默认最大条目数
+///
+/// 每条上下文最多约 7200 根 K 线 (High 档, 约 0.5-1 MB), 128 条的内存
+/// 上界约 70-140 MB; 批量扫描场景下同一股票的复权辅助数据一次扫描内
+/// 通常只需加载一次, 该容量足够覆盖分页复用与常见回补模式。
+pub(crate) const FQ_CACHE_MAX_ENTRIES: usize = 128;
+
+/// 向复权缓存插入条目 (先淘汰过期条目, 容量仍满时淘汰最久未用条目)
+pub(crate) fn fq_cache_insert<K, T>(
+    cache: &mut HashMap<K, FqCacheEntry<T>>,
+    key: K,
+    data: Arc<T>,
+    ttl: Duration,
+    cap: usize,
+) where
+    K: Eq + std::hash::Hash + Clone,
+{
+    let now = std::time::Instant::now();
+    // 1. 惰性清理已过期条目
+    cache.retain(|_, e| now < e.expires_at);
+    // 2. 容量仍满时淘汰最久未用的条目
+    while cache.len() >= cap {
+        let Some(oldest) = cache
+            .iter()
+            .min_by_key(|(_, e)| e.last_used)
+            .map(|(k, _)| k.clone())
+        else {
+            break;
+        };
+        cache.remove(&oldest);
+    }
+    cache.insert(
+        key,
+        FqCacheEntry {
+            data,
+            expires_at: now + ttl,
+            last_used: now,
+        },
+    );
+}
+
+// ================================================================
 // 单元测试
 // ================================================================
 
@@ -656,5 +712,96 @@ mod tests {
     fn test_detect_trading_phase_returns_valid() {
         let phase = detect_trading_phase();
         assert!(matches!(phase, TradingPhase::Trading | TradingPhase::PrePost | TradingPhase::Closed));
+    }
+
+    // ---- fq_cache_insert: 复权辅助缓存 ----
+
+    #[test]
+    fn test_fq_cache_insert_and_hit() {
+        let mut cache: HashMap<String, FqCacheEntry<u32>> = HashMap::new();
+        fq_cache_insert(
+            &mut cache,
+            "a".to_string(),
+            Arc::new(1u32),
+            Duration::from_secs(60),
+            8,
+        );
+        assert_eq!(cache.len(), 1);
+        assert_eq!(*cache["a"].data, 1);
+    }
+
+    #[test]
+    fn test_fq_cache_expired_entries_evicted_on_insert() {
+        let mut cache: HashMap<String, FqCacheEntry<u32>> = HashMap::new();
+        // TTL=0: 条目插入后立即过期
+        fq_cache_insert(
+            &mut cache,
+            "a".to_string(),
+            Arc::new(1u32),
+            Duration::from_secs(0),
+            8,
+        );
+        assert_eq!(cache.len(), 1); // 惰性过期: 插入时仍在
+        // 下一次插入触发清理, 过期条目被移除
+        fq_cache_insert(
+            &mut cache,
+            "b".to_string(),
+            Arc::new(2u32),
+            Duration::from_secs(60),
+            8,
+        );
+        assert!(!cache.contains_key("a"), "过期条目应被清理");
+        assert_eq!(cache.len(), 1);
+    }
+
+    #[test]
+    fn test_fq_cache_lru_eviction() {
+        let mut cache: HashMap<String, FqCacheEntry<u32>> = HashMap::new();
+        fq_cache_insert(
+            &mut cache,
+            "a".to_string(),
+            Arc::new(1u32),
+            Duration::from_secs(60),
+            2,
+        );
+        std::thread::sleep(Duration::from_millis(2));
+        fq_cache_insert(
+            &mut cache,
+            "b".to_string(),
+            Arc::new(2u32),
+            Duration::from_secs(60),
+            2,
+        );
+        std::thread::sleep(Duration::from_millis(2));
+        // 模拟 a 被再次使用 -> b 成为最久未用
+        cache.get_mut("a").unwrap().last_used = std::time::Instant::now();
+        std::thread::sleep(Duration::from_millis(2));
+        // 容量 cap=2 已满, 插入 c 应淘汰 b (最久未用), 保留 a
+        fq_cache_insert(
+            &mut cache,
+            "c".to_string(),
+            Arc::new(3u32),
+            Duration::from_secs(60),
+            2,
+        );
+        assert_eq!(cache.len(), 2, "容量不应超过上限");
+        assert!(cache.contains_key("a"), "最近使用的条目应保留");
+        assert!(!cache.contains_key("b"), "最久未用的条目应被淘汰");
+        assert!(cache.contains_key("c"));
+    }
+
+    #[test]
+    fn test_fq_cache_cap_bounded() {
+        let mut cache: HashMap<u32, FqCacheEntry<u8>> = HashMap::new();
+        for i in 0..50u32 {
+            fq_cache_insert(
+                &mut cache,
+                i,
+                Arc::new(i as u8),
+                Duration::from_secs(60),
+                16,
+            );
+        }
+        assert_eq!(cache.len(), 16, "反复插入应稳定在上限容量");
     }
 }

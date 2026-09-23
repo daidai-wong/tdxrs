@@ -11,7 +11,7 @@ use crate::error_codes::ErrorCode;
 use crate::net::connection::TcpConnection;
 use crate::net::packet::{ResponseHeader, RSP_HEADER_LEN};
 use crate::net::pool::{ConnectionPool, PoolConfig, PoolStats};
-use crate::net::utils::{self, RateLimiter};
+use crate::net::utils::{self, fq_cache_insert, FqCacheEntry, FQ_CACHE_MAX_ENTRIES, RateLimiter};
 use crate::protocol::constants::*;
 use crate::protocol::parsers::*;
 use crate::protocol::types::*;
@@ -47,6 +47,10 @@ pub struct TdxHqClient {
     rate_limiter_minute: RateLimiter,
     /// 复权上下文数据量档位 (默认 Mid ≈ 20 年), 以 u8 存储
     fq_context_tier: AtomicU8,
+    /// 除权除息数据缓存 (复权路径专用): (market, code) -> 事件列表
+    xdxr_cache: Mutex<HashMap<(u8, String), FqCacheEntry<Vec<XdXrInfo>>>>,
+    /// 复权上下文 K 线缓存: (category, market, code, tier) -> 历史 K 线
+    context_cache: Mutex<HashMap<(u8, u8, String, u8), FqCacheEntry<Vec<SecurityBar>>>>,
 }
 
 impl TdxHqClient {
@@ -77,6 +81,8 @@ impl TdxHqClient {
             rate_limiter_daily: RateLimiter::new(67), // 日K 15 req/s
             rate_limiter_minute: RateLimiter::new(100), // 分时 10 req/s (不允许解禁)
             fq_context_tier: AtomicU8::new(utils::FqContextTier::default() as u8),
+            xdxr_cache: Mutex::new(HashMap::new()),
+            context_cache: Mutex::new(HashMap::new()),
         }
     }
 
@@ -353,8 +359,19 @@ impl TdxHqClient {
     }
 
     /// 设置缓存 TTL (秒)
+    ///
+    /// 同时作用于证券数量/列表缓存与复权辅助缓存 (除权除息 + 复权上下文)。
     pub fn set_cache_ttl(&self, ttl_secs: u64) {
         *self.cache_ttl.lock().unwrap() = Duration::from_secs(ttl_secs);
+    }
+
+    /// 清空复权辅助数据缓存 (除权除息 + 复权上下文)
+    ///
+    /// 长驻客户端在上市公司公告除权除息事件后调用, 可立即刷新复权
+    /// 计算的输入数据, 无需等待 TTL 自然过期。
+    pub fn clear_fq_cache(&self) {
+        self.xdxr_cache.lock().unwrap().clear();
+        self.context_cache.lock().unwrap().clear();
     }
 
     /// 设置连接超时 (秒)
@@ -708,15 +725,17 @@ impl TdxHqClient {
             logi!("hq", "got {} bars for {} after {} server switch(es)", bars.len(), code, retry_count);
         }
 
-        // 客户端侧复权计算 (v0.4.2)
+        // 客户端侧复权计算 (v0.4.2); xdxr/context 走 TTL 缓存
+        // (重复请求从 2+6 RTT 降为 1 RTT)
         if fq != 0 && !bars.is_empty() {
-            if let Ok(xdxr) = self.get_xdxr_info(market, code) {
+            if let Ok(xdxr) = self.get_xdxr_info_cached(market, code) {
                 use crate::protocol::adjuster::{adjust_security_bars, FqType};
                 let fq_enum = match fq {
                     2 => FqType::Hfq,
                     _ => FqType::Qfq,
                 };
-                let context = self.fetch_context_bars_for_adjust(category, market, code, &bars, &xdxr);
+                let context =
+                    self.fetch_context_bars_for_adjust_cached(category, market, code, &bars, &xdxr);
                 adjust_security_bars(&mut bars, &context, &xdxr, fq_enum);
             }
         }
@@ -752,12 +771,44 @@ impl TdxHqClient {
         logw!("hq", "no alternative server available");
     }
 
-    /// 为复权计算获取额外的历史 K 线上下文
+    /// 获取除权除息数据 (带 TTL 缓存, 供复权路径复用)
     ///
-    /// 当除权除息事件早于请求的 K 线数据范围时,
-    /// 需要额外的历史数据来计算这些早期事件的复权因子。
-    /// 为复权计算获取历史 K 线上下文
-    fn fetch_context_bars_for_adjust(
+    /// 除权除息数据仅在上市公司公告新事件时变化, 对同一 (market, code)
+    /// 在 TTL 内直接复用缓存, 使重复的复权请求省去 1 次 xdxr 往返。
+    /// TTL 沿用 `set_cache_ttl` 设置 (默认 30 秒), 可用 `clear_fq_cache`
+    /// 强制失效。
+    fn get_xdxr_info_cached(&self, market: u8, code: &str) -> Result<Arc<Vec<XdXrInfo>>> {
+        let key = (market, code.to_string());
+        let now = Instant::now();
+        {
+            let mut cache = self.xdxr_cache.lock().unwrap();
+            if let Some(entry) = cache.get_mut(&key) {
+                if now < entry.expires_at {
+                    entry.last_used = now;
+                    return Ok(Arc::clone(&entry.data));
+                }
+            }
+        }
+
+        let info = Arc::new(self.get_xdxr_info(market, code)?);
+        let ttl = *self.cache_ttl.lock().unwrap();
+        fq_cache_insert(
+            &mut self.xdxr_cache.lock().unwrap(),
+            key,
+            Arc::clone(&info),
+            ttl,
+            FQ_CACHE_MAX_ENTRIES,
+        );
+        Ok(info)
+    }
+
+    /// 获取复权上下文 K 线 (带 TTL 缓存)
+    ///
+    /// 上下文拉取范围只取决于 (category, market, code, 最早除权日, tier),
+    /// 与当次请求的 start/count 无关, 因此可按 (category, market, code, tier)
+    /// 缓存复用。门控判断与 `fetch_context_bars_for_adjust_with_tier`
+    /// 保持一致: 无需上下文时不查缓存、不发包。
+    fn fetch_context_bars_for_adjust_cached(
         &self,
         category: u8,
         market: u8,
@@ -765,11 +816,52 @@ impl TdxHqClient {
         bars: &[SecurityBar],
         xdxr: &[XdXrInfo],
     ) -> Vec<SecurityBar> {
-        utils::fetch_context_bars_for_adjust_with_tier(
+        if bars.is_empty() || xdxr.is_empty() {
+            return Vec::new();
+        }
+        let earliest_event = xdxr
+            .iter()
+            .filter(|x| x.category == 1)
+            .map(|x| x.year as u32 * 10000 + x.month as u32 * 100 + x.day as u32)
+            .min();
+        let Some(ee_date) = earliest_event else { return Vec::new() };
+        let first_bar_date =
+            bars[0].year as u32 * 10000 + bars[0].month as u32 * 100 + bars[0].day as u32;
+        if first_bar_date <= ee_date {
+            return Vec::new();
+        }
+
+        let key = (
+            category,
+            market,
+            code.to_string(),
+            self.fq_context_tier.load(Ordering::SeqCst),
+        );
+        let now = Instant::now();
+        {
+            let mut cache = self.context_cache.lock().unwrap();
+            if let Some(entry) = cache.get_mut(&key) {
+                if now < entry.expires_at {
+                    entry.last_used = now;
+                    return (*entry.data).clone();
+                }
+            }
+        }
+
+        let context = Arc::new(utils::fetch_context_bars_for_adjust_with_tier(
             |pkt| self.send_and_recv(pkt),
             category, market, code, bars, xdxr,
             self.fq_context_tier(),
-        )
+        ));
+        let ttl = *self.cache_ttl.lock().unwrap();
+        fq_cache_insert(
+            &mut self.context_cache.lock().unwrap(),
+            key,
+            Arc::clone(&context),
+            ttl,
+            FQ_CACHE_MAX_ENTRIES,
+        );
+        (*context).clone()
     }
 
     /// 设置复权上下文数据量档位

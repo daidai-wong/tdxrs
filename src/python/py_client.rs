@@ -69,6 +69,14 @@ impl PyTdxHqClient {
         self.client.set_cache_ttl(ttl_secs);
     }
 
+    /// 清空复权辅助数据缓存 (除权除息 + 复权上下文)
+    ///
+    /// 长驻客户端在上市公司公告除权除息事件后调用, 可立即刷新
+    /// 复权计算的输入数据, 无需等待 TTL 自然过期。
+    fn clear_fq_cache(&self) {
+        self.client.clear_fq_cache();
+    }
+
     /// 设置连接超时 (秒)
     fn set_connect_timeout(&self, timeout: f64) {
         self.client.set_connect_timeout(timeout);
