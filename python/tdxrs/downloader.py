@@ -38,7 +38,7 @@ import time
 from datetime import datetime
 from pathlib import Path
 
-from tdxrs._internal import TdxDirectClient
+from tdxrs._internal import PRIMARY_SERVERS, TdxDirectClient
 from tdxrs.constants import (
     MARKET_SH, MARKET_SZ, MARKET_BJ,
     KLINE_5MIN, KLINE_15MIN, KLINE_30MIN, KLINE_1HOUR,
@@ -59,19 +59,9 @@ _CATEGORY_MAP = {
     "min60":   (KLINE_1HOUR,   "min60",  800),
 }
 
-# 默认服务器列表 (与 Rust PRIMARY_SERVERS 一致)
-_DEFAULT_SERVERS = [
-    ("海通8",       "58.63.254.191", 7709),
-    ("广发1",       "119.29.19.242", 7709),
-    ("华林4",       "202.96.138.90", 7709),
-    ("广发13",      "183.60.224.177", 7709),
-    ("杭州联通J2",  "60.12.136.250", 7709),
-    ("华林5",       "218.106.92.182", 7709),
-    ("海通2",       "175.6.5.153", 7709),
-    ("海通4",       "182.131.3.245", 7709),
-    ("杭州电信J3",  "218.75.126.9", 7709),
-    ("上海电信Z1",  "180.153.18.170", 7709),
-]
+# 默认服务器列表 — 来自 Rust PRIMARY_SERVERS (单一事实来源)
+# 注意: 不要在此硬编码服务器, 上游会持续维护 Rust 侧列表并剔除故障机
+_DEFAULT_SERVERS = PRIMARY_SERVERS
 
 
 def _get_phase():

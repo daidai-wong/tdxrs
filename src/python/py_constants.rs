@@ -41,6 +41,14 @@ pub fn register_constants(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.setattr("DEFAULT_POOL_SIZE", constants::DEFAULT_POOL_SIZE)?;
     m.setattr("FQ_PRICE_PRECISION", constants::FQ_PRICE_PRECISION)?;
 
+    // 主力服务器列表 — Python 侧服务器选择的单一事实来源
+    // (downloader.py / cli.py 均由此取值, 不再各自硬编码过期副本)
+    let primary_servers: Vec<(String, String, u16)> = constants::PRIMARY_SERVERS
+        .iter()
+        .map(|(name, ip, port)| (name.to_string(), ip.to_string(), *port))
+        .collect();
+    m.setattr("PRIMARY_SERVERS", primary_servers)?;
+
     // 别名 (向后兼容)
     m.setattr("PORT", constants::DEFAULT_PORT)?;
     m.setattr("POOL_SIZE", constants::DEFAULT_POOL_SIZE)?;

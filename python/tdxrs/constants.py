@@ -41,6 +41,8 @@ from tdxrs._internal import (  # noqa: F401
     BLOCK_FG,
     BLOCK_GN,
     BLOCK_DEFAULT,
+    # 服务器
+    PRIMARY_SERVERS,
 )
 
 __all__ = [
@@ -54,4 +56,5 @@ __all__ = [
     "DEFAULT_PORT", "DEFAULT_POOL_SIZE", "FQ_PRICE_PRECISION",
     "BLOCK_SZ", "BLOCK_FG", "BLOCK_GN", "BLOCK_DEFAULT",
     "PORT", "POOL_SIZE",
+    "PRIMARY_SERVERS",
 ]
