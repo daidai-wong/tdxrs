@@ -34,11 +34,14 @@ impl PyTdxSmartClient {
     ///
     /// 仅验证 TCP + 握手，不做 K 线健康检查。
     /// 优先使用缓存的成功服务器。
+    /// 连接探测在 GIL 外完成。
     #[pyo3(signature = (timeout=None))]
-    fn connect_to_any(&self, timeout: Option<f64>) -> PyResult<bool> {
-        self.client
-            .connect_to_any(timeout)
-            .map_err(|e| pyo3::exceptions::PyConnectionError::new_err(e.to_string()))
+    fn connect_to_any(&self, py: Python<'_>, timeout: Option<f64>) -> PyResult<bool> {
+        py.detach(|| {
+            self.client
+                .connect_to_any(timeout)
+                .map_err(|e| pyo3::exceptions::PyConnectionError::new_err(e.to_string()))
+        })
     }
 
     /// 获取 K 线数据 (带自动重试)
@@ -153,11 +156,11 @@ impl PyTdxSmartClient {
         self.client.clear_cache();
     }
 
-    /// 探测所有服务器并更新缓存
+    /// 探测所有服务器并更新缓存 (探测在 GIL 外完成, 可耗时数十秒)
     ///
     /// 类似 mootdx 的 bestip 功能。
-    fn probe_and_cache(&self, timeout_secs: f64) -> Vec<(String, u16, String, u32)> {
-        self.client.probe_and_cache(timeout_secs)
+    fn probe_and_cache(&self, py: Python<'_>, timeout_secs: f64) -> Vec<(String, u16, String, u32)> {
+        py.detach(|| self.client.probe_and_cache(timeout_secs))
     }
 
     /// 断开连接
