@@ -19,9 +19,17 @@ except ImportError:
         "tdxrs native module not found. Please install with: pip install tdxrs"
     )
 
+# 服务器健康筛查 (纯 Python 层, 复用 Rust probe_servers)
+from tdxrs.server_health import screen_servers, best_server
+
+# 混合数据层 (本地 vipdoc 优先 + 服务器补缺 + 双源验证)
+from tdxrs.hybrid import HybridClient, get_daily_bars
+
 __version__ = "0.6.7"
 __all__ = [
     "DailyBarReader", "MinBarReader", "LcMinBarReader", "BlockReader", "FinancialReader",
     "TdxHqClient", "AsyncTdxHqClient", "TdxDirectClient", "TdxSmartClient", "TdxHqFundClient", "TdxBlockClient",
     "PRIMARY_SERVERS",
+    "screen_servers", "best_server",
+    "HybridClient", "get_daily_bars",
 ]

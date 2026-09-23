@@ -4,6 +4,7 @@
     tdxrs quote 600519
     tdxrs bars 600519 --count 30
     tdxrs download --market sh
+    tdxrs servers --top 10
     tdxrs --help
 """
 
@@ -669,35 +670,101 @@ def cmd_parse(args):
 
 
 def cmd_servers(args):
-    """测试服务器连通性"""
-    import time
+    """服务器健康筛查: 四级体检 (TCP→握手→元数据→行情数据面) + 评分排序"""
+    import json as _json
 
-    print("测试服务器连通性...\n")
+    from tdxrs.server_health import print_report, screen_servers
 
-    ok_count = 0
-    fail_count = 0
-    latencies = []
+    print("服务器健康筛查中 (TCP→握手→元数据→行情数据面)...\n")
 
-    for ip, port in _DEFAULT_SERVERS:
-        try:
-            start = time.time()
-            client = TdxDirectClient(ip, port, args.timeout)
-            client.get_security_count(MARKET_SH)
-            elapsed = (time.time() - start) * 1000
-            latencies.append(elapsed)
-            ok_count += 1
-        except Exception:
-            fail_count += 1
+    results = screen_servers(timeout=args.timeout, data_probe=not args.no_data)
 
-    total = ok_count + fail_count
-    print(f"可用服务器: {ok_count}/{total}")
+    alive = [r for r in results if r["grade"] != "F"]
+    data_ok_n = sum(1 for r in alive if r.get("data_ok"))
+    probe_note = "" if not args.no_data else "  (数据面未探测)"
+    print(f"可达: {len(alive)}/{len(results)}   行情数据可用: {data_ok_n}/{len(alive)}{probe_note}\n")
 
-    if latencies:
-        avg_latency = sum(latencies) / len(latencies)
-        min_latency = min(latencies)
-        max_latency = max(latencies)
-        print(f"平均延迟: {avg_latency:.0f}ms")
-        print(f"延迟范围: {min_latency:.0f}ms ~ {max_latency:.0f}ms")
+    if args.json:
+        print(_json.dumps(results, ensure_ascii=False, indent=2))
+        return
+
+    print_report(results, top=args.top)
+
+
+def cmd_hbars(args):
+    """混合K线: 本地 vipdoc 优先 + 服务器补缺 + 双源验证"""
+    import json as _json
+
+    from tdxrs.hybrid import HybridClient
+
+    count = check_limit("bars_count", args.count)
+    hc = HybridClient(vipdoc_dir=args.vipdoc, timeout=args.timeout)
+    r = hc.get_daily_bars(args.code, count=count, fq=args.fq,
+                          persist=not args.no_persist)
+
+    if args.format == "json":
+        print(_json.dumps(r, ensure_ascii=False, indent=2, default=str))
+        return
+
+    src_note = {"local": "本地vipdoc", "server": "服务器",
+                "local+server": "本地+服务器合并", "server(fq)": "服务器(复权)"}
+    print(f"数据源: {src_note.get(r['source'], r['source'])}"
+          f"  本地: {r['local_count']} 条  服务器: {r['server_count']} 条")
+    if r.get("server_error"):
+        print(f"服务器异常: {r['server_error']}")
+    v = r.get("validation")
+    if v:
+        if v.get("consistent") is True:
+            print(f"双源验证: {v['checked']} 天重叠数据全部一致 ✓")
+        elif v.get("consistent") is False:
+            print(f"双源验证: {v['checked']} 天重叠中 {v['mismatch_count']} 处不符 ✗ "
+                  f"(最大偏差 {v['max_abs_diff']} 元)")
+        else:
+            print(f"双源验证: {v.get('note', '无重叠数据')}")
+
+    columns = [
+        ("日期", "日期", 12),
+        ("开盘", "开盘", 10),
+        ("最高", "最高", 10),
+        ("最低", "最低", 10),
+        ("收盘", "收盘", 10),
+        ("成交量", "成交量", 14),
+    ]
+    rows = []
+    for b in r["bars"]:
+        rows.append({
+            "日期": b["date"],
+            "开盘": f"{b['open']:.2f}",
+            "最高": f"{b['high']:.2f}",
+            "最低": f"{b['low']:.2f}",
+            "收盘": f"{b['close']:.2f}",
+            "成交量": f"{b['volume']:,.0f}",
+        })
+    format_output(rows, columns, args.format)
+
+
+def cmd_validate(args):
+    """双源数据验证: 服务器数据 vs 本地 vipdoc"""
+    from tdxrs.hybrid import HybridClient
+
+    hc = HybridClient(vipdoc_dir=args.vipdoc, timeout=args.timeout)
+    v = hc.validate(args.code, count=args.count)
+
+    print(f"股票: {args.code}  vipdoc: {v.get('vipdoc_dir') or '(未找到)'}")
+    print(f"本地: {v['local_count']} 条 (最新 {v.get('local_last_date')})")
+    print(f"服务器: {v['server_count']} 条 (最新 {v.get('server_last_date')})")
+    if v.get("server_error"):
+        print(f"服务器异常: {v['server_error']}")
+    if v.get("consistent") is True:
+        print(f"\n验证结果: {v['checked']} 天重叠数据全部一致 ✓ (容差 {v['tolerance']} 元)")
+    elif v.get("consistent") is False:
+        print(f"\n验证结果: {v['checked']} 天重叠中 {v['mismatch_count']} 处不符 ✗ "
+              f"(最大偏差 {v['max_abs_diff']} 元)")
+        for m in v["mismatches"]:
+            print(f"  {m['date']} {m['field']}: 本地 {m['local'][m['field']]} "
+                  f"vs 服务器 {m['server'][m['field']]} (差 {m['max_abs_diff']})")
+    else:
+        print(f"\n验证结果: {v.get('note', '无法验证')}")
 
 
 def cmd_version(args):
@@ -841,9 +908,34 @@ def main():
     p.set_defaults(func=cmd_parse)
 
     # ── servers ──
-    p = sub.add_parser("servers", help="测试服务器连通性")
-    p.add_argument("--timeout", type=float, default=3.0, help="超时秒数 (默认3)")
+    p = sub.add_parser("servers", help="服务器健康筛查 (四级体检+评分排序)")
+    p.add_argument("--timeout", type=float, default=3.0, help="单步超时秒数 (默认3)")
+    p.add_argument("--top", type=int, default=0, help="只显示前 N 名 (默认全部)")
+    p.add_argument("--no-data", action="store_true",
+                    help="跳过行情数据面探测, 只测传输层 (更快)")
+    p.add_argument("--json", action="store_true", help="输出完整 JSON 报告")
     p.set_defaults(func=cmd_servers)
+
+    # ── hbars ──
+    p = sub.add_parser("hbars", help="混合K线 (本地vipdoc优先+服务器补缺+双源验证)")
+    p.add_argument("code", help="股票代码")
+    p.add_argument("--count", type=int, default=CLI_LIMITS["bars_count"]["default"],
+                    help=f"条数 (默认{CLI_LIMITS['bars_count']['default']}，上限{CLI_LIMITS['bars_count']['max']})")
+    p.add_argument("--fq", type=int, default=0, choices=[0, 1, 2],
+                    help="复权: 0=不复权(支持本地) 1=前复权 2=后复权 (复权仅服务器)")
+    p.add_argument("--vipdoc", default=None, help="vipdoc 目录 (默认自动探测/环境变量 TDXRS_VIPDOC)")
+    p.add_argument("--no-persist", action="store_true", help="不把合并结果回写本地")
+    p.add_argument("--timeout", type=float, default=5.0)
+    p.add_argument("--format", choices=["table", "json", "csv"], default="table")
+    p.set_defaults(func=cmd_hbars)
+
+    # ── validate ──
+    p = sub.add_parser("validate", help="双源数据验证 (服务器 vs 本地vipdoc)")
+    p.add_argument("code", help="股票代码")
+    p.add_argument("--count", type=int, default=100, help="服务器侧比对条数 (默认100)")
+    p.add_argument("--vipdoc", default=None, help="vipdoc 目录 (默认自动探测)")
+    p.add_argument("--timeout", type=float, default=5.0)
+    p.set_defaults(func=cmd_validate)
 
     # ── version ──
     p = sub.add_parser("version", help="版本信息")
