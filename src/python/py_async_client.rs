@@ -65,20 +65,24 @@ impl PyAsyncTdxHqClient {
     // 连接管理
     // ============================================================
 
-    /// 连接到 TDX 服务器 (建立连接池)
+    /// 连接到 TDX 服务器 (建立连接池, block_on 期间释放 GIL)
     #[pyo3(signature = (ip, port, timeout=None))]
-    fn connect(&self, ip: &str, port: u16, timeout: Option<f64>) -> PyResult<bool> {
-        self.rt
-            .block_on(self.client.connect(ip, port, timeout))
-            .map_err(to_py_err)
+    fn connect(&self, py: Python<'_>, ip: &str, port: u16, timeout: Option<f64>) -> PyResult<bool> {
+        py.detach(|| {
+            self.rt
+                .block_on(self.client.connect(ip, port, timeout))
+                .map_err(to_py_err)
+        })
     }
 
-    /// 连接到任意可用服务器
+    /// 连接到任意可用服务器 (逐台探测在 GIL 外完成, 可耗时数秒)
     #[pyo3(signature = (timeout=None))]
-    fn connect_to_any(&self, timeout: Option<f64>) -> PyResult<bool> {
-        self.rt
-            .block_on(self.client.connect_to_any(timeout))
-            .map_err(to_py_err)
+    fn connect_to_any(&self, py: Python<'_>, timeout: Option<f64>) -> PyResult<bool> {
+        py.detach(|| {
+            self.rt
+                .block_on(self.client.connect_to_any(timeout))
+                .map_err(to_py_err)
+        })
     }
 
     /// 断开所有连接
@@ -152,10 +156,11 @@ impl PyAsyncTdxHqClient {
         count: u16,
         fq: u8,
     ) -> PyResult<Py<PyAny>> {
-        let bars = self
-            .rt
-            .block_on(self.client.get_security_bars(category, market, code, start, count, fq))
-            .map_err(to_py_err)?;
+        let bars = py.detach(|| {
+            self.rt
+                .block_on(self.client.get_security_bars(category, market, code, start, count, fq))
+                .map_err(to_py_err)
+        })?;
 
         let list = PyList::empty(py);
         for b in &bars {
@@ -177,7 +182,7 @@ impl PyAsyncTdxHqClient {
         Ok(list.into())
     }
 
-    /// 获取K线数据 (自动分页)
+    /// 获取K线数据 (自动分页, block_on 期间释放 GIL)
     #[pyo3(signature = (category, market, code, count=800, fq=1))]
     fn get_security_bars_all(
         &self,
@@ -188,10 +193,11 @@ impl PyAsyncTdxHqClient {
         count: u16,
         fq: u8,
     ) -> PyResult<Py<PyAny>> {
-        let bars = self
-            .rt
-            .block_on(self.client.get_security_bars_all(category, market, code, count, fq))
-            .map_err(to_py_err)?;
+        let bars = py.detach(|| {
+            self.rt
+                .block_on(self.client.get_security_bars_all(category, market, code, count, fq))
+                .map_err(to_py_err)
+        })?;
 
         let list = PyList::empty(py);
         for b in &bars {
@@ -213,7 +219,7 @@ impl PyAsyncTdxHqClient {
         Ok(list.into())
     }
 
-    /// 获取指数K线
+    /// 获取指数K线 (block_on 期间释放 GIL)
     #[pyo3(signature = (category, market, code, start=0, count=800, fq=1))]
     fn get_index_bars(
         &self,
@@ -225,10 +231,11 @@ impl PyAsyncTdxHqClient {
         count: u16,
         fq: u8,
     ) -> PyResult<Py<PyAny>> {
-        let bars = self
-            .rt
-            .block_on(self.client.get_index_bars(category, market, code, start, count, fq))
-            .map_err(to_py_err)?;
+        let bars = py.detach(|| {
+            self.rt
+                .block_on(self.client.get_index_bars(category, market, code, start, count, fq))
+                .map_err(to_py_err)
+        })?;
 
         let list = PyList::empty(py);
         for b in &bars {
@@ -252,7 +259,7 @@ impl PyAsyncTdxHqClient {
         Ok(list.into())
     }
 
-    /// 获取指数K线 (自动分页)
+    /// 获取指数K线 (自动分页, block_on 期间释放 GIL)
     #[pyo3(signature = (category, market, code, count=800, fq=1))]
     fn get_index_bars_all(
         &self,
@@ -263,10 +270,11 @@ impl PyAsyncTdxHqClient {
         count: u16,
         fq: u8,
     ) -> PyResult<Py<PyAny>> {
-        let bars = self
-            .rt
-            .block_on(self.client.get_index_bars(category, market, code, 0, count, fq))
-            .map_err(to_py_err)?;
+        let bars = py.detach(|| {
+            self.rt
+                .block_on(self.client.get_index_bars(category, market, code, 0, count, fq))
+                .map_err(to_py_err)
+        })?;
 
         let list = PyList::empty(py);
         for b in &bars {
@@ -294,17 +302,18 @@ impl PyAsyncTdxHqClient {
     // 实时行情
     // ============================================================
 
-    /// 获取实时行情 (批量)
+    /// 获取实时行情 (批量, block_on 期间释放 GIL)
     fn get_security_quotes(
         &self,
         py: Python<'_>,
         all_stock: Vec<(u8, String)>,
     ) -> PyResult<Py<PyAny>> {
         let refs: Vec<(u8, &str)> = all_stock.iter().map(|(m, c)| (*m, c.as_str())).collect();
-        let quotes = self
-            .rt
-            .block_on(self.client.get_security_quotes(&refs))
-            .map_err(to_py_err)?;
+        let quotes = py.detach(|| {
+            self.rt
+                .block_on(self.client.get_security_quotes(&refs))
+                .map_err(to_py_err)
+        })?;
 
         let list = PyList::empty(py);
         for q in &quotes {
@@ -351,14 +360,16 @@ impl PyAsyncTdxHqClient {
     // 证券列表 / 数量
     // ============================================================
 
-    /// 获取证券数量
-    fn get_security_count(&self, market: u8) -> PyResult<u16> {
-        self.rt
-            .block_on(self.client.get_security_count(market))
-            .map_err(to_py_err)
+    /// 获取证券数量 (block_on 期间释放 GIL)
+    fn get_security_count(&self, py: Python<'_>, market: u8) -> PyResult<u16> {
+        py.detach(|| {
+            self.rt
+                .block_on(self.client.get_security_count(market))
+                .map_err(to_py_err)
+        })
     }
 
-    /// 获取证券列表
+    /// 获取证券列表 (block_on 期间释放 GIL)
     #[pyo3(signature = (market, start=0))]
     fn get_security_list(
         &self,
@@ -366,10 +377,11 @@ impl PyAsyncTdxHqClient {
         market: u8,
         start: u16,
     ) -> PyResult<Py<PyAny>> {
-        let data = self
-            .rt
-            .block_on(self.client.get_security_list(market, start))
-            .map_err(to_py_err)?;
+        let data = py.detach(|| {
+            self.rt
+                .block_on(self.client.get_security_list(market, start))
+                .map_err(to_py_err)
+        })?;
 
         let list = PyList::empty(py);
         for d in &data {
@@ -466,7 +478,7 @@ impl PyAsyncTdxHqClient {
         Ok(list.into())
     }
 
-    /// 获取历史逐笔成交
+    /// 获取历史逐笔成交 (block_on 期间释放 GIL)
     #[pyo3(signature = (market, code, start=0, count=2000, date=0))]
     fn get_history_transaction_data(
         &self,
@@ -477,13 +489,14 @@ impl PyAsyncTdxHqClient {
         count: u16,
         date: u32,
     ) -> PyResult<Py<PyAny>> {
-        let data = self
-            .rt
-            .block_on(
-                self.client
-                    .get_history_transaction_data(market, code, start, count, date),
-            )
-            .map_err(to_py_err)?;
+        let data = py.detach(|| {
+            self.rt
+                .block_on(
+                    self.client
+                        .get_history_transaction_data(market, code, start, count, date),
+                )
+                .map_err(to_py_err)
+        })?;
 
         let list = PyList::empty(py);
         for d in &data {
@@ -555,17 +568,18 @@ impl PyAsyncTdxHqClient {
         Ok(dict.into())
     }
 
-    /// 获取除权除息
+    /// 获取除权除息 (block_on 期间释放 GIL)
     fn get_xdxr_info(
         &self,
         py: Python<'_>,
         market: u8,
         code: &str,
     ) -> PyResult<Py<PyAny>> {
-        let data = self
-            .rt
-            .block_on(self.client.get_xdxr_info(market, code))
-            .map_err(to_py_err)?;
+        let data = py.detach(|| {
+            self.rt
+                .block_on(self.client.get_xdxr_info(market, code))
+                .map_err(to_py_err)
+        })?;
 
         let list = PyList::empty(py);
         for d in &data {
@@ -636,6 +650,8 @@ impl PyAsyncTdxHqClient {
     }
 
     /// 获取指数K线, 返回 list of tuple (高性能模式)
+    ///
+    /// block_on 期间释放 GIL。
     #[pyo3(signature = (category, market, code, start=0, count=800, fq=1))]
     fn get_index_bars_tuples(
         &self,
@@ -647,10 +663,11 @@ impl PyAsyncTdxHqClient {
         count: u16,
         fq: u8,
     ) -> PyResult<Py<PyAny>> {
-        let bars = self
-            .rt
-            .block_on(self.client.get_index_bars(category, market, code, start, count, fq))
-            .map_err(to_py_err)?;
+        let bars = py.detach(|| {
+            self.rt
+                .block_on(self.client.get_index_bars(category, market, code, start, count, fq))
+                .map_err(to_py_err)
+        })?;
 
         let list = PyList::empty(py);
         for b in &bars {
@@ -683,10 +700,11 @@ impl PyAsyncTdxHqClient {
         all_stock: Vec<(u8, String)>,
     ) -> PyResult<Py<PyAny>> {
         let refs: Vec<(u8, &str)> = all_stock.iter().map(|(m, c)| (*m, c.as_str())).collect();
-        let quotes = self
-            .rt
-            .block_on(self.client.get_security_quotes(&refs))
-            .map_err(to_py_err)?;
+        let quotes = py.detach(|| {
+            self.rt
+                .block_on(self.client.get_security_quotes(&refs))
+                .map_err(to_py_err)
+        })?;
 
         let list = PyList::empty(py);
         for q in &quotes {
@@ -734,7 +752,7 @@ impl PyAsyncTdxHqClient {
     // DataFrame 输出
     // ============================================================
 
-    /// 获取K线数据, 返回 pandas DataFrame
+    /// 获取K线数据, 返回 pandas DataFrame (block_on 期间释放 GIL)
     #[pyo3(signature = (category, market, code, start=0, count=800, fq=1))]
     fn get_security_bars_dataframe(
         &self,
@@ -746,14 +764,15 @@ impl PyAsyncTdxHqClient {
         count: u16,
         fq: u8,
     ) -> PyResult<Py<PyAny>> {
-        let bars = self
-            .rt
-            .block_on(self.client.get_security_bars(category, market, code, start, count, fq))
-            .map_err(to_py_err)?;
+        let bars = py.detach(|| {
+            self.rt
+                .block_on(self.client.get_security_bars(category, market, code, start, count, fq))
+                .map_err(to_py_err)
+        })?;
         crate::python::py_dataframe::security_bars_to_df(py, &bars)
     }
 
-    /// 获取指数K线, 返回 pandas DataFrame
+    /// 获取指数K线, 返回 pandas DataFrame (block_on 期间释放 GIL)
     #[pyo3(signature = (category, market, code, start=0, count=800, fq=1))]
     fn get_index_bars_dataframe(
         &self,
@@ -765,41 +784,46 @@ impl PyAsyncTdxHqClient {
         count: u16,
         fq: u8,
     ) -> PyResult<Py<PyAny>> {
-        let bars = self
-            .rt
-            .block_on(self.client.get_index_bars(category, market, code, start, count, fq))
-            .map_err(to_py_err)?;
+        let bars = py.detach(|| {
+            self.rt
+                .block_on(self.client.get_index_bars(category, market, code, start, count, fq))
+                .map_err(to_py_err)
+        })?;
         crate::python::py_dataframe::index_bars_to_df(py, &bars)
     }
 
-    /// 获取实时行情, 返回 pandas DataFrame
+    /// 获取实时行情, 返回 pandas DataFrame (block_on 期间释放 GIL)
     fn get_security_quotes_dataframe(
         &self,
         py: Python<'_>,
         all_stock: Vec<(u8, String)>,
     ) -> PyResult<Py<PyAny>> {
         let refs: Vec<(u8, &str)> = all_stock.iter().map(|(m, c)| (*m, c.as_str())).collect();
-        let quotes = self
-            .rt
-            .block_on(self.client.get_security_quotes(&refs))
-            .map_err(to_py_err)?;
+        let quotes = py.detach(|| {
+            self.rt
+                .block_on(self.client.get_security_quotes(&refs))
+                .map_err(to_py_err)
+        })?;
         crate::python::py_dataframe::quotes_to_df(py, &quotes)
     }
 
-    /// 获取多只股票的财务信息, 返回 pandas DataFrame
+    /// 获取多只股票的财务信息, 返回 pandas DataFrame (block_on 期间释放 GIL)
     fn get_finance_info_dataframe(
         &self,
         py: Python<'_>,
         stocks: Vec<(u8, String)>,
     ) -> PyResult<Py<PyAny>> {
-        let mut infos = Vec::new();
-        for (market, code) in &stocks {
-            let info = self
-                .rt
-                .block_on(self.client.get_finance_info(*market, code))
-                .map_err(to_py_err)?;
-            infos.push((info,));
-        }
+        let infos = py.detach(|| {
+            let mut infos = Vec::new();
+            for (market, code) in &stocks {
+                let info = self
+                    .rt
+                    .block_on(self.client.get_finance_info(*market, code))
+                    .map_err(to_py_err)?;
+                infos.push((info,));
+            }
+            Ok::<_, PyErr>(infos)
+        })?;
         crate::python::py_dataframe::finance_to_df(py, &infos)
     }
 }
