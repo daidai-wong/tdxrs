@@ -115,6 +115,7 @@ impl PyTdxF10Client {
     /// 文本内容
     fn get_content(
         &self,
+        py: Python<'_>,
         market: u8,
         code: &str,
         category: &Bound<'_, PyDict>,
