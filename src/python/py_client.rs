@@ -153,7 +153,7 @@ impl PyTdxHqClient {
         self.client.clear_blocked_servers();
     }
 
-    /// 探测全部已知服务器, 返回按 API 响应时间排序的结果
+    /// 并行探测全部已知服务器 (每台一线程), 返回按 API 响应时间排序的结果
     ///
     /// 返回: list of (name, ip, port, tcp_ms, hs_ms, api_ms)
     /// 不会自动修改优先列表, 用户根据结果自行调用 reorder_servers()
