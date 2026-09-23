@@ -47,20 +47,24 @@ impl PyTdxHqFundClient {
         }
     }
 
-    /// 连接到 TDX 服务器
+    /// 连接到 TDX 服务器 (TCP 握手在 GIL 外完成)
     #[pyo3(signature = (ip, port, timeout=None))]
-    fn connect(&self, ip: &str, port: u16, timeout: Option<f64>) -> PyResult<bool> {
-        self.client
-            .connect(ip, port, timeout)
-            .map_err(|e| pyo3::exceptions::PyConnectionError::new_err(e.to_string()))
+    fn connect(&self, py: Python<'_>, ip: &str, port: u16, timeout: Option<f64>) -> PyResult<bool> {
+        py.detach(|| {
+            self.client
+                .connect(ip, port, timeout)
+                .map_err(|e| pyo3::exceptions::PyConnectionError::new_err(e.to_string()))
+        })
     }
 
-    /// 连接到任意可用服务器
+    /// 连接到任意可用服务器 (逐台探测在 GIL 外完成)
     #[pyo3(signature = (timeout=None))]
-    fn connect_to_any(&self, timeout: Option<f64>) -> PyResult<bool> {
-        self.client
-            .connect_to_any(timeout)
-            .map_err(|e| pyo3::exceptions::PyConnectionError::new_err(e.to_string()))
+    fn connect_to_any(&self, py: Python<'_>, timeout: Option<f64>) -> PyResult<bool> {
+        py.detach(|| {
+            self.client
+                .connect_to_any(timeout)
+                .map_err(|e| pyo3::exceptions::PyConnectionError::new_err(e.to_string()))
+        })
     }
 
     /// 断开连接
@@ -82,10 +86,11 @@ impl PyTdxHqFundClient {
     ///     list[dict]: 基金信息列表
     #[pyo3(signature = (market,))]
     fn get_fund_list(&self, py: Python<'_>, market: u8) -> PyResult<Py<PyAny>> {
-        let funds = self
-            .client
-            .get_fund_list(market)
-            .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))?;
+        let funds = py.detach(|| {
+            self.client
+                .get_fund_list(market)
+                .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))
+        })?;
 
         let list = PyList::empty(py);
         for fund in &funds {
@@ -174,14 +179,15 @@ impl PyTdxHqFundClient {
         Ok(list.into())
     }
 
-    /// 获取基金实时行情
+    /// 获取基金实时行情 (网络阶段释放 GIL)
     #[pyo3(signature = (stocks,))]
     fn get_fund_quotes(&self, py: Python<'_>, stocks: Vec<(u8, String)>) -> PyResult<Py<PyAny>> {
         let stock_refs: Vec<(u8, &str)> = stocks.iter().map(|(m, c)| (*m, c.as_str())).collect();
-        let quotes = self
-            .client
-            .get_fund_quotes(&stock_refs)
-            .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))?;
+        let quotes = py.detach(|| {
+            self.client
+                .get_fund_quotes(&stock_refs)
+                .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))
+        })?;
 
         let list = PyList::empty(py);
         for q in &quotes {
@@ -221,7 +227,7 @@ impl PyTdxHqFundClient {
         Ok(list.into())
     }
 
-    /// 获取基金分时数据
+    /// 获取基金分时数据 (网络阶段释放 GIL)
     #[pyo3(signature = (market, code))]
     fn get_fund_minute_time_data(
         &self,
@@ -229,10 +235,11 @@ impl PyTdxHqFundClient {
         market: u8,
         code: &str,
     ) -> PyResult<Py<PyAny>> {
-        let data = self
-            .client
-            .get_fund_minute_time_data(market, code)
-            .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))?;
+        let data = py.detach(|| {
+            self.client
+                .get_fund_minute_time_data(market, code)
+                .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))
+        })?;
 
         let list = PyList::empty(py);
         for item in &data {
@@ -300,7 +307,7 @@ impl PyTdxHqFundClient {
         Ok(list.into())
     }
 
-    /// 获取基金历史逐笔成交
+    /// 获取基金历史逐笔成交 (网络阶段释放 GIL)
     #[pyo3(signature = (market, code, start, count, date))]
     fn get_fund_history_transaction_data(
         &self,
@@ -311,10 +318,11 @@ impl PyTdxHqFundClient {
         count: u16,
         date: u32,
     ) -> PyResult<Py<PyAny>> {
-        let data = self
-            .client
-            .get_fund_history_transaction_data(market, code, start, count, date)
-            .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))?;
+        let data = py.detach(|| {
+            self.client
+                .get_fund_history_transaction_data(market, code, start, count, date)
+                .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))
+        })?;
 
         let list = PyList::empty(py);
         for item in &data {
@@ -328,7 +336,7 @@ impl PyTdxHqFundClient {
         Ok(list.into())
     }
 
-    /// 获取基金除权除息信息
+    /// 获取基金除权除息信息 (网络阶段释放 GIL)
     #[pyo3(signature = (market, code))]
     fn get_fund_xdxr_info(
         &self,
@@ -336,10 +344,11 @@ impl PyTdxHqFundClient {
         market: u8,
         code: &str,
     ) -> PyResult<Py<PyAny>> {
-        let data = self
-            .client
-            .get_fund_xdxr_info(market, code)
-            .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))?;
+        let data = py.detach(|| {
+            self.client
+                .get_fund_xdxr_info(market, code)
+                .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))
+        })?;
 
         let list = PyList::empty(py);
         for item in &data {
@@ -358,7 +367,7 @@ impl PyTdxHqFundClient {
         Ok(list.into())
     }
 
-    /// 获取基金财务信息
+    /// 获取基金财务信息 (网络阶段释放 GIL)
     #[pyo3(signature = (market, code))]
     fn get_fund_finance_info(
         &self,
@@ -366,10 +375,11 @@ impl PyTdxHqFundClient {
         market: u8,
         code: &str,
     ) -> PyResult<Py<PyAny>> {
-        let info = self
-            .client
-            .get_fund_finance_info(market, code)
-            .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))?;
+        let info = py.detach(|| {
+            self.client
+                .get_fund_finance_info(market, code)
+                .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))
+        })?;
 
         let dict = PyDict::new(py);
         dict.set_item("market", info.market)?;
@@ -479,10 +489,11 @@ impl PyTdxBlockClient {
         start: u32,
         count: u16,
     ) -> PyResult<Py<PyAny>> {
-        let bars = self
-            .client
-            .get_block_bars(category, code, start, count)
-            .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))?;
+        let bars = py.detach(|| {
+            self.client
+                .get_block_bars(category, code, start, count)
+                .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))
+        })?;
 
         let list = PyList::empty(py);
         for bar in &bars {
@@ -560,10 +571,11 @@ impl PyTdxBlockClient {
     /// Returns:
     ///     list[dict]: 板块成分股级别的记录，每条含 blockname, block_type, code_index, code
     fn get_block_list(&self, py: Python<'_>, block_file: &str) -> PyResult<Py<PyAny>> {
-        let data = self
-            .client
-            .get_block_list(block_file)
-            .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))?;
+        let data = py.detach(|| {
+            self.client
+                .get_block_list(block_file)
+                .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))
+        })?;
 
         let list = PyList::empty(py);
         for d in &data {
