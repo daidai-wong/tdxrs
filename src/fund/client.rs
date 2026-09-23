@@ -22,6 +22,7 @@ use super::utils::{validate_fund_code, validate_fund_stocks};
 /// ```no_run
 /// use tdxrs::fund::client::TdxHqFundClient;
 /// use tdxrs::fund::constants::{MARKET_SH, MARKET_SZ};
+/// use tdxrs::protocol::constants::KLINE_DAILY;
 ///
 /// let client = TdxHqFundClient::new();
 /// client.connect_to_any(None).unwrap();

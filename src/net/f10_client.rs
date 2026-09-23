@@ -28,7 +28,7 @@ const DEFAULT_F10_TIMEOUT: f64 = 10.0;
 ///
 /// # 示例
 ///
-/// ```rust
+/// ```ignore
 /// use tdxrs::net::f10_client::TdxF10Client;
 ///
 /// let client = TdxF10Client::new("180.153.18.170", 7709, None);

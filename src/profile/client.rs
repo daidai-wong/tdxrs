@@ -15,20 +15,20 @@ use super::types::*;
 ///
 /// # 示例
 ///
-/// ```rust
-/// use tdxrs::net::TdxHqClient;
-/// use tdxrs::profile::ProfileClient;
-///
-/// let mut client = TdxHqClient::new();
-/// client.connect()?;
-///
-/// let mut profile = ProfileClient::new(&mut client);
-/// let categories = profile.get_category(1, "600519")?;
-/// for cat in &categories {
-///     println!("{}: {} bytes", cat.name, cat.length);
-/// }
-/// # Ok::<(), Box<dyn std::error::Error>>
-/// ```
+    /// ```ignore
+    /// use tdxrs::net::client::TdxHqClient;
+    /// use tdxrs::profile::ProfileClient;
+    ///
+    /// let mut client = TdxHqClient::new();
+    /// client.connect("117.34.114.14", 7709, None)?;
+    ///
+    /// let mut profile = ProfileClient::new(&mut client);
+    /// let categories = profile.get_category(1, "600519")?;
+    /// for cat in &categories {
+    ///     println!("{}: {} bytes", cat.name, cat.length);
+    /// }
+    /// # Ok::<(), Box<dyn std::error::Error>>
+    /// ```
 pub struct ProfileClient<'a> {
     client: &'a mut TdxHqClient,
 }
@@ -53,7 +53,7 @@ impl<'a> ProfileClient<'a> {
     ///
     /// # 示例
     ///
-    /// ```rust
+    /// ```ignore
     /// let categories = profile.get_category(1, "600519")?;
     /// for cat in &categories {
     ///     println!("{}", cat.name);

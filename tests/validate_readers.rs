@@ -3,9 +3,7 @@ use std::path::Path;
 
 fn golden_dir() -> std::path::PathBuf {
     std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-        .join("..")
-        .join("tdxpy")
-        .join("test_data")
+        .join("tests")
         .join("golden")
 }
 
@@ -86,9 +84,25 @@ fn test_min_bar_600519() {
     let records = tdxrs::reader::min_bar::parse_lc_min_bar(&data).expect("Parse failed");
 
     assert!(!records.is_empty());
-    assert_eq!(records[0].year, 2023);
-    assert_eq!(records[0].month, 1);
-    assert_eq!(records[0].day, 9);
+
+    // golden: 由 gen_fixtures_local.py 从真实 vipdoc 分钟线生成 (fixture/golden 同源)
+    let golden_path = golden_dir().join("bars_600519_cat0_5分钟线.json");
+    let golden: Vec<serde_json::Value> =
+        serde_json::from_str(&fs::read_to_string(&golden_path).expect("Read golden")).unwrap();
+    assert_eq!(records.len(), golden.len(), "record count mismatch");
+
+    let r0 = &records[0];
+    let g0 = &golden[0];
+    assert_eq!(r0.year, g0["year"].as_u64().unwrap() as u32, "year mismatch");
+    assert_eq!(r0.month, g0["month"].as_u64().unwrap() as u32, "month mismatch");
+    assert_eq!(r0.day, g0["day"].as_u64().unwrap() as u32, "day mismatch");
+    let g_open = g0["open"].as_f64().unwrap();
+    assert!(
+        (r0.open - g_open).abs() < 0.02,
+        "open mismatch: {} vs {}",
+        r0.open,
+        g_open
+    );
 }
 
 #[test]

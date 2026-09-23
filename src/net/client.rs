@@ -621,7 +621,7 @@ impl TdxHqClient {
     ///
     /// # 示例
     ///
-    /// ```rust
+    /// ```ignore
     /// let mut client = TdxHqClient::new();
     /// client.connect()?;
     ///

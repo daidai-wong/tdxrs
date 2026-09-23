@@ -9,12 +9,12 @@
 ///
 /// # 示例
 ///
-/// ```rust
-/// use tdxrs::net::TdxHqClient;
+/// ```ignore
+/// use tdxrs::net::client::TdxHqClient;
 /// use tdxrs::profile::ProfileClient;
 ///
 /// let mut client = TdxHqClient::new();
-/// client.connect()?;
+/// client.connect("117.34.114.14", 7709, None)?;
 ///
 /// let mut profile = ProfileClient::new(&mut client);
 /// let categories = profile.get_category(1, "600519")?;

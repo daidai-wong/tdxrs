@@ -27,6 +27,7 @@
 //! ```no_run
 //! use tdxrs::fund::client::TdxHqFundClient;
 //! use tdxrs::fund::constants::{MARKET_SH, MARKET_SZ, FundType};
+//! use tdxrs::protocol::constants::KLINE_DAILY;
 //!
 //! let client = TdxHqFundClient::new();
 //! client.connect_to_any(None).unwrap();
