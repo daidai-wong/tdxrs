@@ -22,9 +22,13 @@ impl DailyBarReader {
     }
 
     /// 解析日线数据，返回 Python list of dict
+    ///
+    /// 解析在 GIL 外完成 (纯 CPU, 大文件可达数十毫秒)。
     fn parse_data(&self, py: Python<'_>, data: Vec<u8>) -> PyResult<Py<PyAny>> {
-        let records = daily_bar::parse_daily_bar(&data, self.coefficient)
-            .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))?;
+        let records = py.detach(|| {
+                daily_bar::parse_daily_bar(&data, self.coefficient)
+                    .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))
+            })?;
 
         let list = PyList::empty(py);
         for r in &records {
@@ -44,10 +48,12 @@ impl DailyBarReader {
         Ok(list.into())
     }
 
-    /// 从文件读取并解析
+    /// 从文件读取并解析 (文件 IO + 解析均在 GIL 外完成)
     fn parse_file(&self, py: Python<'_>, filename: &str) -> PyResult<Py<PyAny>> {
-        let records = daily_bar::read_daily_bar_file(filename, self.coefficient)
-            .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))?;
+        let records = py.detach(|| {
+                daily_bar::read_daily_bar_file(filename, self.coefficient)
+                    .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))
+            })?;
 
         let list = PyList::empty(py);
         for r in &records {
@@ -68,9 +74,13 @@ impl DailyBarReader {
     }
 
     /// 解析日线数据，返回 Python list of tuple (高性能模式)
+    ///
+    /// 解析在 GIL 外完成。
     fn parse_data_tuples(&self, py: Python<'_>, data: Vec<u8>) -> PyResult<Py<PyAny>> {
-        let records = daily_bar::parse_daily_bar(&data, self.coefficient)
-            .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))?;
+        let records = py.detach(|| {
+                daily_bar::parse_daily_bar(&data, self.coefficient)
+                    .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))
+            })?;
 
         let list = PyList::empty(py);
         for r in &records {
@@ -91,9 +101,13 @@ impl DailyBarReader {
     }
 
     /// 从文件读取并解析，返回 Python list of tuple (高性能模式)
+    ///
+    /// 文件 IO + 解析均在 GIL 外完成。
     fn parse_file_tuples(&self, py: Python<'_>, filename: &str) -> PyResult<Py<PyAny>> {
-        let records = daily_bar::read_daily_bar_file(filename, self.coefficient)
-            .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))?;
+        let records = py.detach(|| {
+                daily_bar::read_daily_bar_file(filename, self.coefficient)
+                    .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))
+            })?;
 
         let list = PyList::empty(py);
         for r in &records {
@@ -114,16 +128,24 @@ impl DailyBarReader {
     }
 
     /// 解析日线数据, 返回 pandas DataFrame (列式, 高性能)
+    ///
+    /// 解析在 GIL 外完成。
     fn to_dataframe(&self, py: Python<'_>, data: Vec<u8>) -> PyResult<Py<PyAny>> {
-        let records = daily_bar::parse_daily_bar(&data, self.coefficient)
-            .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))?;
+        let records = py.detach(|| {
+                daily_bar::parse_daily_bar(&data, self.coefficient)
+                    .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))
+            })?;
         crate::python::py_dataframe::daily_records_to_df(py, &records)
     }
 
     /// 从文件读取并解析, 返回 pandas DataFrame
+    ///
+    /// 文件 IO + 解析均在 GIL 外完成。
     fn to_dataframe_file(&self, py: Python<'_>, filename: &str) -> PyResult<Py<PyAny>> {
-        let records = daily_bar::read_daily_bar_file(filename, self.coefficient)
-            .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))?;
+        let records = py.detach(|| {
+                daily_bar::read_daily_bar_file(filename, self.coefficient)
+                    .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))
+            })?;
         crate::python::py_dataframe::daily_records_to_df(py, &records)
     }
 }
@@ -164,10 +186,12 @@ impl MinBarReader {
         Ok(list.into())
     }
 
-    /// 从文件读取并解析
+    /// 从文件读取并解析 (文件 IO + 解析均在 GIL 外完成)
     fn parse_file(&self, py: Python<'_>, filename: &str) -> PyResult<Py<PyAny>> {
-        let records = min_bar::read_min_bar_file(filename)
-            .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))?;
+        let records = py.detach(|| {
+                min_bar::read_min_bar_file(filename)
+                    .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))
+            })?;
 
         let list = PyList::empty(py);
         for r in &records {
@@ -215,9 +239,13 @@ impl MinBarReader {
     }
 
     /// 从文件读取并解析，返回 list of tuple (高性能模式)
+    ///
+    /// 文件 IO + 解析均在 GIL 外完成。
     fn parse_file_tuples(&self, py: Python<'_>, filename: &str) -> PyResult<Py<PyAny>> {
-        let records = min_bar::read_min_bar_file(filename)
-            .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))?;
+        let records = py.detach(|| {
+                min_bar::read_min_bar_file(filename)
+                    .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))
+            })?;
 
         let list = PyList::empty(py);
         for r in &records {
@@ -240,9 +268,13 @@ impl MinBarReader {
     }
 
     /// 解析5分钟线数据, 返回 pandas DataFrame
+    ///
+    /// 解析在 GIL 外完成。
     fn to_dataframe(&self, py: Python<'_>, data: Vec<u8>) -> PyResult<Py<PyAny>> {
-        let records = min_bar::parse_min_bar(&data)
-            .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))?;
+        let records = py.detach(|| {
+                min_bar::parse_min_bar(&data)
+                    .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))
+            })?;
         crate::python::py_dataframe::min_records_to_df(py, &records)
     }
 }
@@ -259,9 +291,13 @@ impl LcMinBarReader {
     }
 
     /// 解析 LC 格式分钟线数据 (浮点格式)
+    ///
+    /// 解析在 GIL 外完成。
     fn parse_data(&self, py: Python<'_>, data: Vec<u8>) -> PyResult<Py<PyAny>> {
-        let records = min_bar::parse_lc_min_bar(&data)
-            .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))?;
+        let records = py.detach(|| {
+                min_bar::parse_lc_min_bar(&data)
+                    .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))
+            })?;
 
         let list = PyList::empty(py);
         for r in &records {
@@ -283,10 +319,12 @@ impl LcMinBarReader {
         Ok(list.into())
     }
 
-    /// 从文件读取并解析
+    /// 从文件读取并解析 (文件 IO + 解析均在 GIL 外完成)
     fn parse_file(&self, py: Python<'_>, filename: &str) -> PyResult<Py<PyAny>> {
-        let records = min_bar::read_lc_min_bar_file(filename)
-            .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))?;
+        let records = py.detach(|| {
+                min_bar::read_lc_min_bar_file(filename)
+                    .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))
+            })?;
 
         let list = PyList::empty(py);
         for r in &records {
@@ -309,9 +347,13 @@ impl LcMinBarReader {
     }
 
     /// 解析 LC 格式分钟线数据，返回 list of tuple (高性能模式)
+    ///
+    /// 解析在 GIL 外完成。
     fn parse_data_tuples(&self, py: Python<'_>, data: Vec<u8>) -> PyResult<Py<PyAny>> {
-        let records = min_bar::parse_lc_min_bar(&data)
-            .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))?;
+        let records = py.detach(|| {
+                min_bar::parse_lc_min_bar(&data)
+                    .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))
+            })?;
 
         let list = PyList::empty(py);
         for r in &records {
@@ -334,9 +376,13 @@ impl LcMinBarReader {
     }
 
     /// 从文件读取并解析，返回 list of tuple (高性能模式)
+    ///
+    /// 文件 IO + 解析均在 GIL 外完成。
     fn parse_file_tuples(&self, py: Python<'_>, filename: &str) -> PyResult<Py<PyAny>> {
-        let records = min_bar::read_lc_min_bar_file(filename)
-            .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))?;
+        let records = py.detach(|| {
+                min_bar::read_lc_min_bar_file(filename)
+                    .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))
+            })?;
 
         let list = PyList::empty(py);
         for r in &records {
@@ -422,9 +468,13 @@ impl BlockReader {
     }
 
     /// 解析板块数据 (扁平模式: 每只股票一行)
+    ///
+    /// 解析在 GIL 外完成。
     fn parse_data(&self, py: Python<'_>, data: Vec<u8>) -> PyResult<Py<PyAny>> {
-        let records = block::parse_block(&data)
-            .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))?;
+        let records = py.detach(|| {
+                block::parse_block(&data)
+                    .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))
+            })?;
 
         let list = PyList::empty(py);
         for r in &records {
@@ -439,9 +489,13 @@ impl BlockReader {
     }
 
     /// 解析板块数据 (分组模式: 每个板块一行)
+    ///
+    /// 解析在 GIL 外完成。
     fn parse_data_group(&self, py: Python<'_>, data: Vec<u8>) -> PyResult<Py<PyAny>> {
-        let groups = block::parse_block_group(&data)
-            .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))?;
+        let groups = py.detach(|| {
+                block::parse_block_group(&data)
+                    .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))
+            })?;
 
         let list = PyList::empty(py);
         for g in &groups {
@@ -485,9 +539,13 @@ impl FinancialReader {
     }
 
     /// 解析财务数据
+    ///
+    /// 解析在 GIL 外完成。
     fn parse_data(&self, py: Python<'_>, data: Vec<u8>) -> PyResult<Py<PyAny>> {
-        let records = financial::parse_financial(&data)
-            .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))?;
+        let records = py.detach(|| {
+                financial::parse_financial(&data)
+                    .map_err(|e| pyo3::exceptions::PyValueError::new_err(e.to_string()))
+            })?;
 
         let list = PyList::empty(py);
         for r in &records {
