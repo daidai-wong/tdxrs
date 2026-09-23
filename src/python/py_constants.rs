@@ -49,6 +49,14 @@ pub fn register_constants(m: &Bound<'_, PyModule>) -> PyResult<()> {
         .collect();
     m.setattr("PRIMARY_SERVERS", primary_servers)?;
 
+    // 全量已知服务器 (101 唯一 IP) — 供 Python 层注入 IP 池:
+    // Downloader(servers=ALL_KNOWN_SERVERS) / HybridClient(servers=...) / 自定义均衡
+    let all_known_servers: Vec<(String, String, u16)> = constants::ALL_KNOWN_SERVERS
+        .iter()
+        .map(|(name, ip, port)| (name.to_string(), ip.to_string(), *port))
+        .collect();
+    m.setattr("ALL_KNOWN_SERVERS", all_known_servers)?;
+
     // 别名 (向后兼容)
     m.setattr("PORT", constants::DEFAULT_PORT)?;
     m.setattr("POOL_SIZE", constants::DEFAULT_POOL_SIZE)?;
