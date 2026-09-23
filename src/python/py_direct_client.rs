@@ -63,9 +63,11 @@ impl PyTdxDirectClient {
         &self, py: Python<'_>, category: u8, market: u8, code: &str,
         start: u32, count: u16, fq: u8,
     ) -> PyResult<Py<PyAny>> {
-        let bars = self.client.lock().unwrap()
-            .get_security_bars(category, market, code, start, count, fq)
-            .map_err(to_py_err)?;
+        let bars = py.detach(|| {
+            self.client.lock().unwrap()
+                .get_security_bars(category, market, code, start, count, fq)
+                .map_err(to_py_err)
+        })?;
         bars_to_list(py, &bars, |b, d| {
             d.set_item("open", b.open)?;
             d.set_item("close", b.close)?;
@@ -88,9 +90,11 @@ impl PyTdxDirectClient {
         &self, py: Python<'_>, category: u8, market: u8, code: &str,
         start: u32, count: u16, fq: u8,
     ) -> PyResult<Py<PyAny>> {
-        let bars = self.client.lock().unwrap()
-            .get_index_bars(category, market, code, start, count, fq)
-            .map_err(to_py_err)?;
+        let bars = py.detach(|| {
+            self.client.lock().unwrap()
+                .get_index_bars(category, market, code, start, count, fq)
+                .map_err(to_py_err)
+        })?;
         bars_to_list(py, &bars, |b, d| {
             d.set_item("open", b.open)?;
             d.set_item("close", b.close)?;
@@ -129,8 +133,10 @@ impl PyTdxDirectClient {
 
     #[pyo3(signature = (market, start=0))]
     fn get_security_list(&self, py: Python<'_>, market: u8, start: u16) -> PyResult<Py<PyAny>> {
-        let list = self.client.lock().unwrap().get_security_list(market, start)
-            .map_err(to_py_err)?;
+        let list = py.detach(|| {
+            self.client.lock().unwrap().get_security_list(market, start)
+                .map_err(to_py_err)
+        })?;
         sec_list_to_list(py, &list)
     }
 
@@ -152,8 +158,10 @@ impl PyTdxDirectClient {
     fn get_history_minute_time_data(
         &self, py: Python<'_>, market: u8, code: &str, date: u32,
     ) -> PyResult<Py<PyAny>> {
-        let data = self.client.lock().unwrap().get_history_minute_time_data(market, code, date)
-            .map_err(to_py_err)?;
+        let data = py.detach(|| {
+            self.client.lock().unwrap().get_history_minute_time_data(market, code, date)
+                .map_err(to_py_err)
+        })?;
         minute_to_list(py, &data)
     }
 
@@ -177,8 +185,10 @@ impl PyTdxDirectClient {
     }
 
     fn get_finance_info(&self, py: Python<'_>, market: u8, code: &str) -> PyResult<Py<PyAny>> {
-        let info = self.client.lock().unwrap().get_finance_info(market, code)
-            .map_err(to_py_err)?;
+        let info = py.detach(|| {
+            self.client.lock().unwrap().get_finance_info(market, code)
+                .map_err(to_py_err)
+        })?;
         finance_to_dict(py, &info)
     }
 
