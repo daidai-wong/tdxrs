@@ -74,13 +74,17 @@ impl DailyBarReader {
 
         let list = PyList::empty(py);
         for r in &records {
-            let items: Vec<Py<PyAny>> = vec![
-                r.date.as_str().into_py_any(py)?, r.open.into_py_any(py)?,
-                r.high.into_py_any(py)?, r.low.into_py_any(py)?, r.close.into_py_any(py)?,
-                r.amount.into_py_any(py)?, r.volume.into_py_any(py)?,
-                r.year.into_py_any(py)?, r.month.into_py_any(py)?, r.day.into_py_any(py)?,
-            ];
-            let tuple = PyTuple::new(py, &items)?;
+            let date = r.date.as_str().into_py_any(py)?;
+            let open = r.open.into_py_any(py)?;
+            let high = r.high.into_py_any(py)?;
+            let low = r.low.into_py_any(py)?;
+            let close = r.close.into_py_any(py)?;
+            let amount = r.amount.into_py_any(py)?;
+            let volume = r.volume.into_py_any(py)?;
+            let year = r.year.into_py_any(py)?;
+            let month = r.month.into_py_any(py)?;
+            let day = r.day.into_py_any(py)?;
+            let tuple = PyTuple::new(py, [date, open, high, low, close, amount, volume, year, month, day])?;
             list.append(tuple)?;
         }
         Ok(list.into())
@@ -93,13 +97,17 @@ impl DailyBarReader {
 
         let list = PyList::empty(py);
         for r in &records {
-            let items: Vec<Py<PyAny>> = vec![
-                r.date.as_str().into_py_any(py)?, r.open.into_py_any(py)?,
-                r.high.into_py_any(py)?, r.low.into_py_any(py)?, r.close.into_py_any(py)?,
-                r.amount.into_py_any(py)?, r.volume.into_py_any(py)?,
-                r.year.into_py_any(py)?, r.month.into_py_any(py)?, r.day.into_py_any(py)?,
-            ];
-            let tuple = PyTuple::new(py, &items)?;
+            let date = r.date.as_str().into_py_any(py)?;
+            let open = r.open.into_py_any(py)?;
+            let high = r.high.into_py_any(py)?;
+            let low = r.low.into_py_any(py)?;
+            let close = r.close.into_py_any(py)?;
+            let amount = r.amount.into_py_any(py)?;
+            let volume = r.volume.into_py_any(py)?;
+            let year = r.year.into_py_any(py)?;
+            let month = r.month.into_py_any(py)?;
+            let day = r.day.into_py_any(py)?;
+            let tuple = PyTuple::new(py, [date, open, high, low, close, amount, volume, year, month, day])?;
             list.append(tuple)?;
         }
         Ok(list.into())
@@ -188,14 +196,19 @@ impl MinBarReader {
 
         let list = PyList::empty(py);
         for r in &records {
-            let items: Vec<Py<PyAny>> = vec![
-                r.date.as_str().into_py_any(py)?, r.open.into_py_any(py)?,
-                r.high.into_py_any(py)?, r.low.into_py_any(py)?, r.close.into_py_any(py)?,
-                r.amount.into_py_any(py)?, r.volume.into_py_any(py)?,
-                r.year.into_py_any(py)?, r.month.into_py_any(py)?, r.day.into_py_any(py)?,
-                r.hour.into_py_any(py)?, r.minute.into_py_any(py)?,
-            ];
-            let tuple = PyTuple::new(py, &items)?;
+            let date = r.date.as_str().into_py_any(py)?;
+            let open = r.open.into_py_any(py)?;
+            let high = r.high.into_py_any(py)?;
+            let low = r.low.into_py_any(py)?;
+            let close = r.close.into_py_any(py)?;
+            let amount = r.amount.into_py_any(py)?;
+            let volume = r.volume.into_py_any(py)?;
+            let year = r.year.into_py_any(py)?;
+            let month = r.month.into_py_any(py)?;
+            let day = r.day.into_py_any(py)?;
+            let hour = r.hour.into_py_any(py)?;
+            let minute = r.minute.into_py_any(py)?;
+            let tuple = PyTuple::new(py, [date, open, high, low, close, amount, volume, year, month, day, hour, minute])?;
             list.append(tuple)?;
         }
         Ok(list.into())
@@ -208,14 +221,19 @@ impl MinBarReader {
 
         let list = PyList::empty(py);
         for r in &records {
-            let items: Vec<Py<PyAny>> = vec![
-                r.date.as_str().into_py_any(py)?, r.open.into_py_any(py)?,
-                r.high.into_py_any(py)?, r.low.into_py_any(py)?, r.close.into_py_any(py)?,
-                r.amount.into_py_any(py)?, r.volume.into_py_any(py)?,
-                r.year.into_py_any(py)?, r.month.into_py_any(py)?, r.day.into_py_any(py)?,
-                r.hour.into_py_any(py)?, r.minute.into_py_any(py)?,
-            ];
-            let tuple = PyTuple::new(py, &items)?;
+            let date = r.date.as_str().into_py_any(py)?;
+            let open = r.open.into_py_any(py)?;
+            let high = r.high.into_py_any(py)?;
+            let low = r.low.into_py_any(py)?;
+            let close = r.close.into_py_any(py)?;
+            let amount = r.amount.into_py_any(py)?;
+            let volume = r.volume.into_py_any(py)?;
+            let year = r.year.into_py_any(py)?;
+            let month = r.month.into_py_any(py)?;
+            let day = r.day.into_py_any(py)?;
+            let hour = r.hour.into_py_any(py)?;
+            let minute = r.minute.into_py_any(py)?;
+            let tuple = PyTuple::new(py, [date, open, high, low, close, amount, volume, year, month, day, hour, minute])?;
             list.append(tuple)?;
         }
         Ok(list.into())
@@ -297,14 +315,19 @@ impl LcMinBarReader {
 
         let list = PyList::empty(py);
         for r in &records {
-            let items: Vec<Py<PyAny>> = vec![
-                r.date.as_str().into_py_any(py)?, r.open.into_py_any(py)?,
-                r.high.into_py_any(py)?, r.low.into_py_any(py)?, r.close.into_py_any(py)?,
-                r.amount.into_py_any(py)?, r.volume.into_py_any(py)?,
-                r.year.into_py_any(py)?, r.month.into_py_any(py)?, r.day.into_py_any(py)?,
-                r.hour.into_py_any(py)?, r.minute.into_py_any(py)?,
-            ];
-            let tuple = PyTuple::new(py, &items)?;
+            let date = r.date.as_str().into_py_any(py)?;
+            let open = r.open.into_py_any(py)?;
+            let high = r.high.into_py_any(py)?;
+            let low = r.low.into_py_any(py)?;
+            let close = r.close.into_py_any(py)?;
+            let amount = r.amount.into_py_any(py)?;
+            let volume = r.volume.into_py_any(py)?;
+            let year = r.year.into_py_any(py)?;
+            let month = r.month.into_py_any(py)?;
+            let day = r.day.into_py_any(py)?;
+            let hour = r.hour.into_py_any(py)?;
+            let minute = r.minute.into_py_any(py)?;
+            let tuple = PyTuple::new(py, [date, open, high, low, close, amount, volume, year, month, day, hour, minute])?;
             list.append(tuple)?;
         }
         Ok(list.into())
@@ -317,14 +340,19 @@ impl LcMinBarReader {
 
         let list = PyList::empty(py);
         for r in &records {
-            let items: Vec<Py<PyAny>> = vec![
-                r.date.as_str().into_py_any(py)?, r.open.into_py_any(py)?,
-                r.high.into_py_any(py)?, r.low.into_py_any(py)?, r.close.into_py_any(py)?,
-                r.amount.into_py_any(py)?, r.volume.into_py_any(py)?,
-                r.year.into_py_any(py)?, r.month.into_py_any(py)?, r.day.into_py_any(py)?,
-                r.hour.into_py_any(py)?, r.minute.into_py_any(py)?,
-            ];
-            let tuple = PyTuple::new(py, &items)?;
+            let date = r.date.as_str().into_py_any(py)?;
+            let open = r.open.into_py_any(py)?;
+            let high = r.high.into_py_any(py)?;
+            let low = r.low.into_py_any(py)?;
+            let close = r.close.into_py_any(py)?;
+            let amount = r.amount.into_py_any(py)?;
+            let volume = r.volume.into_py_any(py)?;
+            let year = r.year.into_py_any(py)?;
+            let month = r.month.into_py_any(py)?;
+            let day = r.day.into_py_any(py)?;
+            let hour = r.hour.into_py_any(py)?;
+            let minute = r.minute.into_py_any(py)?;
+            let tuple = PyTuple::new(py, [date, open, high, low, close, amount, volume, year, month, day, hour, minute])?;
             list.append(tuple)?;
         }
         Ok(list.into())
