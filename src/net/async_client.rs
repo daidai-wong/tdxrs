@@ -515,7 +515,8 @@ impl AsyncTdxHqClient {
 
         let max_per_page = MAX_KLINE_COUNT as u32;
         let max_pages = self.fq_context_tier().pages();
-        let mut context = Vec::new();
+        // 各页按时间从近到远到达; 先收集, 最后逆序一次性拼接 (避免每页头插的 O(n²) 搬移)
+        let mut pages: Vec<Vec<SecurityBar>> = Vec::with_capacity(max_pages as usize);
         let mut offset = max_per_page;
 
         for _page in 0..max_pages {
@@ -537,19 +538,20 @@ impl AsyncTdxHqClient {
             let batch_first_date =
                 batch[0].year as u32 * 10000 + batch[0].month as u32 * 100 + batch[0].day as u32;
 
-            let len_before = context.len();
-            context.splice(0..0, batch);
+            pages.push(batch);
 
             if batch_first_date <= ee_date {
                 break;
             }
 
             offset += max_per_page;
-            if context.len() == len_before {
-                break;
-            }
         }
 
+        let total: usize = pages.iter().map(|p| p.len()).sum();
+        let mut context = Vec::with_capacity(total);
+        for page in pages.into_iter().rev() {
+            context.extend(page);
+        }
         context
     }
 
