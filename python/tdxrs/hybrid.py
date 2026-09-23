@@ -214,15 +214,21 @@ class HybridClient:
         服务器连接超时 (秒)。
     client : object | None
         注入的服务器客户端 (需提供 get_security_bars), 主要用于测试。
+    servers : list[(name, ip, port)] | None
+        自定义服务器池。None 用默认 PRIMARY (连接失败时 Rust 层自动兜底
+        全量 ALL_KNOWN_SERVERS); 传入 tdxrs.ALL_KNOWN_SERVERS 可把全部
+        101 个 IP 注入池子, connect_to_any 按优先列表+全量顺序遍历。
     """
 
-    def __init__(self, vipdoc_dir=None, timeout: float = 5.0, client=None):
+    def __init__(self, vipdoc_dir=None, timeout: float = 5.0, client=None,
+                 servers=None):
         self.timeout = timeout
         if vipdoc_dir is not None:
             self.vipdoc_dir = Path(vipdoc_dir)
         else:
             self.vipdoc_dir = locate_vipdoc()
         self._client = client
+        self._servers = list(servers) if servers else None
         self._last_server_error = None
 
     # ---------- 服务器 ----------
@@ -230,6 +236,12 @@ class HybridClient:
     def _get_client(self):
         if self._client is None:
             c = TdxHqClient()
+            # 自定义 IP 池注入 (全量池/筛查结果均可)
+            if self._servers:
+                try:
+                    c.set_servers([(n, ip, p) for n, ip, p in self._servers])
+                except Exception:
+                    pass
             ok = False
             # 优先用筛查缓存的最优服务器 (24h 内有效)
             try:

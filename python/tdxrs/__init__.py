@@ -12,7 +12,7 @@ try:
     from tdxrs._internal import (
         DailyBarReader, MinBarReader, LcMinBarReader, BlockReader, FinancialReader,
         TdxHqClient, AsyncTdxHqClient, TdxDirectClient, TdxSmartClient, TdxHqFundClient, TdxBlockClient,
-        PRIMARY_SERVERS,
+        PRIMARY_SERVERS, ALL_KNOWN_SERVERS,
     )
 except ImportError:
     raise ImportError(
@@ -29,7 +29,7 @@ __version__ = "0.6.7"
 __all__ = [
     "DailyBarReader", "MinBarReader", "LcMinBarReader", "BlockReader", "FinancialReader",
     "TdxHqClient", "AsyncTdxHqClient", "TdxDirectClient", "TdxSmartClient", "TdxHqFundClient", "TdxBlockClient",
-    "PRIMARY_SERVERS",
+    "PRIMARY_SERVERS", "ALL_KNOWN_SERVERS",
     "screen_servers", "best_server",
     "HybridClient", "get_daily_bars",
 ]
