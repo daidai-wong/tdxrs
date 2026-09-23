@@ -257,7 +257,7 @@ impl TdxHqClient {
 
         for &(name, ip, port) in ALL_KNOWN_SERVERS {
             let tcp_start = Instant::now();
-            let result = (|| -> std::result::Result<(f64, f64), TdxError> {
+            let result = (|| -> std::result::Result<(f64, f64, f64), TdxError> {
                 let mut tcp = TcpConnection::connect(ip, port, timeout_secs)?;
                 let tcp_ms = tcp_start.elapsed().as_secs_f64() * 1000.0;
 
@@ -265,8 +265,9 @@ impl TdxHqClient {
                 utils::perform_handshake(&mut tcp)?;
                 let hs_ms = hs_start.elapsed().as_secs_f64() * 1000.0;
 
-                // 简单 API (get_security_count)
-                // 验证服务器可用 (发送 API 请求)
+                // 简单 API (get_security_count) 验证服务器可用并测量响应时间。
+                // 任何一步失败经 ? 传播为 Err (跳过该服务器), 绝不 panic。
+                let api_start = Instant::now();
                 let mut pkt = Vec::with_capacity(18);
                 pkt.extend_from_slice(&[
                     0x0c, 0x0c, 0x18, 0x6c, 0x00, 0x01, 0x08, 0x00, 0x08, 0x00, 0x4e, 0x04,
@@ -281,38 +282,20 @@ impl TdxHqClient {
                 while body.len() < zs {
                     body.extend_from_slice(&tcp.recv(zs - body.len())?);
                 }
-                Ok((tcp_ms, hs_ms))
+                let api_ms = api_start.elapsed().as_secs_f64() * 1000.0;
+                Ok((tcp_ms, hs_ms, api_ms))
             })();
 
             match result {
-                Ok((tcp_ms, hs_ms)) => {
-                    let api_ms = {
-                        let mut conn = TcpConnection::connect(ip, port, timeout_secs).unwrap();
-                        utils::perform_handshake(&mut conn).unwrap();
-                        let start = Instant::now();
-                        let mut pkt = Vec::with_capacity(18);
-                        pkt.extend_from_slice(&[
-                            0x0c, 0x0c, 0x18, 0x6c, 0x00, 0x01, 0x08, 0x00, 0x08, 0x00, 0x4e, 0x04,
-                        ]);
-                        pkt.extend_from_slice(&(1u16.to_le_bytes()));
-                        pkt.extend_from_slice(&[0x75, 0xc7, 0x33, 0x01]);
-                        conn.send(&pkt).unwrap();
-                        let head = conn.recv(RSP_HEADER_LEN).unwrap();
-                        let h = ResponseHeader::parse(&head).unwrap();
-                        let zs = h.zip_size as usize;
-                        let mut body = Vec::with_capacity(zs);
-                        while body.len() < zs {
-                            body.extend_from_slice(&conn.recv(zs - body.len()).unwrap());
-                        }
-                        start.elapsed().as_secs_f64() * 1000.0
-                    };
+                Ok((tcp_ms, hs_ms, api_ms)) => {
                     results.push((name, ip, port, tcp_ms, hs_ms, api_ms));
                 }
                 Err(_) => continue,
             }
         }
 
-        results.sort_by(|a, b| a.5.partial_cmp(&b.5).unwrap());
+        // total_cmp: f64 排序不因 NaN panic (partial_cmp().unwrap() 会)
+        results.sort_by(|a, b| a.5.total_cmp(&b.5));
         results
     }
 
