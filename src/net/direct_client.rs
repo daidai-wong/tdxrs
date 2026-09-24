@@ -335,12 +335,30 @@ impl TdxDirectClient {
     // 分时数据
     // ================================================================
 
-    /// 获取当日分时数据 (委托给历史分时 API，避免实时 API 价格编码异常)
+    /// 获取当日实时分时数据 (命令码 0x051d, 2026-07 新格式)
+    ///
+    /// 实时 API 空/失败时回退历史分时 API (传今日日期)。
     pub fn get_minute_time_data(
         &self,
         market: u8,
         code: &str,
     ) -> Result<Vec<MinuteTimePrice>> {
+        let code_buf = utils::code_bytes(code);
+        let mut pkt = Vec::with_capacity(21);
+        pkt.extend_from_slice(&[
+            0x0c, 0x1b, 0x08, 0x00, 0x01, 0x01, 0x0e, 0x00, 0x0e, 0x00, 0x1d, 0x05,
+        ]);
+        pkt.extend_from_slice(&(market as u16).to_le_bytes());
+        pkt.extend_from_slice(&code_buf);
+        pkt.extend_from_slice(&0u32.to_le_bytes());
+
+        if let Ok(body) = self.send_and_recv(&pkt) {
+            if let Ok(data) = parse_minute_time_data(&body, market, code) {
+                if !data.is_empty() {
+                    return Ok(data);
+                }
+            }
+        }
         let today = utils::today_yyyymmdd();
         self.get_history_minute_time_data(market, code, today)
     }

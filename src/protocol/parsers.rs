@@ -294,57 +294,133 @@ pub fn minute_time_from_index(index: usize) -> String {
     format!("{:02}:{:02}", total / 60, total % 60)
 }
 
-/// 解析当日分时数据
+/// 解析实时分时数据 (命令码 0x051d)
 ///
-/// ⚠️ 已知问题: TDX 实时分时 API (命令码 0x051d) 的数据格式与历史分时 API 不同，
-/// 且数据编码存在异常（价格差分编码在某些记录会重置）。
+/// # 2026-07 服务器协议变更后的新格式 (2026-09 逆向验证, 4 股全量比对通过)
 ///
-/// 建议使用 `get_history_minute_time_data` API 替代，传入今日日期即可获取当日数据，
-/// 该 API 数据格式稳定且已验证正确。
+/// ```text
+/// body := count(u16) + pad(u16) + market(u8) + code(6B ASCII)
+///       → prologue 差分字段 (变长 zigzag, 含 close/pre/open/high/low-close 等)
+///       → 可变尾部杂项字段
+///       → count × (d_price, X, vol)  顺时记录 (09:31 起)
+/// ```
 ///
-/// 当前实现基于逆向分析，头部偏移 13 字节，但部分场景下价格可能异常。
+/// - 记录为**顺时序** (09:31 → 15:00), 与历史分时 API 一致
+/// - 首条 d_price 为绝对价 raw (price×100), 后续为相对前一条的差分
+/// - prologue 中「绝对值最大的前 6 字段之一」= 收盘/最新价 raw
+/// - 记录区通过锚点扫描定位: 累计价 == 最新价 raw (240 次累计命中特定值,
+///   误报概率可忽略), 且记录流恰好消费到 body 末尾
+/// - X 字段含义未明 (每条记录 1 个, 跳过)
 pub fn parse_minute_time_data(body: &[u8], market: u8, code: &str) -> Result<Vec<MinuteTimePrice>> {
     let coefficient = super::types::get_security_coefficient(market, code);
 
-    if body.len() < 14 {
+    if body.len() < 13 {
         return Err(ErrorCode::RESPONSE_LENGTH_MISMATCH.err("body too short"));
     }
 
     let count = read_u16(body, 0) as usize;
-    // 实时分时数据头部: 2(count) + 2(padding) + 1(indicator) + 6(stock_code) + 2(unknown) = 13 bytes
-    // 注意: 此偏移量基于逆向分析，可能不完全准确
-    let mut pos = 13;
+    if count == 0 {
+        return Ok(Vec::new());
+    }
+
+    // prologue: offset 11 起读 10 个 zigzag 字段
+    let mut pos = 11usize;
+    let mut prologue = [0i64; 10];
+    for item in prologue.iter_mut() {
+        let (v, np) = get_price(body, pos);
+        *item = v;
+        pos = np;
+        if pos >= body.len() {
+            return Err(ErrorCode::RESPONSE_LENGTH_MISMATCH.err("prologue truncated"));
+        }
+    }
+    // 最新价 raw = 前 6 字段中绝对值最大者 (价格幅度 >> 差分幅度)
+    let latest_raw = prologue[..6]
+        .iter()
+        .map(|v| v.abs())
+        .max()
+        .unwrap_or(0);
+    if latest_raw == 0 {
+        return Err(ErrorCode::RESPONSE_LENGTH_MISMATCH.err("no price field in prologue"));
+    }
+
+    // 预扫描字段边界 (候选锚点: prologue 之后的 60 个字段位置)
+    let mut field_pos = Vec::with_capacity(62);
+    field_pos.push(pos);
+    let mut p = pos;
+    for _ in 0..60 {
+        if p >= body.len() {
+            break;
+        }
+        let (_, np) = get_price(body, p);
+        field_pos.push(np);
+        p = np;
+    }
+
+    // 锚点扫描: 从某字段位置起, count × (d_price, X, vol), 累计价 == latest_raw,
+    // 且记录流恰好消费到 body 末尾 (所有已验证报文均满足 endpos == body.len(),
+    // 这在 count 很小时 (盘前占位报文) 是消除锚点歧义的关键约束)
+    let try_anchor = |exact_only: bool| -> Option<usize> {
+        for &start in field_pos.iter().skip(1) {
+            let mut q = start;
+            let mut cum: i64 = 0;
+            let mut ok = true;
+            for k in 0..count {
+                let (d, q2) = get_price(body, q);
+                if q2 >= body.len() {
+                    ok = false;
+                    break;
+                }
+                let (_, q3) = get_price(body, q2);
+                let (_, q4) = get_price(body, q3);
+                if q3 >= body.len() || q4 > body.len() {
+                    ok = false;
+                    break;
+                }
+                cum = if k == 0 { d } else { cum + d };
+                q = q4;
+            }
+            let end_ok = if exact_only {
+                q == body.len()
+            } else {
+                q >= body.len() - 8
+            };
+            if ok && cum == latest_raw && end_ok {
+                return Some(start);
+            }
+        }
+        None
+    };
+    let anchor_start = try_anchor(true).or_else(|| try_anchor(false));
+    let start = anchor_start.ok_or_else(|| {
+        ErrorCode::RESPONSE_LENGTH_MISMATCH.err("0x051d: record anchor not found")
+    })?;
+
+    // 正式解析: 顺时序
     let mut result = Vec::with_capacity(count);
-
-    let mut pre_diff_base: i64 = 0;
-    let mut cum_amount: f64 = 0.0;
-    let mut cum_vol: f64 = 0.0;
-
+    let mut q = start;
+    let mut cum: i64 = 0;
+    let mut cum_amount = 0f64;
+    let mut cum_vol = 0f64;
     for i in 0..count {
-        let (price_diff, new_pos) = get_price(body, pos);
-        pre_diff_base += price_diff;
-        let price = (pre_diff_base as f64) * coefficient;
-        pos = new_pos;
-
-        // reversed1 (skipped)
-        let (_, new_pos) = get_price(body, pos);
-        pos = new_pos;
-
-        let (vol_diff, new_pos) = get_price(body, pos);
-        let vol = vol_diff as f64;
-        pos = new_pos;
-
-        // 均价 = 累计金额 / 累计成交量
+        let (d, q2) = get_price(body, q);
+        let (_, q3) = get_price(body, q2);
+        let (vol, q4) = get_price(body, q3);
+        if q4 > body.len() {
+            break;
+        }
+        cum = if i == 0 { d } else { cum + d };
+        let price = cum as f64 * coefficient;
+        let vol = vol as f64;
         cum_amount += price * vol;
         cum_vol += vol;
         let avg_price = if cum_vol > 0.0 { cum_amount / cum_vol } else { price };
 
         let time = minute_time_from_index(i);
         result.push(MinuteTimePrice { time, price, avg_price, vol });
+        q = q4;
     }
 
-    // 倒序排列：最新记录在前
-    result.reverse();
     Ok(result)
 }
 

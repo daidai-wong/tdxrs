@@ -1221,15 +1221,34 @@ impl TdxHqClient {
         Ok(count)
     }
 
-    /// 获取当日分时数据
+    /// 获取当日实时分时数据 (命令码 0x051d)
     ///
-    /// 内部委托给历史分时 API (传入今日日期)，避免实时分时 API (0x051d)
-    /// 的价格编码异常（基金类价格 1000x 偏高）。
+    /// 2026-07 服务器协议变更后的新格式已逆向完成 (见 parse_minute_time_data)，
+    /// 此 API 现在发送真实的 0x051d 请求，盘中可获取实时分时。
+    /// 若实时 API 返回空/解析失败 (如盘前无数据)，自动回退到
+    /// 历史分时 API (传入今日日期)。
     pub fn get_minute_time_data(
         &self,
         market: u8,
         code: &str,
     ) -> Result<Vec<MinuteTimePrice>> {
+        let code_buf = utils::code_bytes(code);
+        let mut packet = Vec::with_capacity(21);
+        packet.extend_from_slice(&[
+            0x0c, 0x1b, 0x08, 0x00, 0x01, 0x01, 0x0e, 0x00, 0x0e, 0x00, 0x1d, 0x05,
+        ]);
+        packet.extend_from_slice(&(market as u16).to_le_bytes());
+        packet.extend_from_slice(&code_buf);
+        packet.extend_from_slice(&0u32.to_le_bytes());
+
+        if let Ok(body) = self.send_and_recv_limited(&packet, &self.rate_limiter_minute) {
+            if let Ok(data) = parse_minute_time_data(&body, market, code) {
+                if !data.is_empty() {
+                    return Ok(data);
+                }
+            }
+        }
+        // 回退: 历史分时 API 传今日日期
         let today = utils::today_yyyymmdd();
         self.get_history_minute_time_data(market, code, today)
     }
