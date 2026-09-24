@@ -1249,8 +1249,13 @@ impl TdxHqClient {
             }
         }
         // 回退: 历史分时 API 传今日日期
+        // (盘中该接口报文为倒序, 归一化为顺时, 与 0x051d 路径输出一致)
         let today = utils::today_yyyymmdd();
-        self.get_history_minute_time_data(market, code, today)
+        let mut data = self.get_history_minute_time_data(market, code, today)?;
+        if data.len() >= 2 && data[0].time > data[data.len() - 1].time {
+            data.reverse();
+        }
+        Ok(data)
     }
 
     /// 获取历史分时数据

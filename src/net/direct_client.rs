@@ -360,7 +360,12 @@ impl TdxDirectClient {
             }
         }
         let today = utils::today_yyyymmdd();
-        self.get_history_minute_time_data(market, code, today)
+        let mut data = self.get_history_minute_time_data(market, code, today)?;
+        // 盘中历史分时接口报文为倒序, 归一化为顺时 (与 0x051d 路径输出一致)
+        if data.len() >= 2 && data[0].time > data[data.len() - 1].time {
+            data.reverse();
+        }
+        Ok(data)
     }
 
     pub fn get_history_minute_time_data(

@@ -60,6 +60,36 @@ fn test_051d_preopen_placeholder() {
 }
 
 #[test]
+fn test_051d_live_intraday() {
+    // 盘中实时报文 (2026-09-24 10:03 抓取, count=22):
+    // prologue 最新价 = 实时价 (随行情跳动), 记录流末条 = 最后一根已提交分钟
+    // (服务器有数分钟滞后) -> cum != latest_raw, 验证漂移锚点容差 + 顺序自检
+    let body = fixture("mtdl_600519.bin");
+    let data = parse_minute_time_data(&body, 1, "600519").expect("parse failed");
+    assert_eq!(data.len(), 22);
+    assert_eq!(data[0].time, "09:31");
+    assert_eq!(data[21].time, "09:52");
+    // 09:31 首分钟与历史分时 API 逐位一致 (顺时序自检通过)
+    assert!((data[0].price - 1249.99).abs() < 0.005, "first={}", data[0].price);
+    assert!((data[0].vol - 1393.0).abs() < 0.5, "vol={}", data[0].vol);
+    assert!((data[21].price - 1241.67).abs() < 0.005, "last={}", data[21].price);
+
+    let body = fixture("mtdl_000001.bin");
+    let data = parse_minute_time_data(&body, 0, "000001").expect("parse failed");
+    assert_eq!(data.len(), 22);
+    assert!((data[0].price - 11.38).abs() < 0.005, "first={}", data[0].price);
+    assert!((data[0].vol - 52477.0).abs() < 0.5, "vol={}", data[0].vol);
+    assert!((data[21].price - 11.42).abs() < 0.005, "last={}", data[21].price);
+
+    // ETF (coefficient 0.001): 漂移仅 1 raw 也应命中锚点
+    let body = fixture("mtdl_510300.bin");
+    let data = parse_minute_time_data(&body, 1, "510300").expect("parse failed");
+    assert_eq!(data.len(), 22);
+    assert!((data[0].price - 4.568).abs() < 0.0005, "first={}", data[0].price);
+    assert!((data[21].price - 4.558).abs() < 0.0005, "last={}", data[21].price);
+}
+
+#[test]
 fn test_051d_short_body() {
     // 空报文 / 过短报文应报错而非 panic
     assert!(parse_minute_time_data(&[], 1, "600519").is_err());

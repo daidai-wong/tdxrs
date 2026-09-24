@@ -357,10 +357,16 @@ pub fn parse_minute_time_data(body: &[u8], market: u8, code: &str) -> Result<Vec
         p = np;
     }
 
-    // 锚点扫描: 从某字段位置起, count × (d_price, X, vol), 累计价 == latest_raw,
-    // 且记录流恰好消费到 body 末尾 (所有已验证报文均满足 endpos == body.len(),
-    // 这在 count 很小时 (盘前占位报文) 是消除锚点歧义的关键约束)
-    let try_anchor = |exact_only: bool| -> Option<usize> {
+    // 锚点扫描: 从某字段位置起, count × (d_price, X, vol) 三元组流。
+    // 所有已验证报文的记录流都恰好消费到 body 末尾 (endpos == body.len()),
+    // 这是主要锚点判据; cum==latest_raw 为辅助判据。
+    //
+    // ⚠️ 盘中特有: prologue 里的「最新价」是实时价 (随行情跳动), 而记录流末条是
+    // 最后一根已提交分钟的价格 (服务器序列有数分钟滞后), 两者允许有小额价差
+    // (实测 600519 差 27 raw = 0.27 元)。因此 cum 采用「精确相等优先, 否则取
+    // 与 latest_raw 最接近且在容差内」的策略。
+    let scan_candidates = |exact_end: bool| -> Vec<(usize, i64)> {
+        let mut candidates = Vec::new();
         for &start in field_pos.iter().skip(1) {
             let mut q = start;
             let mut cum: i64 = 0;
@@ -380,45 +386,77 @@ pub fn parse_minute_time_data(body: &[u8], market: u8, code: &str) -> Result<Vec
                 cum = if k == 0 { d } else { cum + d };
                 q = q4;
             }
-            let end_ok = if exact_only {
+            if !ok {
+                continue;
+            }
+            let end_ok = if exact_end {
                 q == body.len()
             } else {
                 q >= body.len() - 8
             };
-            if ok && cum == latest_raw && end_ok {
-                return Some(start);
+            if end_ok {
+                candidates.push((start, cum));
             }
         }
-        None
+        candidates
     };
-    let anchor_start = try_anchor(true).or_else(|| try_anchor(false));
-    let start = anchor_start.ok_or_else(|| {
-        ErrorCode::RESPONSE_LENGTH_MISMATCH.err("0x051d: record anchor not found")
-    })?;
+    // 容差: 实时价与末条已提交分钟的价差, 实测 ~0.02%, 取 5% 上限足够宽
+    let drift_cap = (latest_raw / 20).max(200);
+    let pick = |cands: &[(usize, i64)]| -> Option<usize> {
+        if let Some(&(s, _)) = cands.iter().find(|&(_, cum)| *cum == latest_raw) {
+            return Some(s);
+        }
+        cands
+            .iter()
+            .copied()
+            .min_by_key(|&(_, cum)| (cum - latest_raw).abs())
+            .filter(|&(_, cum)| (cum - latest_raw).abs() <= drift_cap)
+            .map(|(s, _)| s)
+    };
+    let start = pick(&scan_candidates(true))
+        .or_else(|| pick(&scan_candidates(false)))
+        .ok_or_else(|| {
+            ErrorCode::RESPONSE_LENGTH_MISMATCH.err("0x051d: record anchor not found")
+        })?;
 
-    // 正式解析: 顺时序
-    let mut result = Vec::with_capacity(count);
+    // 提取记录流: 链式差分逐元素还原绝对价 (与流顺序无关地正确)
+    let mut stream: Vec<(i64, f64)> = Vec::with_capacity(count);
     let mut q = start;
     let mut cum: i64 = 0;
-    let mut cum_amount = 0f64;
-    let mut cum_vol = 0f64;
-    for i in 0..count {
+    for k in 0..count {
         let (d, q2) = get_price(body, q);
         let (_, q3) = get_price(body, q2);
         let (vol, q4) = get_price(body, q3);
         if q4 > body.len() {
             break;
         }
-        cum = if i == 0 { d } else { cum + d };
-        let price = cum as f64 * coefficient;
-        let vol = vol as f64;
+        cum = if k == 0 { d } else { cum + d };
+        stream.push((cum, vol as f64));
+        q = q4;
+    }
+
+    // 顺序自检: 顺时流的末条 (最新分钟) 应最接近实时价。
+    // 仅当首条显著更接近时才翻转 (双重阈值防平盘误判)。
+    if stream.len() >= 2 {
+        let first_dist = (stream[0].0 - latest_raw).abs();
+        let last_dist = (stream[stream.len() - 1].0 - latest_raw).abs();
+        if first_dist < last_dist / 2 && first_dist < latest_raw / 100 {
+            stream.reverse();
+        }
+    }
+
+    // 顺时序组装: 均价按时间正序累计
+    let mut result = Vec::with_capacity(stream.len());
+    let mut cum_amount = 0f64;
+    let mut cum_vol = 0f64;
+    for (i, &(praw, vol)) in stream.iter().enumerate() {
+        let price = praw as f64 * coefficient;
         cum_amount += price * vol;
         cum_vol += vol;
         let avg_price = if cum_vol > 0.0 { cum_amount / cum_vol } else { price };
 
         let time = minute_time_from_index(i);
         result.push(MinuteTimePrice { time, price, avg_price, vol });
-        q = q4;
     }
 
     Ok(result)
