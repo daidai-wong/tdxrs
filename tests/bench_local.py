@@ -178,9 +178,30 @@ def sc_zc_batch(files: list[Path], vipdoc: Path) -> dict:
 
 
 def sc_scan_daily(files: list[Path], vipdoc: Path) -> dict:
+    """两遍法预分配 + 自动并行 (默认 min(8, CPU, 文件数))。"""
     from tdxrs import local
-    res = local.scan_daily(files)
-    return {"rows": int(res.n), "codes": len(files)}
+    p = local.scan_daily(files)
+    return {"rows": p.n_rows, "codes": p.n_files}
+
+
+def sc_scan_1t(files: list[Path], vipdoc: Path) -> dict:
+    from tdxrs import local
+    p = local.scan_daily(files, workers=1)
+    return {"rows": p.n_rows, "threads": 1}
+
+
+def sc_scan_8t(files: list[Path], vipdoc: Path) -> dict:
+    from tdxrs import local
+    p = local.scan_daily(files, workers=8)
+    return {"rows": p.n_rows, "threads": 8}
+
+
+def sc_scan_panel_df(files: list[Path], vipdoc: Path) -> dict:
+    """面板 -> 单个 DataFrame (含 Categorical code 列), 批量终态形态。"""
+    from tdxrs import local
+    p = local.scan_daily(files)
+    df = p.to_dataframe()
+    return {"rows": len(df), "cols": list(df.columns), "code_dtype": str(df["code"].dtype)}
 
 
 def _screen_target(f: Path) -> tuple[int, str]:
@@ -224,7 +245,24 @@ def sc_screen_tail(files: list[Path], vipdoc: Path) -> dict:
     n = 0
     for f in files:
         n += local.read_tail(f, 30).n
-    return {"rows": n, "codes": len(files), "note": "只读尾部 30x32 字节"}
+    return {"rows": n, "codes": len(files), "note": "只读尾部 30x32 字节 (串行)"}
+
+
+def sc_screen_scan(files: list[Path], vipdoc: Path) -> dict:
+    """筛查的批量终态: 一次 scan_daily(tail=30) 吃完整个目录。"""
+    from tdxrs import local
+    p = local.scan_daily(files, tail=30)
+    return {"rows": p.n_rows, "codes": p.n_files, "note": "scan_daily(tail=30), 并行"}
+
+
+def sc_screen_grid(files: list[Path], vipdoc: Path) -> dict:
+    """筛查的完整终态: 批量扫描 + 直接出 (股票数, 30) 网格, 无 DataFrame。"""
+    from tdxrs import local
+    p = local.scan_daily(files, tail=30)
+    g = p.close_grid()
+    return {"rows": p.n_rows, "codes": p.n_files,
+            "grid_shape": list(g.shape),
+            "note": "scan_daily(tail=30) + close_grid() -> (K, 30)"}
 
 
 SCENARIOS = {
@@ -236,16 +274,24 @@ SCENARIOS = {
     "zc_8t":          (sc_zc_8t,          "零拷贝 read_daily 8 线程"),
     "mmap_1t":        (sc_mmap_1t,        "零拷贝 np.memmap 1 线程"),
     "zc_batch":       (sc_zc_batch,       "零拷贝 + concat 批量拼装"),
-    "scan_daily":     (sc_scan_daily,     "批量并行扫描 scan_daily"),
+    "scan_daily":     (sc_scan_daily,     "批量 scan_daily (自动并行, 两遍法)"),
+    "scan_1t":        (sc_scan_1t,        "批量 scan_daily 1 线程"),
+    "scan_8t":        (sc_scan_8t,        "批量 scan_daily 8 线程"),
+    "scan_panel_df":  (sc_scan_panel_df,  "批量 scan_daily -> 单 DataFrame"),
     "screen_legacy":  (sc_screen_legacy,  "筛查(旧行为锚点): 全量解析+切片"),
     "screen_hybrid":  (sc_screen_hybrid,  "筛查: HybridClient(count=30)"),
-    "screen_tail":    (sc_screen_tail,    "筛查: read_tail(30)"),
+    "screen_tail":    (sc_screen_tail,    "筛查: read_tail(30) 串行"),
+    "screen_scan":    (sc_screen_scan,    "筛查: scan_daily(tail=30) 批量并行"),
+    "screen_grid":    (sc_screen_grid,    "筛查: scan_daily+close_grid (K,30) 网格"),
 }
 
 # 需要 tdxrs.local 的场景(P2 之后才有)
-NEEDS_LOCAL = {"zc_1t", "zc_8t", "mmap_1t", "zc_batch", "scan_daily", "screen_tail"}
-# 用筛查样本(300 长历史文件)而非全市场样本的场景
-SCREEN_SCENARIOS = {"screen_legacy", "screen_hybrid", "screen_tail"}
+NEEDS_LOCAL = {"zc_1t", "zc_8t", "mmap_1t", "zc_batch", "scan_daily",
+               "scan_1t", "scan_8t", "scan_panel_df", "screen_tail", "screen_scan",
+               "screen_grid"}
+# 用筛查样本(300 文件均匀抽样)而非全市场样本的场景
+SCREEN_SCENARIOS = {"screen_legacy", "screen_hybrid", "screen_tail", "screen_scan",
+                    "screen_grid"}
 
 
 # ============================================================
