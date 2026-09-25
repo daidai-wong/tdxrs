@@ -545,7 +545,7 @@ def main() -> int:
         print("pyarrow 未安装 -> 跳过 Arrow 缓存验收。装法:\n"
               '  pip install --target "D:/Agent/TDX RS/pylibs" pyarrow\n'
               '  PYTHONPATH="D:/Agent/TDX RS/pylibs" python tests/test_arrow_cache.py')
-        return 0
+        return 2  # 与 test_boundary 对齐: 缺可选依赖 = SKIP(退出码 2), 而非假绿 PASS
 
     cases = {
         "build_open": lambda c, w: t_build_open(c, w, ArrowCache),
