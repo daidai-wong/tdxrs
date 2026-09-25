@@ -20,7 +20,6 @@ import argparse
 import ctypes
 import ctypes.wintypes as wt
 import json
-import os
 import subprocess
 import sys
 import time

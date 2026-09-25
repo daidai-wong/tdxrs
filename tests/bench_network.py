@@ -15,7 +15,6 @@ import time
 
 sys.path.insert(0, str(__import__("pathlib").Path(__file__).parent.parent))
 from tests.bench_utils import (
-    BenchmarkResult, Suite, fmt_ms, speedup,
     markdown_report, json_report, init_rust_import
 )
 

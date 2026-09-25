@@ -11,13 +11,12 @@ Usage:
 """
 
 import argparse
-import math
 import statistics
 import sys
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Callable, Optional
+from typing import Optional
 
 # ============================================================
 # Path setup

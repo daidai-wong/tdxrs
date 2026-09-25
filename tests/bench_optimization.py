@@ -15,7 +15,6 @@ import argparse
 import os
 import sys
 import time
-from collections import OrderedDict
 from dataclasses import dataclass, field
 
 # Ensure both tdxrs (local) and tdxpy (parent dir) are on path

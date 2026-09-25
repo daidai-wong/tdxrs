@@ -17,7 +17,6 @@ from tdxrs._internal import (
     TdxDirectClient,
     DailyBarReader,
     MinBarReader,
-    LcMinBarReader,
     BlockReader,
 )
 from tdxrs.constants import (

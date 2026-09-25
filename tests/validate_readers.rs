@@ -1,5 +1,4 @@
 use std::fs;
-use std::path::Path;
 
 fn golden_dir() -> std::path::PathBuf {
     std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"))

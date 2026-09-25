@@ -6,7 +6,6 @@ TdxF10Client 需源码编译启用 f10 feature:
 未启用时本测试 SKIP (exit 0), 不算失败。
 """
 
-import sys
 
 FAILS = []
 

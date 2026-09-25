@@ -5,7 +5,6 @@ table 格式使用简易字符串拼接，无额外依赖。
 """
 
 import csv
-import io
 import json
 import sys
 

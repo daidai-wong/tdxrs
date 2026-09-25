@@ -14,8 +14,8 @@ import sys
 # — path setup —
 sys.path.insert(0, str(__import__("pathlib").Path(__file__).parent.parent))
 from tests.bench_utils import (
-    BenchmarkResult, Suite, fmt_ms, speedup, markdown_report, json_report,
-    SCRIPT_DIR, FIXTURE_DIR, REPORT_DIR, init_rust_import
+    BenchmarkResult, Suite, fmt_ms, markdown_report, json_report,
+    FIXTURE_DIR, init_rust_import
 )
 
 # — import modules —
