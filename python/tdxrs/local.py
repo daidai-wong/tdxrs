@@ -364,6 +364,15 @@ class Matrix:
                  "volume": float(vol[i]), "amount": float(amt[i])}
                 for i in range(self.n)]
 
+    def to_arrow(self, **kwargs):
+        """-> pyarrow.Table (边界互操作; 惰性依赖 pyarrow, 见 tdxrs.boundary)。
+
+        只做边界, 不进热路径: 记录是行主序, 取列是跨步视图, Arrow 必须拷贝一次。
+        ``columns=`` 按需建列是这里最有效的开关 (要 1 列时比整体转置便宜 ~9x)。
+        """
+        from tdxrs.boundary import matrix_to_arrow
+        return matrix_to_arrow(self, **kwargs)
+
     def __repr__(self) -> str:
         rng = ""
         if self.n:
@@ -372,7 +381,6 @@ class Matrix:
         partial = f", partial={self._partial}B" if self._partial else ""
         return (f"Matrix(n={self.n}, kind={self._kind}"
                 f"{', code=' + self.code if self.code else ''}{rng}{partial})")
-
     # ---------- 资源释放 (mmap) ----------
 
     def dispose(self) -> None:
@@ -636,6 +644,11 @@ class DailyPanel:
         return self._kind
 
     @property
+    def coefficient(self) -> float:
+        """价格系数 (.day 默认 0.01; .lc 恒为 1.0)。"""
+        return self._coefficient
+
+    @property
     def raw(self):
         """(N,) structured 视图 -- 零拷贝。"""
         return self._arr
@@ -714,6 +727,19 @@ class DailyPanel:
                 np.arange(len(self._files), dtype=np.int64), self.counts)
         return self._cache["rci"]
 
+    def code_indices(self, dtype=np.int32):
+        """(N,) 整数索引 -> code 的字典下标 (惰性 + 按 dtype 缓存)。
+
+        Arrow 的 dictionary 编码与 pandas 的 Categorical 都吃整数下标,
+        且都要求 ≤ int32; 缓存下来才能保证「零拷贝进 Arrow」的地址断言成立
+        (每次现转 astype 都会得到新数组, 地址必然不同)。
+        """
+        dt = np.dtype(dtype)
+        key = f"ci_{dt.str}"
+        if key not in self._cache:
+            self._cache[key] = self.row_code_index().astype(dt)
+        return self._cache[key]
+
     def categorical(self):
         """code 列 -> pd.Categorical (dictionary 编码)。
 
@@ -722,7 +748,7 @@ class DailyPanel:
         import pandas as pd
         if "cat" not in self._cache:
             self._cache["cat"] = pd.Categorical.from_codes(
-                self.row_code_index(), categories=self.codes)
+                self.code_indices(), categories=self.codes)
         return self._cache["cat"]
 
     # ---------- 转换 ----------
@@ -860,6 +886,11 @@ class DailyPanel:
         if index:
             df = df.set_index("code" if with_code else "date")
         return df
+
+    def to_arrow(self, **kwargs):
+        """-> pyarrow.Table (整个面板一张列存表; ``code`` 为 dictionary 编码)。"""
+        from tdxrs.boundary import panel_to_arrow
+        return panel_to_arrow(self, **kwargs)
 
     def __repr__(self) -> str:
         rng = ""

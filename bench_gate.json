@@ -1,0 +1,71 @@
+{
+  "note": "门禁基线: 只比归一化比值 (wall_s / io_floor_s); 绝对耗时与峰值内存仅供排查, 跨机器不可比。更新: tests/bench_gate.py --record",
+  "env": {
+    "platform": "Windows-11-10.0.28000-SP0",
+    "cpu": "Intel64 Family 6 Model 191 Stepping 2, GenuineIntel",
+    "python": "3.13.14",
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "pyarrow": "MISSING",
+    "cwd": "D:\\Agent\\TDX RS\\tdxrs"
+  },
+  "n_files": "all",
+  "screen_n": 300,
+  "io_floor_s_at_record": 1.100132,
+  "scenarios": {
+    "io_floor": {
+      "ratio": 1.0,
+      "wall_s": 1.100132,
+      "rows": 10210967,
+      "peak_rss_mb": 29.9
+    },
+    "df_1t": {
+      "ratio": 4.793651125501303,
+      "wall_s": 5.273649,
+      "rows": 10210967,
+      "peak_rss_mb": 84.1
+    },
+    "zc_1t": {
+      "ratio": 1.1685134147538658,
+      "wall_s": 1.285519,
+      "rows": 10210967,
+      "peak_rss_mb": 42.2
+    },
+    "zc_8t": {
+      "ratio": 0.7442197845349466,
+      "wall_s": 0.81874,
+      "rows": 10210967,
+      "peak_rss_mb": 62.8
+    },
+    "zc_batch": {
+      "ratio": 1.4813595095861223,
+      "wall_s": 1.629691,
+      "rows": 10210967,
+      "peak_rss_mb": 667.0
+    },
+    "scan_1t": {
+      "ratio": 1.1552786392905576,
+      "wall_s": 1.270959,
+      "rows": 10210967,
+      "peak_rss_mb": 359.6
+    },
+    "scan_8t": {
+      "ratio": 0.7615649758392629,
+      "wall_s": 0.837822,
+      "rows": 10210967,
+      "peak_rss_mb": 371.1
+    },
+    "scan_daily": {
+      "ratio": 0.7572118618493053,
+      "wall_s": 0.833033,
+      "rows": 10210967,
+      "peak_rss_mb": 372.5
+    },
+    "scan_panel_df": {
+      "ratio": 2.2498727425436216,
+      "wall_s": 2.475157,
+      "rows": 10210967,
+      "peak_rss_mb": 1846.4
+    }
+  }
+}

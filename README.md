@@ -13,6 +13,9 @@
 
 **tdxrs** 是通达信 (TDX) 行情数据解析库的 Rust 高性能实现。通过 PyO3/maturin 提供 Python 调用接口，保持与 Python [tdxpy](https://github.com/rainx/pytdx) 的 API 兼容，本地解析性能提升 **9-11 倍**。
 
+> 说明：上述 9-11× 为与 tdxpy 的对比。在同机、同口径的独立复测中该倍数为 **1.10×**；本库量级更大的收益来自
+> **零拷贝本地读取路径**（全市场 997.9 万条贴到 IO 地板，筛查场景 14.2×）。详见下方 [性能](#性能) 与 [已知问题](#已知问题与限制诚实声明)。
+
 ```python
 from tdxrs import TdxHqClient
 from tdxrs.constants import MARKET_SH, KLINE_DAILY, FQ_QFQ
@@ -34,14 +37,50 @@ quotes = client.get_security_quotes([
 
 ## 性能
 
-### 本地文件解析
+> **口径说明（重要）**：本节的本地解析数字全部可用 `tests/bench_local.py` 复现，并同时给出
+> **「耗时 ÷ 同轮纯 IO 地板」的归一化比值**。原因是本机 IO 地板实测在 **0.889 s ~ 5.4 s** 之间漂移（**5.7×**）——
+> 同一个「零拷贝对现状 4.80×」与「1.76×」都是真数字，差别只在落在哪个 IO 窗口。
+> **只报绝对耗时没有可比性**，这是本节所有表格都带 `/IO` 列的原因。
+>
+> 官方宣称的「本地解析提升 9-11 倍」是**与 tdxpy 对比**的结果。在同机、同口径、同语料的
+> 独立复测中，该倍数为 **1.10×**（详见 `PERF_COMPARISON_REPORT.html`）；本库真正量级更大的收益来自
+> **零拷贝读取路径**（下节），与 tdxpy 无关。
 
-| 操作 | tdxrs (Rust) | tdxpy (Python) | 加速比 |
-|------|------------:|--------------:|:-----:|
-| 日线 1000 条 | 0.3ms | 2.8ms | **9×** |
-| 分钟线 1000 条 | 0.5ms | 5.1ms | **10×** |
-| 板块 500 条 | 1.2ms | 12.0ms | **10×** |
-| 财务 500 条 | 0.8ms | 8.5ms | **11×** |
+### 本地文件解析 — 全市场（9300 个 `.day` / 997.9 万条 / 304.5 MiB）
+
+测试环境：i5-13400F (10C/16T) · 31.8 GB · Windows 11 Pro 28000 · rustc 1.96.0 (`opt-level=3` + `lto=true`) ·
+CPython 3.13 · numpy 2.5 · pandas 3.0。复现：`python tests/bench_local.py --rounds 3 --out bench_local.json`
+
+| 路径 | 耗时 | ÷同轮IO地板 | 峰值内存 |
+|------|-----:|-----------:|--------:|
+| 纯 IO 地板（逐文件 `read_bytes` 后即弃） | 1.100 s | 1.00× | 30 MB |
+| `to_dataframe_file`（原有 Rust API，1 线程） | 5.274 s | 4.79× | 84 MB |
+| **`local.read_daily` 零拷贝（1 线程）** | **1.286 s** | **1.17×** | 42 MB |
+| **`local.scan_daily`（自动并行 + 两遍法预分配）** | **0.833 s** | **0.76×** | 373 MB |
+
+> 零拷贝路径的绝对耗时已经**贴到 IO 地板**（1.17×），并行后甚至**低于串行地板**（0.76×）——
+> 剩下唯一的杠杆是并行 IO 与输出形态，**不在解析本身**。
+
+### 筛查场景（`HybridClient.get_daily_bars(count=30)`，300 只）
+
+| 路径 | 耗时 | ÷旧行为 |
+|------|-----:|--------:|
+| 改造前：全量解析整个文件（均值 1085 条）再切片 | 0.369 s | 1.00× |
+| 改造后：只读尾部 `count×32` 字节 | **0.026 s** | **14.2×**（冷 IO 口径 34.9×） |
+
+### 边界互操作（Arrow / Parquet / DuckDB）
+
+**Arrow 只在边界，永远不进热路径** —— 32 B 行主序记录取列是跨步视图，Arrow 必然付一次拷贝
+（实测 16.17 ms/百万行）。这次拷贝换来的是「一次转置、之后不再重扫 vipdoc」：
+
+| 环节（997.9 万行） | 耗时 | 说明 |
+|------|-----:|------|
+| 重扫 vipdoc（`scan_daily`） | 0.869 s | 每次都要付 |
+| 建列存缓存（Arrow + Feather lz4） | 1.381 s | 一次性，188 MiB（0.62×） |
+| **重开缓存** | **0.0996 s** | 8.7× 于重扫 |
+| **DuckDB 直读 Parquet** | **0.048 s** | 18× 于重扫，峰值仅 73.5 MB |
+
+回本点 **n ≈ 1.8**：缓存用到第 2 次即回本。完整实测见 `ARROW_BOUNDARY_REPORT.html`。
 
 ### 网络 API (连接池模式)
 
@@ -60,6 +99,20 @@ quotes = client.get_security_quotes([
 | 异步 (Async) | 345ms | 3880ms | 11.2× |
 
 > 详见 [性能基准](docs/public/BENCHMARKS.md)。
+
+### 已知问题与限制（诚实声明）
+
+| 项 | 状态 | 说明 |
+|---|---|---|
+| 编译参数调优 | **已评估，收益不可测** | `codegen-units=1` / `target-cpu=native` / `panic=abort` 五组配置在真实数据微基准上差异 **≤2%**，而**同一二进制连跑三次的噪声达 +59%（IO）/ ±12%（计算核）** —— 收益无法与噪声区分。`lto=true` 已开启，`codegen-units` 基本冗余；解码核是内存带宽瓶颈的标量循环，不吃指令集。因此**未启用**（`panic="abort"` 另有语义问题：会把 pyo3 本可转成 Python 异常的 panic 变成进程 abort） |
+| `memory_map=True` 非零拷贝 | 已实测确认 | `feather.read_table(memory_map=True)` 两次读取 buffer 地址不同，即 pyarrow 仍拷出数据。真实收益是**免重扫 + 列裁剪** |
+| `Table.to_pandas()` 默认拷贝 | 已确认 | pandas BlockManager 会把同 dtype 多列合并成二维 block。需 `split_blocks=True` 或 `types_mapper=pd.ArrowDtype` |
+| 交易日历 | **未实现** | 请求限流按**时钟**判断交易日，**节假日会误判为 trading** |
+| `async_client` 实时分时 | 走回退路径 | 同步客户端已接真实 `0x051d`；异步客户端仍走历史接口回退（功能正常，非实时） |
+| `quote` 服务器时间 | 乱码 | `servertime` 字段解析未对齐（P2，不影响行情数据） |
+| 基准可复现性 | 受本机影响 | IO 地板漂移 5.7×，跨机器对比必须用归一化比值；`tests/bench_gate.py` 因此只比比值 |
+| Arrow 边界 | **可选依赖** | `pyarrow` / `polars` / `duckdb` 均不在 `dependencies` 里；核心读取路径不依赖它们 |
+
 
 ---
 

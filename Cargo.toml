@@ -48,3 +48,19 @@ harness = false
 [profile.release]
 opt-level = 3  # 最高优化级别
 lto = true      # 链接时优化 (跨 crate 内联)
+
+# 关于另外三个常被提到的调优参数 —— 本仓库已实测, 结论是**都不要加**:
+#
+#   codegen-units = 1    无收益。lto = true 已经做了跨 crate 内联, codegen-units 基本冗余;
+#                        代价是构建时间 22s -> 106s (4.8x)。
+#   target-cpu=native    无收益。解码核是按记录逐字段取的标量循环, 内存带宽瓶颈, 不吃指令集;
+#                        另外它会让 wheel 绑定本机 CPU, 不可分发。
+#   panic = "abort"      无收益, 且有**语义风险**: pyo3 依赖 unwind 把 Rust panic 转成
+#                        Python 异常; 改成 abort 后, 一次可捕获的 panic 会变成整个进程退出。
+#
+# 实测方法 (真实 vipdoc 解码微基准, benches/reader_bench.rs):
+#     bash tests/probe_flags.sh          # 五组配置 A/B (每组整树重建)
+#     bash tests/probe_flags_control.sh  # 对照组: 同一二进制连跑三次
+# 结果: 五组配置差异 <=2%, 而**同一二进制**三次连跑的噪声达 +59% (IO) / ±12% (计算核)。
+# 即收益完全落在噪声里, 无法证明存在。
+

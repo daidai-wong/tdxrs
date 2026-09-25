@@ -5,16 +5,91 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch: # 手动触发 (含性能门禁)
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
+  # ------------------------------------------------------------------
+  # Rust: 单元测试 + **集成测试**
+  # 原 CI 只跑 cargo test --lib, 漏掉 tests/*.rs 里四个集成测试文件
+  # (minute_time_051d / validate_readers / test_async_client / net_test);
+  # 且没有 PYO3_PYTHON, 依赖 setup-python 恰好被 pyo3 自动发现。
+  # ------------------------------------------------------------------
+  rust:
+    name: rust ${{ matrix.os }} / py${{ matrix.python }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ["3.11", "3.13"]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
-      - name: Run Rust tests
-        run: cargo test --lib
-      - name: Check compilation
-        run: cargo check
+          python-version: ${{ matrix.python }}
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
+      - uses: Swatinem/rust-cache@v2
+      - name: Check formatting
+        run: cargo fmt --all -- --check
+      - name: Build all targets (含 benches / examples)
+        run: cargo check --all-targets
+        env:
+          PYO3_PYTHON: python
+      - name: Rust tests (lib + integration)
+        run: cargo test --lib --tests
+        env:
+          PYO3_PYTHON: python
+
+  # ------------------------------------------------------------------
+  # Python: 构建扩展 + 跑独立 runner (run_all.py --ci 跳过网络用例)
+  # ------------------------------------------------------------------
+  python:
+    name: python ${{ matrix.os }} / ${{ matrix.python }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ["3.11", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: Build & install extension
+        run: |
+          python -m pip install --upgrade pip maturin
+          maturin develop --release
+      - name: Python test runners
+        # 无 vipdoc / 无黄金语料时 VIPDOC 类用例自动 SKIP 而非 FAIL
+        run: python tests/run_all.py --ci
+      - name: 边界互操作 (需 pyarrow)
+        run: |
+          python -m pip install pyarrow
+          python tests/test_boundary.py --limit 5
+        continue-on-error: true
+
+  # ------------------------------------------------------------------
+  # 性能门禁: **必须有真实 vipdoc 的机器** (本机 / self-hosted), 手动触发。
+  #
+  # 为何不做成 push 触发: 门禁比的是归一化比值 wall_s / io_floor_s ——
+  # 同一路径的 IO 地板实测在 0.889s ~ 5.4s 之间漂 5.7x, 共享 CI runner 上
+  # 这个量级完全不可控, 只会稳定误报。详见 tests/bench_gate.py 模块说明。
+  # ------------------------------------------------------------------
+  perf-gate:
+    name: perf gate (self-hosted, needs vipdoc)
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: [self-hosted, windows]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Build extension
+        run: maturin develop --release
+      - name: Benchmark (全市场, 3 轮取最优, 含同轮 IO 地板)
+        run: python tests/bench_local.py --rounds 3 --out bench_local_ci.json
+      - name: Gate (归一化比值, 退化 >10% 失败)
+        run: python tests/bench_gate.py --check bench_local_ci.json
