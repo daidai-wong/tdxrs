@@ -1,0 +1,6172 @@
+{
+  "generated_at": "2026-09-25T11:39:39",
+  "vipdoc": "D:\\TDX\\vipdoc",
+  "n_files": 231,
+  "total_records": 842775,
+  "total_bytes": 26968800,
+  "errors": [],
+  "files": [
+    {
+      "rel": "bj/lday/bj810011.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 384,
+      "n_records": 12,
+      "sha256": "38b6715746e4434bda93d9e25b27758c2288616b1598edebfd6d3a1abc98db7c",
+      "first": {
+        "date": "2025-09-09",
+        "open": 10000.0,
+        "high": 10000.0,
+        "low": 10000.0,
+        "close": 10000.0,
+        "amount": 835000.0,
+        "volume": 835.0
+      },
+      "last": {
+        "date": "2026-04-07",
+        "open": 10000.0,
+        "high": 10000.0,
+        "low": 10000.0,
+        "close": 10000.0,
+        "amount": 740000.0,
+        "volume": 740.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920001.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 29088,
+      "n_records": 909,
+      "sha256": "0c207e004d6732227af7c2f686d34a1db4c4546cd72b19627e031b922b5b7e5f",
+      "first": {
+        "date": "2022-12-27",
+        "open": 8.11,
+        "high": 8.11,
+        "low": 7.19,
+        "close": 7.8100000000000005,
+        "amount": 67858816.0,
+        "volume": 8891705.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 11.72,
+        "high": 12.06,
+        "low": 11.61,
+        "close": 11.69,
+        "amount": 24912610.0,
+        "volume": 2122125.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920017.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 25856,
+      "n_records": 808,
+      "sha256": "f33c371630b9a5df7e5001f6d85604a3ea9f76cce9ab0a04c067272bed02383e",
+      "first": {
+        "date": "2023-05-31",
+        "open": 11.0,
+        "high": 11.72,
+        "low": 10.790000000000001,
+        "close": 10.89,
+        "amount": 173989552.0,
+        "volume": 15346788.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 16.07,
+        "high": 16.17,
+        "low": 15.73,
+        "close": 15.75,
+        "amount": 17123878.0,
+        "volume": 1074902.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920020.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 7200,
+      "n_records": 225,
+      "sha256": "bfc3b2651e5f0798ad6186509a0ce8a93177a82bbc5feda32a47fc4b31a64395",
+      "first": {
+        "date": "2025-10-28",
+        "open": 19.05,
+        "high": 23.88,
+        "low": 19.0,
+        "close": 21.64,
+        "amount": 775166080.0,
+        "volume": 36878920.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 14.700000000000001,
+        "high": 14.780000000000001,
+        "low": 14.64,
+        "close": 14.76,
+        "amount": 2748401.0,
+        "volume": 186788.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920033.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 29216,
+      "n_records": 913,
+      "sha256": "fc77a58596c510f94e3b98fbfdee8d2fd72d0fac2cefb6c5bc82dd6fc018b3ff",
+      "first": {
+        "date": "2022-12-21",
+        "open": 17.13,
+        "high": 18.18,
+        "low": 16.240000000000002,
+        "close": 16.38,
+        "amount": 203044880.0,
+        "volume": 11771069.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 13.46,
+        "high": 13.46,
+        "low": 13.07,
+        "close": 13.120000000000001,
+        "amount": 7127175.5,
+        "volume": 538875.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920035.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 6400,
+      "n_records": 200,
+      "sha256": "8a5d6170887b88a1e0e5187d4ce2e1532f68782ca4a2af57eef172fe3e0acee2",
+      "first": {
+        "date": "2025-12-02",
+        "open": 51.0,
+        "high": 66.23,
+        "low": 51.0,
+        "close": 52.120000000000005,
+        "amount": 686606592.0,
+        "volume": 12211777.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 24.46,
+        "high": 24.6,
+        "low": 23.86,
+        "close": 23.86,
+        "amount": 11952222.0,
+        "volume": 494247.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920037.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 9824,
+      "n_records": 307,
+      "sha256": "68c54c564fc1b4cbbddd9bb8b5cd45cd4f5f38b0562d4655f6d33e46cb611fc0",
+      "first": {
+        "date": "2025-06-26",
+        "open": 50.0,
+        "high": 63.97,
+        "low": 50.0,
+        "close": 60.0,
+        "amount": 1273529216.0,
+        "volume": 22205164.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 39.050000000000004,
+        "high": 39.39,
+        "low": 38.36,
+        "close": 38.410000000000004,
+        "amount": 27992268.0,
+        "volume": 721616.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920046.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 30784,
+      "n_records": 962,
+      "sha256": "e804445e9b01ec012eff3a912f261ea5c37878aee4eab7e28a8128ab703d6e60",
+      "first": {
+        "date": "2022-10-13",
+        "open": 8.5,
+        "high": 9.790000000000001,
+        "low": 8.4,
+        "close": 8.49,
+        "amount": 116323952.0,
+        "volume": 12959434.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 19.830000000000002,
+        "high": 19.96,
+        "low": 19.51,
+        "close": 19.51,
+        "amount": 25844678.0,
+        "volume": 1315025.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920047.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "b1d56430a784b6bdd0ec1f8bda0663d3a3d2120e65198f8d526fe3fab2e47264",
+      "first": {
+        "date": "2021-08-02",
+        "open": 9.92,
+        "high": 9.92,
+        "low": 9.42,
+        "close": 9.58,
+        "amount": 2621584.75,
+        "volume": 274700.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 15.66,
+        "high": 15.8,
+        "low": 15.18,
+        "close": 15.3,
+        "amount": 52811836.0,
+        "volume": 3426694.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920055.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 3936,
+      "n_records": 123,
+      "sha256": "db85e446e9d637d0ca73d84dda0299b283991d0b6aa62c21ae65948138e14224",
+      "first": {
+        "date": "2026-03-31",
+        "open": 36.0,
+        "high": 43.11,
+        "low": 36.0,
+        "close": 37.800000000000004,
+        "amount": 543820608.0,
+        "volume": 14282618.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 25.85,
+        "high": 25.86,
+        "low": 25.18,
+        "close": 25.2,
+        "amount": 4203398.5,
+        "volume": 165702.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920058.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 23968,
+      "n_records": 749,
+      "sha256": "6457464198ca577655b27d1d921e518de0c142dc8017d8eeedca2ac29f23627c",
+      "first": {
+        "date": "2023-08-10",
+        "open": 16.3,
+        "high": 32.19,
+        "low": 15.99,
+        "close": 20.62,
+        "amount": 238497392.0,
+        "volume": 10760814.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 23.43,
+        "high": 23.96,
+        "low": 23.0,
+        "close": 23.29,
+        "amount": 15981455.0,
+        "volume": 681694.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920066.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 14880,
+      "n_records": 465,
+      "sha256": "dbafad751c5bc830902a04f45cb8e3b59a1ece5f6c84f97409d01229cecd1fc2",
+      "first": {
+        "date": "2024-10-31",
+        "open": 45.660000000000004,
+        "high": 68.42,
+        "low": 45.18,
+        "close": 52.52,
+        "amount": 526551264.0,
+        "volume": 9959926.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 18.650000000000002,
+        "high": 18.650000000000002,
+        "low": 18.03,
+        "close": 18.07,
+        "amount": 5423825.0,
+        "volume": 297564.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920077.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 39328,
+      "n_records": 1229,
+      "sha256": "dbad8266b90b28286e0a4f761c232e36abae6e3a63845548370327acf8fbb91e",
+      "first": {
+        "date": "2021-08-31",
+        "open": 16.8,
+        "high": 19.38,
+        "low": 16.5,
+        "close": 19.1,
+        "amount": 328736512.0,
+        "volume": 18334900.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 13.200000000000001,
+        "high": 13.52,
+        "low": 13.06,
+        "close": 13.15,
+        "amount": 58202812.0,
+        "volume": 4393838.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920081.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 1760,
+      "n_records": 55,
+      "sha256": "042c77d20e9cc12bcf4c2897a3b89fee131363e892e3dd26d55dc242116600b2",
+      "first": {
+        "date": "2026-07-10",
+        "open": 55.0,
+        "high": 58.88,
+        "low": 46.88,
+        "close": 47.02,
+        "amount": 782923200.0,
+        "volume": 15170237.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 42.37,
+        "high": 42.5,
+        "low": 41.04,
+        "close": 41.11,
+        "amount": 32277126.0,
+        "volume": 774923.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920082.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 13600,
+      "n_records": 425,
+      "sha256": "85f7d88feee74bcf121a3c1432bee37e6d642043bfe9442f4d9e3db416185e5c",
+      "first": {
+        "date": "2024-12-26",
+        "open": 21.0,
+        "high": 25.0,
+        "low": 20.81,
+        "close": 21.7,
+        "amount": 658177984.0,
+        "volume": 29632836.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 7.9,
+        "high": 7.92,
+        "low": 7.8,
+        "close": 7.83,
+        "amount": 2539366.5,
+        "volume": 324158.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920089.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 37952,
+      "n_records": 1186,
+      "sha256": "b3a2a0e39c4d43709557a0679b16cb4e20942ecb8c47b1e4c191e7697da055a3",
+      "first": {
+        "date": "2021-11-09",
+        "open": 18.990000000000002,
+        "high": 19.47,
+        "low": 16.89,
+        "close": 18.18,
+        "amount": 251321376.0,
+        "volume": 13870700.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 10.23,
+        "high": 10.31,
+        "low": 10.05,
+        "close": 10.09,
+        "amount": 10179961.0,
+        "volume": 1003020.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920093.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 800,
+      "n_records": 25,
+      "sha256": "3b7378152a8fe77f6f84ea4d6d74050694a850a620584fa94fb360dc3229f824",
+      "first": {
+        "date": "2026-08-21",
+        "open": 28.0,
+        "high": 31.8,
+        "low": 23.1,
+        "close": 23.19,
+        "amount": 637029824.0,
+        "volume": 23437996.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 19.31,
+        "high": 19.46,
+        "low": 18.990000000000002,
+        "close": 19.080000000000002,
+        "amount": 28036838.0,
+        "volume": 1461582.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920110.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 29568,
+      "n_records": 924,
+      "sha256": "a77b146d5735e3e26030e26ed384302f5d9fddde265d0df5a71e31544a30edaa",
+      "first": {
+        "date": "2022-12-06",
+        "open": 17.400000000000002,
+        "high": 19.7,
+        "low": 17.05,
+        "close": 18.5,
+        "amount": 40957308.0,
+        "volume": 2196444.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 25.92,
+        "high": 26.080000000000002,
+        "low": 25.12,
+        "close": 25.32,
+        "amount": 2489302.25,
+        "volume": 97649.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920112.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 8384,
+      "n_records": 262,
+      "sha256": "d81100e310caf0e49c8cefcb03f8173980cae226f3dce6eb3c32fe0e73b1cb19",
+      "first": {
+        "date": "2025-08-28",
+        "open": 50.0,
+        "high": 51.49,
+        "low": 45.01,
+        "close": 48.15,
+        "amount": 890543872.0,
+        "volume": 18567707.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 14.8,
+        "high": 14.81,
+        "low": 14.51,
+        "close": 14.540000000000001,
+        "amount": 4593922.5,
+        "volume": 314208.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920118.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 16256,
+      "n_records": 508,
+      "sha256": "c126190b5114056a272694805f91f44fed927d101da706eb8c16caab1f3b94a1",
+      "first": {
+        "date": "2024-08-22",
+        "open": 23.0,
+        "high": 28.69,
+        "low": 22.92,
+        "close": 23.13,
+        "amount": 201681312.0,
+        "volume": 7995881.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 20.75,
+        "high": 20.75,
+        "low": 20.02,
+        "close": 20.16,
+        "amount": 6488808.5,
+        "volume": 320681.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920125.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 3392,
+      "n_records": 106,
+      "sha256": "2600e871d4e38cc49113b6c6ae471286c4a40b5fe2183147f132a7ab9bf896ca",
+      "first": {
+        "date": "2026-04-24",
+        "open": 46.0,
+        "high": 55.54,
+        "low": 46.0,
+        "close": 50.02,
+        "amount": 659679552.0,
+        "volume": 13364399.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 148.13,
+        "high": 151.0,
+        "low": 145.65,
+        "close": 146.83,
+        "amount": 131003992.0,
+        "volume": 886026.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920126.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 2336,
+      "n_records": 73,
+      "sha256": "38bd09bc3f07f5732386e512561f33af3edb34e3a5cbb1717c70a05ee5be0597",
+      "first": {
+        "date": "2026-06-15",
+        "open": 19.01,
+        "high": 23.11,
+        "low": 17.56,
+        "close": 17.68,
+        "amount": 749364672.0,
+        "volume": 37970072.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 10.07,
+        "high": 10.1,
+        "low": 9.83,
+        "close": 9.86,
+        "amount": 13505217.0,
+        "volume": 1360428.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920139.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 30432,
+      "n_records": 951,
+      "sha256": "71fcaa34d2eae931d2ffa7c0a72ccec1cf2909886868d141136b70713399b107",
+      "first": {
+        "date": "2022-10-28",
+        "open": 14.0,
+        "high": 14.23,
+        "low": 12.8,
+        "close": 13.5,
+        "amount": 269277408.0,
+        "volume": 19762226.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 15.49,
+        "high": 15.89,
+        "low": 15.17,
+        "close": 15.290000000000001,
+        "amount": 68933760.0,
+        "volume": 4443482.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920159.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 5152,
+      "n_records": 161,
+      "sha256": "e6ecc32584c00d398afce56366d2dcf9c4243fecb1192aff9c1c8436ea5c64e0",
+      "first": {
+        "date": "2026-01-28",
+        "open": 49.9,
+        "high": 65.18,
+        "low": 47.07,
+        "close": 52.89,
+        "amount": 703488448.0,
+        "volume": 13684268.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 29.3,
+        "high": 29.43,
+        "low": 28.19,
+        "close": 28.330000000000002,
+        "amount": 27140322.0,
+        "volume": 949742.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920175.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 25216,
+      "n_records": 788,
+      "sha256": "c9696bac80f09cbcd97b516fa1babd00cc11ac95b48644a1838dbc57ef1072d6",
+      "first": {
+        "date": "2023-06-30",
+        "open": 10.75,
+        "high": 10.75,
+        "low": 9.8,
+        "close": 9.870000000000001,
+        "amount": 169365360.0,
+        "volume": 16731644.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 7.68,
+        "high": 7.72,
+        "low": 7.61,
+        "close": 7.640000000000001,
+        "amount": 6956331.5,
+        "volume": 908001.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920185.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "a86eb225fd84a3a3c128623708b93f0037be1802cb7ebc3cc3e7607d2851ee08",
+      "first": {
+        "date": "2021-08-02",
+        "open": 78.21000000000001,
+        "high": 82.0,
+        "low": 78.0,
+        "close": 80.4,
+        "amount": 57550356.0,
+        "volume": 716000.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 20.27,
+        "high": 20.34,
+        "low": 19.93,
+        "close": 19.94,
+        "amount": 58484316.0,
+        "volume": 2914761.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920187.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 4512,
+      "n_records": 141,
+      "sha256": "639063e10f915c285abbedd6929f7beca4023301ffb8f6505955a7d32a9de88a",
+      "first": {
+        "date": "2026-03-05",
+        "open": 45.0,
+        "high": 49.38,
+        "low": 41.410000000000004,
+        "close": 41.89,
+        "amount": 635624512.0,
+        "volume": 14097202.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 17.26,
+        "high": 17.37,
+        "low": 17.04,
+        "close": 17.05,
+        "amount": 3907966.5,
+        "volume": 227573.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920195.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 28992,
+      "n_records": 906,
+      "sha256": "79aff68b319b4711be07c79ed2753ce63bf427ef9d3c01a41e37f41be9c9ccfb",
+      "first": {
+        "date": "2022-12-30",
+        "open": 7.5600000000000005,
+        "high": 8.05,
+        "low": 7.01,
+        "close": 7.8100000000000005,
+        "amount": 64092748.0,
+        "volume": 8663446.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 12.71,
+        "high": 12.790000000000001,
+        "low": 12.620000000000001,
+        "close": 12.68,
+        "amount": 3323547.0,
+        "volume": 261656.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920201.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 32,
+      "n_records": 1,
+      "sha256": "72214b56da1984d9f0e41308ea01ed052738826806b8cdd12e44c43bb72654fb",
+      "first": {
+        "date": "2026-09-24",
+        "open": 75.0,
+        "high": 97.0,
+        "low": 72.0,
+        "close": 72.35000000000001,
+        "amount": 608990464.0,
+        "volume": 7404159.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 75.0,
+        "high": 97.0,
+        "low": 72.0,
+        "close": 72.35000000000001,
+        "amount": 608990464.0,
+        "volume": 7404159.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920204.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 36384,
+      "n_records": 1137,
+      "sha256": "715b49d573b0c68202fb3024ca5a0a1dac97e305d83de81c88d90a99961d3143",
+      "first": {
+        "date": "2022-01-18",
+        "open": 29.810000000000002,
+        "high": 38.800000000000004,
+        "low": 28.43,
+        "close": 30.59,
+        "amount": 192046016.0,
+        "volume": 6066820.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 13.15,
+        "high": 13.24,
+        "low": 12.86,
+        "close": 12.93,
+        "amount": 5660597.5,
+        "volume": 434676.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920220.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 2848,
+      "n_records": 89,
+      "sha256": "f283620c64dcc131d9386737db88751bddb2304cce49b78495e97baef7889e1e",
+      "first": {
+        "date": "2026-05-22",
+        "open": 180.0,
+        "high": 195.88,
+        "low": 130.0,
+        "close": 138.8,
+        "amount": 1875174272.0,
+        "volume": 10715140.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 41.33,
+        "high": 42.5,
+        "low": 40.5,
+        "close": 40.5,
+        "amount": 25113160.0,
+        "volume": 605031.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920230.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 29472,
+      "n_records": 921,
+      "sha256": "7ab1ff4a64b1aaf9df5ca3a62b683924b85b22918226351018710f76ae090ab4",
+      "first": {
+        "date": "2022-12-09",
+        "open": 11.870000000000001,
+        "high": 12.8,
+        "low": 11.28,
+        "close": 12.120000000000001,
+        "amount": 62698216.0,
+        "volume": 5176636.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 11.0,
+        "high": 11.120000000000001,
+        "low": 10.81,
+        "close": 11.05,
+        "amount": 10832220.0,
+        "volume": 988886.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920258.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 1248,
+      "n_records": 39,
+      "sha256": "bf13a9481e6dded7270aca0ec584b110ee906d7a2608f0df7d30a2e97f7f873c",
+      "first": {
+        "date": "2026-08-03",
+        "open": 19.0,
+        "high": 19.68,
+        "low": 15.3,
+        "close": 15.72,
+        "amount": 586810560.0,
+        "volume": 33943528.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 10.200000000000001,
+        "high": 10.26,
+        "low": 10.09,
+        "close": 10.1,
+        "amount": 17311856.0,
+        "volume": 1709690.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920260.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 37824,
+      "n_records": 1182,
+      "sha256": "cea90a66bfe221d99f01199a0e71c7587cac1cf5d0aeb9d67aad5dcea5ae9ed5",
+      "first": {
+        "date": "2021-11-15",
+        "open": 23.5,
+        "high": 45.5,
+        "low": 23.5,
+        "close": 30.0,
+        "amount": 275819840.0,
+        "volume": 8714300.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 8.290000000000001,
+        "high": 8.290000000000001,
+        "low": 8.08,
+        "close": 8.2,
+        "amount": 2668967.5,
+        "volume": 327329.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920267.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 33728,
+      "n_records": 1054,
+      "sha256": "3be1c547cad77a6414fe2923051fe34dc0ca717ffd63629b686accabf1bfbdfd",
+      "first": {
+        "date": "2022-05-27",
+        "open": 15.21,
+        "high": 15.24,
+        "low": 13.17,
+        "close": 13.51,
+        "amount": 53238928.0,
+        "volume": 3780675.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 16.17,
+        "high": 16.21,
+        "low": 15.0,
+        "close": 15.71,
+        "amount": 12378470.0,
+        "volume": 778343.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920278.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "8b47315a7d01022a29ea8b1e7909273860f07c3ec0980b9b79d60aa50ffca4e4",
+      "first": {
+        "date": "2021-08-02",
+        "open": 14.0,
+        "high": 14.780000000000001,
+        "low": 13.6,
+        "close": 14.0,
+        "amount": 4045618.75,
+        "volume": 288900.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 6.48,
+        "high": 6.48,
+        "low": 6.23,
+        "close": 6.23,
+        "amount": 5127847.5,
+        "volume": 813000.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920363.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 21280,
+      "n_records": 665,
+      "sha256": "8213c289611930ee849dd1728f5576bb57708e02831dc2ab4f4ddcf95fc395ed",
+      "first": {
+        "date": "2023-12-28",
+        "open": 23.8,
+        "high": 24.400000000000002,
+        "low": 19.78,
+        "close": 19.81,
+        "amount": 354670048.0,
+        "volume": 16031201.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 10.05,
+        "high": 10.19,
+        "low": 9.81,
+        "close": 9.85,
+        "amount": 9808747.0,
+        "volume": 985780.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920378.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 33248,
+      "n_records": 1039,
+      "sha256": "e304b6e5a246dfc03ee164248b3e6afb35e9aa08d98502e58a6465796812f47a",
+      "first": {
+        "date": "2022-06-20",
+        "open": 4.18,
+        "high": 4.41,
+        "low": 4.01,
+        "close": 4.0600000000000005,
+        "amount": 62464136.0,
+        "volume": 15101302.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 7.01,
+        "high": 7.1000000000000005,
+        "low": 6.97,
+        "close": 7.0600000000000005,
+        "amount": 2702357.75,
+        "volume": 382952.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920427.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "4647ce583ffa6ae481f2625b6032e008906ea2c31b828c52ef46f7911d5965f8",
+      "first": {
+        "date": "2021-08-02",
+        "open": 7.86,
+        "high": 7.86,
+        "low": 7.8100000000000005,
+        "close": 7.8500000000000005,
+        "amount": 243637.296875,
+        "volume": 31100.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 11.59,
+        "high": 11.6,
+        "low": 10.03,
+        "close": 10.3,
+        "amount": 140937392.0,
+        "volume": 13119830.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920429.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 29344,
+      "n_records": 917,
+      "sha256": "3b47e0c2ee7ff4272dbfe9949bf4177535f546275b74e0703fcfba997e5f35b9",
+      "first": {
+        "date": "2022-12-15",
+        "open": 7.99,
+        "high": 8.01,
+        "low": 7.58,
+        "close": 7.84,
+        "amount": 61881116.0,
+        "volume": 7972355.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 10.51,
+        "high": 10.59,
+        "low": 10.28,
+        "close": 10.38,
+        "amount": 9867891.0,
+        "volume": 943064.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920478.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 27936,
+      "n_records": 873,
+      "sha256": "f9ebd82e2d0043f899fc7c363d8981932d698409bb98fbfb6d76a2425b1d70de",
+      "first": {
+        "date": "2023-02-23",
+        "open": 20.88,
+        "high": 21.48,
+        "low": 18.88,
+        "close": 19.240000000000002,
+        "amount": 168815264.0,
+        "volume": 8297455.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 11.5,
+        "high": 12.01,
+        "low": 11.18,
+        "close": 11.370000000000001,
+        "amount": 110643128.0,
+        "volume": 9594726.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920509.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "ed13812ae2e961a82fb9294f09db86a632c9fbcce1981d3570e11086d2912884",
+      "first": {
+        "date": "2021-08-02",
+        "open": 10.38,
+        "high": 10.58,
+        "low": 10.38,
+        "close": 10.38,
+        "amount": 1067295.0,
+        "volume": 102100.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 23.48,
+        "high": 26.0,
+        "low": 23.27,
+        "close": 24.93,
+        "amount": 259370288.0,
+        "volume": 10411419.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920553.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 39872,
+      "n_records": 1246,
+      "sha256": "f96d90405380292aa333db9f3620e6bcd5ee2c33c959745cfc563d0d66921059",
+      "first": {
+        "date": "2021-08-06",
+        "open": 3.88,
+        "high": 3.93,
+        "low": 3.71,
+        "close": 3.75,
+        "amount": 20588356.0,
+        "volume": 5358200.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 6.78,
+        "high": 6.83,
+        "low": 6.67,
+        "close": 6.72,
+        "amount": 3142110.75,
+        "volume": 465749.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920634.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 29824,
+      "n_records": 932,
+      "sha256": "afadf77b730217df14d9dbc142e020498325d6acaa649607e840224de5035cb2",
+      "first": {
+        "date": "2022-11-24",
+        "open": 9.700000000000001,
+        "high": 9.78,
+        "low": 9.38,
+        "close": 9.6,
+        "amount": 32494946.0,
+        "volume": 3398961.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 15.81,
+        "high": 15.94,
+        "low": 15.52,
+        "close": 15.540000000000001,
+        "amount": 9000264.0,
+        "volume": 575672.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920663.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 27488,
+      "n_records": 859,
+      "sha256": "81013d16ba37b52a81aa2d4ee7d2d176ef91f912984ab4df03bf52de4ddd583a",
+      "first": {
+        "date": "2023-03-15",
+        "open": 11.59,
+        "high": 11.9,
+        "low": 11.22,
+        "close": 11.73,
+        "amount": 92026800.0,
+        "volume": 7914449.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 12.42,
+        "high": 12.450000000000001,
+        "low": 12.120000000000001,
+        "close": 12.15,
+        "amount": 4267079.5,
+        "volume": 348446.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920675.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 39680,
+      "n_records": 1240,
+      "sha256": "35b51ec11957466c5a5db73e66825c91594250379be9a1b1f46ec649dc44d6d0",
+      "first": {
+        "date": "2021-08-02",
+        "open": 12.120000000000001,
+        "high": 12.6,
+        "low": 11.790000000000001,
+        "close": 12.3,
+        "amount": 1622699.0,
+        "volume": 131500.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 7.43,
+        "high": 7.47,
+        "low": 7.3100000000000005,
+        "close": 7.36,
+        "amount": 3551544.5,
+        "volume": 482033.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920682.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "3ecb4b991046a0359efa13aa96b11cc5ba16183b9ab24c0bb31ff0c139b227a5",
+      "first": {
+        "date": "2021-08-02",
+        "open": 7.9,
+        "high": 7.9,
+        "low": 7.49,
+        "close": 7.61,
+        "amount": 5180290.0,
+        "volume": 683000.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 5.83,
+        "high": 5.8500000000000005,
+        "low": 5.72,
+        "close": 5.7700000000000005,
+        "amount": 5634685.0,
+        "volume": 976576.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920689.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 35136,
+      "n_records": 1098,
+      "sha256": "a6c894cee5a3ede3a0397b66f3531be9d73a73d2978db9ee79a0f0850383f7e8",
+      "first": {
+        "date": "2022-03-21",
+        "open": 10.8,
+        "high": 10.8,
+        "low": 10.13,
+        "close": 10.8,
+        "amount": 47489536.0,
+        "volume": 4573425.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 19.84,
+        "high": 19.84,
+        "low": 19.55,
+        "close": 19.61,
+        "amount": 5182327.0,
+        "volume": 263775.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920699.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 26368,
+      "n_records": 824,
+      "sha256": "61f22caf657558ea82712db4a4bc1d7221bb4e754744b9c11aaeec35f0569152",
+      "first": {
+        "date": "2023-05-09",
+        "open": 15.1,
+        "high": 18.1,
+        "low": 15.1,
+        "close": 15.15,
+        "amount": 127214200.0,
+        "volume": 7900599.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 67.12,
+        "high": 68.03,
+        "low": 65.3,
+        "close": 66.18,
+        "amount": 30607496.0,
+        "volume": 461690.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920703.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 21824,
+      "n_records": 682,
+      "sha256": "07a422501582d574f4e45ff0f92c05faefeb0986a63c7c7b82b263b776762674",
+      "first": {
+        "date": "2023-12-05",
+        "open": 34.0,
+        "high": 51.68,
+        "low": 34.0,
+        "close": 41.89,
+        "amount": 544121536.0,
+        "volume": 13662236.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 9.53,
+        "high": 9.66,
+        "low": 9.46,
+        "close": 9.53,
+        "amount": 2784607.75,
+        "volume": 291358.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920706.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 19872,
+      "n_records": 621,
+      "sha256": "fe2ef50d229660e433a2b7c21628aa98a7ef638ce8e94d105b3fcca10ea4f65b",
+      "first": {
+        "date": "2024-03-08",
+        "open": 15.0,
+        "high": 20.0,
+        "low": 15.0,
+        "close": 16.06,
+        "amount": 339046752.0,
+        "volume": 20261387.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 14.94,
+        "high": 19.19,
+        "low": 14.9,
+        "close": 18.01,
+        "amount": 129510864.0,
+        "volume": 7723588.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920725.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 32608,
+      "n_records": 1019,
+      "sha256": "f2be5f596679eb008b7c4c08c827cdd8fa584725179bf5361b191a17afe5ae4f",
+      "first": {
+        "date": "2022-07-18",
+        "open": 31.6,
+        "high": 32.9,
+        "low": 29.18,
+        "close": 29.2,
+        "amount": 202579680.0,
+        "volume": 6521813.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 93.8,
+        "high": 95.10000000000001,
+        "low": 90.63,
+        "close": 91.62,
+        "amount": 376232608.0,
+        "volume": 4060114.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920790.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 31520,
+      "n_records": 985,
+      "sha256": "b313a6842fd0d227ad04f732819efeb131eac51f88f18caafb678318ba3b74a4",
+      "first": {
+        "date": "2022-09-02",
+        "open": 8.0,
+        "high": 8.08,
+        "low": 7.48,
+        "close": 7.79,
+        "amount": 48549728.0,
+        "volume": 6224269.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 22.95,
+        "high": 23.28,
+        "low": 22.63,
+        "close": 22.86,
+        "amount": 29119496.0,
+        "volume": 1274703.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920799.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "50e4c291223d927bbe410329b17a8010d8d302c4b82c54c995afb3f68942579c",
+      "first": {
+        "date": "2021-08-02",
+        "open": 16.68,
+        "high": 16.89,
+        "low": 16.3,
+        "close": 16.36,
+        "amount": 1456725.625,
+        "volume": 87600.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 32.2,
+        "high": 32.62,
+        "low": 31.38,
+        "close": 31.400000000000002,
+        "amount": 75221672.0,
+        "volume": 2367987.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920802.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 28352,
+      "n_records": 886,
+      "sha256": "1d54391497baa4e4f6c15fb4b5766db3677ba91a33514cc6dee3e4faa8e79f47",
+      "first": {
+        "date": "2023-02-06",
+        "open": 9.05,
+        "high": 10.5,
+        "low": 9.05,
+        "close": 10.34,
+        "amount": 64102232.0,
+        "volume": 6497997.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 10.88,
+        "high": 10.88,
+        "low": 10.52,
+        "close": 10.8,
+        "amount": 3546997.0,
+        "volume": 332272.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920833.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 22432,
+      "n_records": 701,
+      "sha256": "f852f8a7846c881564d6a9faf862ec20acb10a930bcc741052507fd99973d7b4",
+      "first": {
+        "date": "2023-11-08",
+        "open": 16.51,
+        "high": 20.18,
+        "low": 16.51,
+        "close": 16.66,
+        "amount": 243945776.0,
+        "volume": 13160239.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 9.81,
+        "high": 9.870000000000001,
+        "low": 9.620000000000001,
+        "close": 9.620000000000001,
+        "amount": 3716594.0,
+        "volume": 382071.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920895.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 27008,
+      "n_records": 844,
+      "sha256": "56354cd9059f142f4d87884b0e1773a969643240e04cd42852aa8b76bf7d57a8",
+      "first": {
+        "date": "2023-04-06",
+        "open": 6.66,
+        "high": 6.79,
+        "low": 6.21,
+        "close": 6.6000000000000005,
+        "amount": 32419118.0,
+        "volume": 4972045.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 22.68,
+        "high": 24.48,
+        "low": 21.76,
+        "close": 22.85,
+        "amount": 155825760.0,
+        "volume": 6756799.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920946.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "5a15953479801f5334f6afc68b515cc16599265f788d910d34ac14bb1e0431d1",
+      "first": {
+        "date": "2021-08-02",
+        "open": 4.99,
+        "high": 5.0600000000000005,
+        "low": 4.95,
+        "close": 5.05,
+        "amount": 1588645.625,
+        "volume": 317100.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 10.6,
+        "high": 10.69,
+        "low": 10.28,
+        "close": 10.290000000000001,
+        "amount": 47166212.0,
+        "volume": 4523770.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920978.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 23168,
+      "n_records": 724,
+      "sha256": "d0b97b13bbf02052f1c30024221db0941dfdb0ff3807f7eafcef2e395afe409b",
+      "first": {
+        "date": "2023-09-28",
+        "open": 7.44,
+        "high": 7.82,
+        "low": 7.33,
+        "close": 7.37,
+        "amount": 196550672.0,
+        "volume": 26245743.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 17.42,
+        "high": 17.42,
+        "low": 17.16,
+        "close": 17.2,
+        "amount": 15809967.0,
+        "volume": 915402.0
+      }
+    },
+    {
+      "rel": "bj/lday/bj920982.day",
+      "market": "bj",
+      "kind": "day",
+      "size": 24768,
+      "n_records": 774,
+      "sha256": "e53326269be6535cebd2d6db191fcedd33e02bdb6f2550b1f81408f2561f7d59",
+      "first": {
+        "date": "2023-07-20",
+        "open": 117.0,
+        "high": 142.8,
+        "low": 115.0,
+        "close": 127.25,
+        "amount": 754995136.0,
+        "volume": 6104999.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 121.0,
+        "high": 129.3,
+        "low": 120.0,
+        "close": 123.4,
+        "amount": 228644048.0,
+        "volume": 1818737.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh000001.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "f03c88bae6d09897bdecd2572e17f12b983043b6ac5d0d09f5ea2a60e3e88d66",
+      "first": {
+        "date": "2021-08-02",
+        "open": 3385.69,
+        "high": 3464.29,
+        "low": 3367.64,
+        "close": 3464.29,
+        "amount": 657885757440.0,
+        "volume": 432927871.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 3925.32,
+        "high": 3930.5,
+        "low": 3888.37,
+        "close": 3888.37,
+        "amount": 783612968960.0,
+        "volume": 438530412.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh000300.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "cfffab2c8322b89151a93e5afdc13c1dd3d585f64647c7d7df979720a5d3bb90",
+      "first": {
+        "date": "2021-08-02",
+        "open": 4794.82,
+        "high": 4938.82,
+        "low": 4761.46,
+        "close": 4933.74,
+        "amount": 524659458048.0,
+        "volume": 227194918.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 4499.86,
+        "high": 4500.2,
+        "low": 4439.14,
+        "close": 4439.14,
+        "amount": 375461675008.0,
+        "volume": 151965787.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh113625.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "25c118d7423f41a1a3ed418d72d79799de2e747453b8cd1e1eb7e350a80bf3d3",
+      "first": {
+        "date": "2021-08-02",
+        "open": 11197.0,
+        "high": 11197.0,
+        "low": 11040.0,
+        "close": 11131.0,
+        "amount": 3720972.5,
+        "volume": 3357.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 11551.0,
+        "high": 11558.7,
+        "low": 11540.0,
+        "close": 11544.1,
+        "amount": 12534514.0,
+        "volume": 10855.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh113703.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 1856,
+      "n_records": 58,
+      "sha256": "8d3be2a7ddc26092af2de64f48d6ec21c3e9803f8e6a72f7c02ef219669989e0",
+      "first": {
+        "date": "2026-07-07",
+        "open": 13000.0,
+        "high": 15730.0,
+        "low": 13000.0,
+        "close": 14463.4,
+        "amount": 231374656.0,
+        "volume": 155459.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 13810.1,
+        "high": 13940.6,
+        "low": 13712.1,
+        "close": 13732.300000000001,
+        "amount": 38885324.0,
+        "volume": 28151.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh508007.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 22688,
+      "n_records": 709,
+      "sha256": "08cca548a862b750252e893b83e582e998c02bdb077087154f96e6bef84eff96",
+      "first": {
+        "date": "2023-10-27",
+        "open": 74.71000000000001,
+        "high": 74.9,
+        "low": 74.7,
+        "close": 74.9,
+        "amount": 33215592.0,
+        "volume": 4441644.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 75.04,
+        "high": 77.45,
+        "low": 73.71000000000001,
+        "close": 77.10000000000001,
+        "amount": 13525757.0,
+        "volume": 1764422.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh510300.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "336854c6dbd71de493d26fd50cf61eda1f44ba0090ac3bf70966b1bdd1c00f2e",
+      "first": {
+        "date": "2021-08-02",
+        "open": 48.56,
+        "high": 50.04,
+        "low": 48.24,
+        "close": 49.93,
+        "amount": 1853444864.0,
+        "volume": 375203941.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 45.78,
+        "high": 45.79,
+        "low": 45.12,
+        "close": 45.15,
+        "amount": 3220888064.0,
+        "volume": 710251904.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh510650.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "444b330e1501963903a46ee5b137ddf670a7fbe9ed68f784e9b52fbba02fec70",
+      "first": {
+        "date": "2021-08-02",
+        "open": 19.740000000000002,
+        "high": 20.400000000000002,
+        "low": 19.54,
+        "close": 20.23,
+        "amount": 7475590.0,
+        "volume": 3728400.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 29.27,
+        "high": 29.37,
+        "low": 29.18,
+        "close": 29.26,
+        "amount": 1945966.0,
+        "volume": 665600.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh511990.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "444b15d35de4ea3ddab51be8c97be2936c0d954a4c0650bc813ef528d3a42a7c",
+      "first": {
+        "date": "2021-08-02",
+        "open": 1000.01,
+        "high": 1000.0500000000001,
+        "low": 999.9200000000001,
+        "close": 1000.01,
+        "amount": 20178229248.0,
+        "volume": 201785421.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 1000.02,
+        "high": 1000.0500000000001,
+        "low": 1000.01,
+        "close": 1000.0400000000001,
+        "amount": 15798454272.0,
+        "volume": 157979760.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh512470.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 32,
+      "n_records": 1,
+      "sha256": "78a7873148c57a21067a922c0576a9d6ab98c8de08ac61ab586ef8db9758c457",
+      "first": {
+        "date": "2026-09-24",
+        "open": 9.85,
+        "high": 9.86,
+        "low": 9.65,
+        "close": 9.65,
+        "amount": 43799144.0,
+        "volume": 44729072.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 9.85,
+        "high": 9.86,
+        "low": 9.65,
+        "close": 9.65,
+        "amount": 43799144.0,
+        "volume": 44729072.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh512720.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "3e1c72a3aeb8747c6e4ab20b7df70dcef7d4b517f698ee90adef95429090f249",
+      "first": {
+        "date": "2021-08-02",
+        "open": 14.43,
+        "high": 14.82,
+        "low": 14.36,
+        "close": 14.790000000000001,
+        "amount": 37727080.0,
+        "volume": 25874000.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 11.42,
+        "high": 11.42,
+        "low": 11.21,
+        "close": 11.21,
+        "amount": 15964233.0,
+        "volume": 14139900.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh515560.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "1d98dd1d30ddcd3b81ea9bde1c8c23a33d78b322ef26dd3e45ffb3ebae7dfa68",
+      "first": {
+        "date": "2021-08-02",
+        "open": 9.25,
+        "high": 9.69,
+        "low": 9.11,
+        "close": 9.540000000000001,
+        "amount": 51394712.0,
+        "volume": 54389400.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 9.78,
+        "high": 9.78,
+        "low": 9.6,
+        "close": 9.620000000000001,
+        "amount": 9490536.0,
+        "volume": 9811000.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh517100.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "e5a505c8d4657171f67e33bf8b307d9e9371b2b41d1580d4ca76f5cec2fa1487",
+      "first": {
+        "date": "2021-08-02",
+        "open": 8.72,
+        "high": 8.94,
+        "low": 8.66,
+        "close": 8.94,
+        "amount": 5600339.0,
+        "volume": 6353400.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 9.91,
+        "high": 9.91,
+        "low": 9.85,
+        "close": 9.86,
+        "amount": 513640.0,
+        "volume": 520100.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh561930.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 15648,
+      "n_records": 489,
+      "sha256": "1445fb6c7e498afa51b88c4daa167168bec88861c54c877bb0486749359a2ef7",
+      "first": {
+        "date": "2024-09-20",
+        "open": 10.0,
+        "high": 10.05,
+        "low": 9.950000000000001,
+        "close": 10.03,
+        "amount": 141192960.0,
+        "volume": 141155132.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 15.540000000000001,
+        "high": 15.540000000000001,
+        "low": 15.24,
+        "close": 15.27,
+        "amount": 6363627.0,
+        "volume": 4159800.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh562890.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 19680,
+      "n_records": 615,
+      "sha256": "e61fc7facc7b2dd625d12d414aedb4fe98645bdcfc1cb287025e297a5dad6397",
+      "first": {
+        "date": "2024-03-18",
+        "open": 9.96,
+        "high": 10.08,
+        "low": 9.96,
+        "close": 10.07,
+        "amount": 632252608.0,
+        "volume": 631061780.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 13.290000000000001,
+        "high": 13.370000000000001,
+        "low": 13.16,
+        "close": 13.18,
+        "amount": 14267148.0,
+        "volume": 10783800.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh563900.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 10944,
+      "n_records": 342,
+      "sha256": "0952cb3e3376f8801c0a6430d0cc16ddddab8cab9b11a23c0b4d06280c719ab4",
+      "first": {
+        "date": "2025-05-07",
+        "open": 10.07,
+        "high": 10.1,
+        "low": 10.02,
+        "close": 10.07,
+        "amount": 203753056.0,
+        "volume": 202719600.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 11.28,
+        "high": 11.290000000000001,
+        "low": 11.23,
+        "close": 11.26,
+        "amount": 15874995.0,
+        "volume": 14097800.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh588950.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 12960,
+      "n_records": 405,
+      "sha256": "fcca69b33d6177e67e7b03e7b29c735129e43edcf77d5563e733459fbd758ab6",
+      "first": {
+        "date": "2025-01-24",
+        "open": 9.93,
+        "high": 10.08,
+        "low": 9.92,
+        "close": 10.0,
+        "amount": 130799168.0,
+        "volume": 130678366.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 17.29,
+        "high": 17.38,
+        "low": 16.990000000000002,
+        "close": 17.01,
+        "amount": 95099744.0,
+        "volume": 55479600.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh589090.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 8416,
+      "n_records": 263,
+      "sha256": "50c7779f141810074d690b4b102c95157928a3b0822200271ea604b07c75eff3",
+      "first": {
+        "date": "2025-08-27",
+        "open": 10.69,
+        "high": 11.450000000000001,
+        "low": 10.57,
+        "close": 10.8,
+        "amount": 506018048.0,
+        "volume": 469502100.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 10.700000000000001,
+        "high": 10.78,
+        "low": 10.56,
+        "close": 10.56,
+        "amount": 4620311.0,
+        "volume": 4341300.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh600108.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "811cdf2c592e65ce41cf48f903fce495463c6d6075acdd69e6868d42b2a09c7c",
+      "first": {
+        "date": "2021-08-02",
+        "open": 3.11,
+        "high": 3.24,
+        "low": 3.11,
+        "close": 3.19,
+        "amount": 290402528.0,
+        "volume": 91427687.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 4.32,
+        "high": 4.43,
+        "low": 4.12,
+        "close": 4.13,
+        "amount": 622786880.0,
+        "volume": 147712528.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh600267.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "7ad6a1b6217331d591c2e06d51189130e12a432cbf67a45b6b48352e774e4e9a",
+      "first": {
+        "date": "2021-08-02",
+        "open": 13.27,
+        "high": 13.4,
+        "low": 12.96,
+        "close": 13.39,
+        "amount": 109498360.0,
+        "volume": 8290022.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 11.73,
+        "high": 11.81,
+        "low": 11.4,
+        "close": 11.43,
+        "amount": 238280256.0,
+        "volume": 20614284.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh600421.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 36320,
+      "n_records": 1135,
+      "sha256": "9f44fb032fed57c7737e0d61f888f79c2449d0f1ac750904f9358235c637f20a",
+      "first": {
+        "date": "2021-08-02",
+        "open": 12.6,
+        "high": 12.6,
+        "low": 11.72,
+        "close": 11.73,
+        "amount": 27267984.0,
+        "volume": 2258642.0
+      },
+      "last": {
+        "date": "2026-06-22",
+        "open": 0.27,
+        "high": 0.27,
+        "low": 0.24,
+        "close": 0.24,
+        "amount": 3757247.0,
+        "volume": 15223100.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh600433.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "900ebad38d7fd17a384cf5ba881071d1fddb256eeffdc2b587f37100e8747fe3",
+      "first": {
+        "date": "2021-08-02",
+        "open": 4.96,
+        "high": 5.03,
+        "low": 4.88,
+        "close": 5.0,
+        "amount": 42662288.0,
+        "volume": 8619200.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 3.2800000000000002,
+        "high": 3.33,
+        "low": 3.25,
+        "close": 3.2600000000000002,
+        "amount": 50418248.0,
+        "volume": 15376700.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh600519.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 192384,
+      "n_records": 6012,
+      "sha256": "27800e19f85130df26d85187c3d64198590e3ad54dc513569a39b0e9fe7ff6b9",
+      "first": {
+        "date": "2001-08-27",
+        "open": 34.51,
+        "high": 37.78,
+        "low": 32.85,
+        "close": 35.550000000000004,
+        "amount": 1410347136.0,
+        "volume": 40631800.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 1250.01,
+        "high": 1256.13,
+        "low": 1231.05,
+        "close": 1237.0,
+        "amount": 3867310848.0,
+        "volume": 3123935.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh600600.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "c27bd4c8b3a108c10511d9a827182fb89fe466fe09842ccea3f36fb0f0fe3417",
+      "first": {
+        "date": "2021-08-02",
+        "open": 79.0,
+        "high": 84.64,
+        "low": 77.31,
+        "close": 83.68,
+        "amount": 1417475968.0,
+        "volume": 17470220.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 50.300000000000004,
+        "high": 50.6,
+        "low": 49.88,
+        "close": 49.89,
+        "amount": 169042816.0,
+        "volume": 3374360.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh600601.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 271040,
+      "n_records": 8470,
+      "sha256": "7a0016025fdf9c60647b6bcc56ae749721517019520b0e605cc30344f3895b28",
+      "first": {
+        "date": "1991-09-05",
+        "open": 63.6,
+        "high": 63.6,
+        "low": 63.6,
+        "close": 63.6,
+        "amount": 190000.0,
+        "volume": 29900.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 14.9,
+        "high": 15.07,
+        "low": 14.22,
+        "close": 14.24,
+        "amount": 2357027072.0,
+        "volume": 161824160.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh600729.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 39616,
+      "n_records": 1238,
+      "sha256": "2be172dcc130d8dfefd040602320a8be4b2f663cb31693427b768f2d5eb243a1",
+      "first": {
+        "date": "2021-08-02",
+        "open": 26.240000000000002,
+        "high": 26.41,
+        "low": 25.740000000000002,
+        "close": 25.97,
+        "amount": 60070948.0,
+        "volume": 2308278.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 18.39,
+        "high": 18.46,
+        "low": 18.080000000000002,
+        "close": 18.14,
+        "amount": 35725496.0,
+        "volume": 1961100.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh600737.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "8786e03a86158f6b063a0c05dd9852851e6bcdffbba9c27a5c814b3176eef085",
+      "first": {
+        "date": "2021-08-02",
+        "open": 8.64,
+        "high": 8.82,
+        "low": 8.36,
+        "close": 8.82,
+        "amount": 251575872.0,
+        "volume": 29297720.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 15.01,
+        "high": 15.16,
+        "low": 14.61,
+        "close": 14.75,
+        "amount": 746569216.0,
+        "volume": 50367564.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh600869.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "40bdf9abf32682d219e91e7b2877fb7fffe7dd22c676f127eb5649bd65cb8c56",
+      "first": {
+        "date": "2021-08-02",
+        "open": 5.29,
+        "high": 5.37,
+        "low": 5.0600000000000005,
+        "close": 5.18,
+        "amount": 226249728.0,
+        "volume": 43577653.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 20.78,
+        "high": 20.88,
+        "low": 19.78,
+        "close": 19.830000000000002,
+        "amount": 3126621440.0,
+        "volume": 155312448.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh600892.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 39872,
+      "n_records": 1246,
+      "sha256": "18c0c7d6de5e0a879fee54aef85bae41cfc6275b3b201e2349f71ebf6f8f4311",
+      "first": {
+        "date": "2021-08-02",
+        "open": 3.91,
+        "high": 3.97,
+        "low": 3.84,
+        "close": 3.94,
+        "amount": 10073445.0,
+        "volume": 2570000.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 4.15,
+        "high": 4.22,
+        "low": 4.09,
+        "close": 4.12,
+        "amount": 121179168.0,
+        "volume": 29271300.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh600935.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 37536,
+      "n_records": 1173,
+      "sha256": "86b20857245dfad75f19097e959733bcdb702b282a2deacce406e4c8649963bb",
+      "first": {
+        "date": "2021-11-26",
+        "open": 4.73,
+        "high": 5.67,
+        "low": 4.73,
+        "close": 5.67,
+        "amount": 51318464.0,
+        "volume": 9077318.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 2.3000000000000003,
+        "high": 2.32,
+        "low": 2.2800000000000002,
+        "close": 2.29,
+        "amount": 30121116.0,
+        "volume": 13105500.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh601061.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 26944,
+      "n_records": 842,
+      "sha256": "19b50cdfe41c131fc136b1e7ac1a58785ed8f248369ca7497d278837e5e083c0",
+      "first": {
+        "date": "2023-04-10",
+        "open": 8.89,
+        "high": 14.21,
+        "low": 8.89,
+        "close": 11.24,
+        "amount": 3423150080.0,
+        "volume": 301564876.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 11.24,
+        "high": 11.27,
+        "low": 10.790000000000001,
+        "close": 10.83,
+        "amount": 181544160.0,
+        "volume": 16565556.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh601117.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "7e61af98b06898c0baf92084e3bbd4df73a9d318d3b844e59f69ca65f4c194a7",
+      "first": {
+        "date": "2021-08-02",
+        "open": 8.700000000000001,
+        "high": 9.33,
+        "low": 8.61,
+        "close": 9.14,
+        "amount": 673664448.0,
+        "volume": 74543848.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 7.15,
+        "high": 7.25,
+        "low": 7.1000000000000005,
+        "close": 7.22,
+        "amount": 432335168.0,
+        "volume": 60215964.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh601398.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "570ba2766ab74e9558c71cf424302833ad738fd8d98d032939d8c8058ef849ba",
+      "first": {
+        "date": "2021-08-02",
+        "open": 4.58,
+        "high": 4.61,
+        "low": 4.53,
+        "close": 4.6000000000000005,
+        "amount": 980307712.0,
+        "volume": 214322262.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 8.1,
+        "high": 8.22,
+        "low": 8.09,
+        "close": 8.13,
+        "amount": 2182889728.0,
+        "volume": 267588976.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh601689.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "3088628bde2c01ec747f249bbb6e10b25bb69e3917ec775eb7b92f54b0581cdd",
+      "first": {
+        "date": "2021-08-02",
+        "open": 34.160000000000004,
+        "high": 36.14,
+        "low": 34.160000000000004,
+        "close": 35.99,
+        "amount": 884273856.0,
+        "volume": 24902164.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 45.87,
+        "high": 47.84,
+        "low": 45.26,
+        "close": 46.44,
+        "amount": 1765757568.0,
+        "volume": 37515708.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh603035.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "c6a6d1a746a331fec44e745f8e62f626ba45d16a98a441dd2efe125dd0b01a47",
+      "first": {
+        "date": "2021-08-02",
+        "open": 12.700000000000001,
+        "high": 13.14,
+        "low": 12.69,
+        "close": 12.94,
+        "amount": 187423808.0,
+        "volume": 14473117.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 10.370000000000001,
+        "high": 10.65,
+        "low": 10.3,
+        "close": 10.540000000000001,
+        "amount": 71676024.0,
+        "volume": 6818358.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh603232.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "8aafa8a34c652635671274e21ec809e7fc07cc3b2491eae8c53cf1330cc0ef73",
+      "first": {
+        "date": "2021-08-02",
+        "open": 14.71,
+        "high": 15.19,
+        "low": 14.58,
+        "close": 15.13,
+        "amount": 40720148.0,
+        "volume": 2711646.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 16.54,
+        "high": 16.580000000000002,
+        "low": 15.870000000000001,
+        "close": 15.93,
+        "amount": 281408064.0,
+        "volume": 17538580.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh603235.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 32736,
+      "n_records": 1023,
+      "sha256": "ec2b295b4cbe327274288287cf219f0a9a4f2df1a467a45b6e7c8953fef7499f",
+      "first": {
+        "date": "2022-07-12",
+        "open": 44.26,
+        "high": 53.11,
+        "low": 44.26,
+        "close": 53.11,
+        "amount": 180125488.0,
+        "volume": 3403791.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 24.900000000000002,
+        "high": 25.23,
+        "low": 24.85,
+        "close": 25.17,
+        "amount": 10311594.0,
+        "volume": 411100.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh603389.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 38944,
+      "n_records": 1217,
+      "sha256": "75f02941fdb81c1fcca4448073fd9298220776cb62a2cbb5d5323a461a41a7f0",
+      "first": {
+        "date": "2021-08-02",
+        "open": 4.58,
+        "high": 4.67,
+        "low": 4.54,
+        "close": 4.64,
+        "amount": 4063472.0,
+        "volume": 879740.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 44.300000000000004,
+        "high": 44.63,
+        "low": 43.660000000000004,
+        "close": 43.82,
+        "amount": 51589504.0,
+        "volume": 1170900.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh603488.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 39680,
+      "n_records": 1240,
+      "sha256": "9328293b53eef5c4e1fbcea5c144e4e9039f594f67865bcf13b79fceb9b87b23",
+      "first": {
+        "date": "2021-08-02",
+        "open": 6.95,
+        "high": 6.99,
+        "low": 6.84,
+        "close": 6.96,
+        "amount": 11658330.0,
+        "volume": 1683520.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 7.95,
+        "high": 8.03,
+        "low": 7.890000000000001,
+        "close": 7.91,
+        "amount": 33625984.0,
+        "volume": 4231700.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh603518.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "efc4393721585ac2e0f619ab9a1fc97aecb254400550240f746a74e8627c25ec",
+      "first": {
+        "date": "2021-08-02",
+        "open": 14.77,
+        "high": 14.93,
+        "low": 14.0,
+        "close": 14.700000000000001,
+        "amount": 149405616.0,
+        "volume": 10216228.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 7.71,
+        "high": 7.8500000000000005,
+        "low": 7.68,
+        "close": 7.72,
+        "amount": 42145496.0,
+        "volume": 5435032.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh603713.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "2dbc1878bd166f72c1961c750eee47974419af6173851fcde0dad4421410e2e5",
+      "first": {
+        "date": "2021-08-02",
+        "open": 90.32000000000001,
+        "high": 94.47,
+        "low": 90.32000000000001,
+        "close": 93.9,
+        "amount": 116706968.0,
+        "volume": 1255122.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 67.65,
+        "high": 70.37,
+        "low": 67.54,
+        "close": 69.43,
+        "amount": 219206720.0,
+        "volume": 3174481.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh603880.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 39776,
+      "n_records": 1243,
+      "sha256": "56d6d1dbd741f1b9ea57da289b5f12b69f21db3f5459bcc0df025d383da2ca38",
+      "first": {
+        "date": "2021-08-02",
+        "open": 7.0,
+        "high": 7.19,
+        "low": 6.99,
+        "close": 7.09,
+        "amount": 32849904.0,
+        "volume": 4608288.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 9.23,
+        "high": 9.43,
+        "low": 9.120000000000001,
+        "close": 9.120000000000001,
+        "amount": 51188068.0,
+        "volume": 5531200.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh603960.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "dd7363a095321df747b3887becf16c8fdf8f692126579af4474d412ccc828b04",
+      "first": {
+        "date": "2021-08-02",
+        "open": 32.480000000000004,
+        "high": 33.12,
+        "low": 31.59,
+        "close": 32.83,
+        "amount": 161430608.0,
+        "volume": 4979382.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 18.14,
+        "high": 18.42,
+        "low": 17.6,
+        "close": 17.88,
+        "amount": 157503776.0,
+        "volume": 8710400.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh605299.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "cb1b615c691b8193e35594504a592ded924d05e215f4650bf036f10ef98f361b",
+      "first": {
+        "date": "2021-08-02",
+        "open": 16.65,
+        "high": 16.72,
+        "low": 16.2,
+        "close": 16.490000000000002,
+        "amount": 56931984.0,
+        "volume": 3470200.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 12.34,
+        "high": 12.73,
+        "low": 12.32,
+        "close": 12.620000000000001,
+        "amount": 120290168.0,
+        "volume": 9613700.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh688076.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 39968,
+      "n_records": 1249,
+      "sha256": "5df91e4aa05aac57d9e1278a177bd764c2c874b5088538caae22a0be7c79bc5a",
+      "first": {
+        "date": "2021-08-02",
+        "open": 52.27,
+        "high": 55.43,
+        "low": 50.08,
+        "close": 55.2,
+        "amount": 154255808.0,
+        "volume": 2895520.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 29.28,
+        "high": 29.28,
+        "low": 28.82,
+        "close": 28.830000000000002,
+        "amount": 44954504.0,
+        "volume": 1553754.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh688118.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "bd88500c174309d4359034bf822346da1edb0e3a386ecf651ed8ebe06bf21917",
+      "first": {
+        "date": "2021-08-02",
+        "open": 22.91,
+        "high": 23.84,
+        "low": 22.66,
+        "close": 23.76,
+        "amount": 22645232.0,
+        "volume": 970213.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 20.41,
+        "high": 20.41,
+        "low": 19.93,
+        "close": 20.150000000000002,
+        "amount": 37228540.0,
+        "volume": 1847705.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh688147.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 29152,
+      "n_records": 911,
+      "sha256": "0a4dce166a23878dfb860dfa9e686b956a33c9d39742f70b0aa094ab49888a44",
+      "first": {
+        "date": "2022-12-23",
+        "open": 29.900000000000002,
+        "high": 31.0,
+        "low": 26.88,
+        "close": 27.45,
+        "amount": 713472000.0,
+        "volume": 25182599.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 115.0,
+        "high": 115.55,
+        "low": 110.7,
+        "close": 111.0,
+        "amount": 611108480.0,
+        "volume": 5404223.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh688331.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 34880,
+      "n_records": 1090,
+      "sha256": "b8c8658a8216cffd23d6e42f4b7832d9c04d230898c2a84188adcd733f219c8c",
+      "first": {
+        "date": "2022-03-31",
+        "open": 46.0,
+        "high": 48.18,
+        "low": 40.11,
+        "close": 40.84,
+        "amount": 985409728.0,
+        "volume": 22421365.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 123.3,
+        "high": 125.08,
+        "low": 116.12,
+        "close": 116.28,
+        "amount": 848150720.0,
+        "volume": 7147268.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh688358.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "f0dc180bf6f98937ecc85f92fff86deac88eaa1930923b05bac3f061c0da469e",
+      "first": {
+        "date": "2021-08-02",
+        "open": 47.800000000000004,
+        "high": 48.660000000000004,
+        "low": 47.57,
+        "close": 48.65,
+        "amount": 8757748.0,
+        "volume": 181900.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 29.5,
+        "high": 29.5,
+        "low": 29.0,
+        "close": 29.0,
+        "amount": 17416614.0,
+        "volume": 597153.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh688448.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 31136,
+      "n_records": 973,
+      "sha256": "526ccfbba07750e1e2e81c8865660bbdbc7e232be1df7f0225aed63dc5705c61",
+      "first": {
+        "date": "2022-09-21",
+        "open": 30.11,
+        "high": 31.67,
+        "low": 28.2,
+        "close": 29.28,
+        "amount": 237822624.0,
+        "volume": 8133248.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 68.1,
+        "high": 68.25,
+        "low": 65.47,
+        "close": 65.69,
+        "amount": 103926696.0,
+        "volume": 1562109.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh688500.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 39936,
+      "n_records": 1248,
+      "sha256": "834cf4323b7d58e7552d93905970ce47540a185323ce1c09ad2d8768af012ded",
+      "first": {
+        "date": "2021-08-02",
+        "open": 32.6,
+        "high": 33.46,
+        "low": 32.3,
+        "close": 33.21,
+        "amount": 14129253.0,
+        "volume": 428307.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 31.3,
+        "high": 31.53,
+        "low": 30.6,
+        "close": 30.7,
+        "amount": 53135392.0,
+        "volume": 1712982.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh688626.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "8c7945a0cc23b8ecd3624781b50775f23ad773774e6480aff1f110dfed561895",
+      "first": {
+        "date": "2021-08-02",
+        "open": 66.99,
+        "high": 71.43,
+        "low": 63.78,
+        "close": 70.81,
+        "amount": 123382128.0,
+        "volume": 1810605.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 44.4,
+        "high": 45.480000000000004,
+        "low": 43.97,
+        "close": 44.06,
+        "amount": 124325408.0,
+        "volume": 2778330.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh688781.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 4064,
+      "n_records": 127,
+      "sha256": "7e682d8ef0dbff01a0800947cbd192e01f14440e6ae520cbeb4b70f104caaf5c",
+      "first": {
+        "date": "2026-03-25",
+        "open": 50.0,
+        "high": 52.88,
+        "low": 42.5,
+        "close": 46.0,
+        "amount": 1498307968.0,
+        "volume": 31680032.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 49.88,
+        "high": 51.550000000000004,
+        "low": 45.02,
+        "close": 45.02,
+        "amount": 391644992.0,
+        "volume": 8280173.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh688981.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 39808,
+      "n_records": 1244,
+      "sha256": "23a41968d1cbc634c627a75f1830301eb6e851ee05f583eac73b2badef243a62",
+      "first": {
+        "date": "2021-08-02",
+        "open": 65.53,
+        "high": 70.7,
+        "low": 65.0,
+        "close": 67.36,
+        "amount": 9968123904.0,
+        "volume": 146900287.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 121.10000000000001,
+        "high": 121.39,
+        "low": 119.63,
+        "close": 119.98,
+        "amount": 2246348544.0,
+        "volume": 18660976.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh880049.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 6208,
+      "n_records": 194,
+      "sha256": "8da6e15965d8a0887e09a98c0f52b595b7bb7a54186349ac993aaea3b9b29e0b",
+      "first": {
+        "date": "2025-12-10",
+        "open": 1184.0,
+        "high": 1184.33,
+        "low": 1170.21,
+        "close": 1180.47,
+        "amount": 180346290176.0,
+        "volume": 32060787.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 725.92,
+        "high": 727.51,
+        "low": 711.95,
+        "close": 712.02,
+        "amount": 245485256704.0,
+        "volume": 40119213.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh880210.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "2373957a4a1a83bc5bfa968e3b8345038185bbee8103f7053ea06f1c7a898afe",
+      "first": {
+        "date": "2021-08-02",
+        "open": 756.4,
+        "high": 770.33,
+        "low": 748.47,
+        "close": 769.1,
+        "amount": 2655240192.0,
+        "volume": 4395906.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 1020.52,
+        "high": 1023.46,
+        "low": 1009.13,
+        "close": 1010.0400000000001,
+        "amount": 5626245120.0,
+        "volume": 6624153.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh880398.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "20a6614961b40d99bf29bee011ad509239e965efb76bf63febfd71c6dbbfc510",
+      "first": {
+        "date": "2021-08-02",
+        "open": 5873.77,
+        "high": 6001.05,
+        "low": 5689.46,
+        "close": 5975.85,
+        "amount": 44551577600.0,
+        "volume": 11505171.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 2889.04,
+        "high": 2913.16,
+        "low": 2850.7000000000003,
+        "close": 2850.73,
+        "amount": 33224421376.0,
+        "volume": 18313199.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh880521.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "1fa91056fbb2116472d9ef1314ff6c81eb9dc2e8ef3917fd775c2f8c8457a0f6",
+      "first": {
+        "date": "2021-08-02",
+        "open": 952.36,
+        "high": 967.86,
+        "low": 934.75,
+        "close": 963.0600000000001,
+        "amount": 31057514496.0,
+        "volume": 34335111.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 1701.15,
+        "high": 1701.3700000000001,
+        "low": 1663.1000000000001,
+        "close": 1663.9,
+        "amount": 44137938944.0,
+        "volume": 29511171.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh880676.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 24800,
+      "n_records": 775,
+      "sha256": "cf3ad33be9bcac0ad00e1a8c80d0815de1680acc7a07111bb1a9678051c866be",
+      "first": {
+        "date": "2023-07-19",
+        "open": 997.02,
+        "high": 1000.11,
+        "low": 993.09,
+        "close": 999.1,
+        "amount": 37610287104.0,
+        "volume": 387289894.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 1269.6200000000001,
+        "high": 1270.7,
+        "low": 1250.98,
+        "close": 1251.03,
+        "amount": 139660115968.0,
+        "volume": 733230449.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh880734.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "3f0a172a80fbcca95ca174a61749151d09937e5c7c244d45e081a86939f5ad0f",
+      "first": {
+        "date": "2021-08-02",
+        "open": 994.58,
+        "high": 1031.89,
+        "low": 959.66,
+        "close": 1000.0,
+        "amount": 18793359360.0,
+        "volume": 8242909.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 1524.01,
+        "high": 1535.1000000000001,
+        "low": 1510.14,
+        "close": 1511.33,
+        "amount": 11919416320.0,
+        "volume": 4591358.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh880874.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "7a801383f9b757a9060400a0faf06ced58e258bb7ea11202ddd5a7b0affa5c1e",
+      "first": {
+        "date": "2021-08-02",
+        "open": 133.05,
+        "high": 133.12,
+        "low": 126.32000000000001,
+        "close": 130.12,
+        "amount": 21353895936.0,
+        "volume": 19699905.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 569.61,
+        "high": 574.0600000000001,
+        "low": 561.88,
+        "close": 566.26,
+        "amount": 30109945856.0,
+        "volume": 33393651.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh880984.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "11f706a270277e93181cfad74a7af928bbafeffbe1d7a62f6a9a463c56879ebb",
+      "first": {
+        "date": "2021-08-02",
+        "open": 3292.75,
+        "high": 3373.38,
+        "low": 3246.62,
+        "close": 3372.06,
+        "amount": 213671215104.0,
+        "volume": 89580221.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 2755.01,
+        "high": 2772.29,
+        "low": 2719.5,
+        "close": 2719.5,
+        "amount": 198310412288.0,
+        "volume": 127561453.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh881074.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "e7a1ee12c21064ac65c977e4f57c77e11eff9ca9dd87ad437f0bb6e6721e59b0",
+      "first": {
+        "date": "2021-08-02",
+        "open": 935.48,
+        "high": 945.4300000000001,
+        "low": 907.78,
+        "close": 926.54,
+        "amount": 7517045248.0,
+        "volume": 9510196.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 1702.28,
+        "high": 1707.45,
+        "low": 1657.22,
+        "close": 1659.23,
+        "amount": 4969174016.0,
+        "volume": 3690759.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh881159.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "a2737503cd0a333deccad52630afb6cc1be38ff7c5294cbcdb8593fa286613ba",
+      "first": {
+        "date": "2021-08-02",
+        "open": 836.1800000000001,
+        "high": 854.4300000000001,
+        "low": 830.41,
+        "close": 852.74,
+        "amount": 583691776.0,
+        "volume": 680489.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 1038.53,
+        "high": 1047.94,
+        "low": 1036.14,
+        "close": 1036.24,
+        "amount": 1162950016.0,
+        "volume": 966799.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh881244.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "7ac7309e436f160737e1f491324a8ff705cb32b32d16142d565f51f0626b1e25",
+      "first": {
+        "date": "2021-08-02",
+        "open": 1168.69,
+        "high": 1187.8500000000001,
+        "low": 1110.73,
+        "close": 1176.42,
+        "amount": 13727750144.0,
+        "volume": 2585490.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 646.32,
+        "high": 648.25,
+        "low": 633.35,
+        "close": 633.52,
+        "amount": 6714419200.0,
+        "volume": 2550634.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh881329.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "c17eb39dbaffc078a2962d28d531b3b86caa71d942eceffa91b4d698d101d2e8",
+      "first": {
+        "date": "2021-08-02",
+        "open": 1079.51,
+        "high": 1099.98,
+        "low": 1074.41,
+        "close": 1092.49,
+        "amount": 35286437888.0,
+        "volume": 32083916.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 1120.32,
+        "high": 1122.25,
+        "low": 1098.84,
+        "close": 1099.15,
+        "amount": 41450946560.0,
+        "volume": 31484794.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh881415.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "a6d71416504dc27559b2e42fe7204f1c5dc5de0251f4f06b7a908e4a245da2bf",
+      "first": {
+        "date": "2021-08-02",
+        "open": 944.44,
+        "high": 967.02,
+        "low": 939.87,
+        "close": 966.26,
+        "amount": 789720064.0,
+        "volume": 656344.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 1212.53,
+        "high": 1218.68,
+        "low": 1197.27,
+        "close": 1204.05,
+        "amount": 2848342016.0,
+        "volume": 2170174.0
+      }
+    },
+    {
+      "rel": "sh/lday/sh900925.day",
+      "market": "sh",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "840ad858ea09c7fde2e9cf011f960c0968f497d8d9814a469838dd95c596bd0e",
+      "first": {
+        "date": "2021-08-02",
+        "open": 12.31,
+        "high": 12.85,
+        "low": 12.31,
+        "close": 12.82,
+        "amount": 758515.25,
+        "volume": 599125.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 11.8,
+        "high": 11.9,
+        "low": 11.8,
+        "close": 11.870000000000001,
+        "amount": 262194.0,
+        "volume": 221200.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz000001.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "5f5624ce55568797a319658ee5e7618a5fc0bbb0a1e116553303d5a67ac5090e",
+      "first": {
+        "date": "2021-08-02",
+        "open": 17.64,
+        "high": 18.14,
+        "low": 17.18,
+        "close": 18.01,
+        "amount": 2056014208.0,
+        "volume": 115992263.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 11.35,
+        "high": 11.47,
+        "low": 11.290000000000001,
+        "close": 11.3,
+        "amount": 1186736896.0,
+        "volume": 104381872.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz000002.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "fcf32bf91f111286004f9bfa2cd7072c217537719977bd483cf5c1cf0ebb4f77",
+      "first": {
+        "date": "2021-08-02",
+        "open": 20.6,
+        "high": 21.18,
+        "low": 20.1,
+        "close": 20.900000000000002,
+        "amount": 1731493120.0,
+        "volume": 83480263.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 3.89,
+        "high": 3.93,
+        "low": 3.67,
+        "close": 3.7600000000000002,
+        "amount": 2512837888.0,
+        "volume": 667265024.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz000423.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "10826466d5d4f72269ca9ebbf07f61e2a8011f0fbd4cb2fd370102c4920ef7a6",
+      "first": {
+        "date": "2021-08-02",
+        "open": 30.32,
+        "high": 31.35,
+        "low": 30.2,
+        "close": 30.990000000000002,
+        "amount": 193462832.0,
+        "volume": 6264179.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 46.08,
+        "high": 46.15,
+        "low": 45.12,
+        "close": 45.15,
+        "amount": 218123872.0,
+        "volume": 4803519.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz000683.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "f7dfa67743d83017210838a6a5530a6260d136dd018aa3c27ad55e68007a9669",
+      "first": {
+        "date": "2021-08-02",
+        "open": 7.17,
+        "high": 7.42,
+        "low": 6.86,
+        "close": 7.3100000000000005,
+        "amount": 1542332416.0,
+        "volume": 215834003.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 5.6000000000000005,
+        "high": 5.64,
+        "low": 5.53,
+        "close": 5.54,
+        "amount": 178305056.0,
+        "volume": 31982700.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz000821.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 39968,
+      "n_records": 1249,
+      "sha256": "27fcd8405655aaee1286b5130e2039dea4fc47e8dd9df82db0e3859941ef22a6",
+      "first": {
+        "date": "2021-08-02",
+        "open": 12.3,
+        "high": 12.93,
+        "low": 11.55,
+        "close": 11.94,
+        "amount": 572961600.0,
+        "volume": 47365382.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 7.58,
+        "high": 7.58,
+        "low": 7.390000000000001,
+        "close": 7.45,
+        "amount": 36229396.0,
+        "volume": 4849530.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz000823.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 223072,
+      "n_records": 6971,
+      "sha256": "6061ff3ab3219cd8a02f2d37ca4efbed5bc4867a951d93ccf96deb7f34e2e20b",
+      "first": {
+        "date": "1997-10-08",
+        "open": 8.49,
+        "high": 9.120000000000001,
+        "low": 8.31,
+        "close": 8.98,
+        "amount": 332101088.0,
+        "volume": 38109600.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 26.1,
+        "high": 26.62,
+        "low": 24.48,
+        "close": 24.48,
+        "amount": 3267360000.0,
+        "volume": 129378248.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz000830.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 39680,
+      "n_records": 1240,
+      "sha256": "d573387f966d143919f12932a5ad9ca3391259b77b63ebfb86fbfc393bbc91ad",
+      "first": {
+        "date": "2021-08-02",
+        "open": 20.0,
+        "high": 20.75,
+        "low": 19.6,
+        "close": 20.14,
+        "amount": 1258281984.0,
+        "volume": 62593696.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 11.85,
+        "high": 11.88,
+        "low": 11.55,
+        "close": 11.57,
+        "amount": 234281264.0,
+        "volume": 20110744.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz000882.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "d7ee9baf229be566a5e63288507ef5b89a15158d67d0ec4e1eb59b2d78838480",
+      "first": {
+        "date": "2021-08-02",
+        "open": 1.79,
+        "high": 1.82,
+        "low": 1.75,
+        "close": 1.8,
+        "amount": 45527860.0,
+        "volume": 25558698.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 1.53,
+        "high": 1.56,
+        "low": 1.48,
+        "close": 1.5,
+        "amount": 119643288.0,
+        "volume": 79174288.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz001210.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 40064,
+      "n_records": 1252,
+      "sha256": "af1e095c2d7f01b75fb9409fb821df2d7d1dccf725f740844fff63a014618e64",
+      "first": {
+        "date": "2021-07-29",
+        "open": 33.61,
+        "high": 40.33,
+        "low": 33.61,
+        "close": 40.33,
+        "amount": 9698604.0,
+        "volume": 241578.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 28.990000000000002,
+        "high": 29.36,
+        "low": 28.62,
+        "close": 28.77,
+        "amount": 93951104.0,
+        "volume": 3247650.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz001236.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 32160,
+      "n_records": 1005,
+      "sha256": "0abeba6554c81a6b3d466c5dc7503b29dbf794bd7157a07bfccd48002fb7a330",
+      "first": {
+        "date": "2022-08-05",
+        "open": 2.23,
+        "high": 2.68,
+        "low": 2.23,
+        "close": 2.68,
+        "amount": 7501916.5,
+        "volume": 2810662.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 7.76,
+        "high": 7.82,
+        "low": 7.68,
+        "close": 7.7700000000000005,
+        "amount": 53165072.0,
+        "volume": 6866400.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz002010.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "b97a9e4b2310448216416da80b3758d42a08b5c7c91d24aaee8a6dd3b2b83aa9",
+      "first": {
+        "date": "2021-08-02",
+        "open": 7.08,
+        "high": 7.2700000000000005,
+        "low": 7.0,
+        "close": 7.25,
+        "amount": 225794192.0,
+        "volume": 31479048.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 4.55,
+        "high": 4.5600000000000005,
+        "low": 4.48,
+        "close": 4.49,
+        "amount": 46635736.0,
+        "volume": 10337912.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz002126.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "dd54c24c3e42f18da1f577adeb5227ccf230a81d06db963164b3a0f1bc6bb39f",
+      "first": {
+        "date": "2021-08-02",
+        "open": 12.120000000000001,
+        "high": 12.450000000000001,
+        "low": 11.9,
+        "close": 12.32,
+        "amount": 373566880.0,
+        "volume": 30492975.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 38.12,
+        "high": 38.17,
+        "low": 36.03,
+        "close": 36.11,
+        "amount": 708525440.0,
+        "volume": 19191416.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz002247.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "81b1317dd485a02a1ed72fe6c5dacaa6298ababdd5d99ea8d4fdda643b54286c",
+      "first": {
+        "date": "2021-08-02",
+        "open": 2.47,
+        "high": 2.52,
+        "low": 2.44,
+        "close": 2.5,
+        "amount": 20399362.0,
+        "volume": 8209442.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 2.44,
+        "high": 2.47,
+        "low": 2.42,
+        "close": 2.45,
+        "amount": 42285784.0,
+        "volume": 17230000.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz002361.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "0ff144d487f112efa96e93e02d48740f0e1440b6e8fa336c79daad2023ceba8f",
+      "first": {
+        "date": "2021-08-02",
+        "open": 5.36,
+        "high": 5.54,
+        "low": 5.28,
+        "close": 5.44,
+        "amount": 138835824.0,
+        "volume": 25501335.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 10.09,
+        "high": 10.5,
+        "low": 10.02,
+        "close": 10.14,
+        "amount": 892722048.0,
+        "volume": 87323440.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz002463.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "5e6a860e7fbe80faaba55d0bc5382fe9359a87975a36b4543640be089d8295be",
+      "first": {
+        "date": "2021-08-02",
+        "open": 13.1,
+        "high": 13.98,
+        "low": 13.07,
+        "close": 13.780000000000001,
+        "amount": 865840896.0,
+        "volume": 63405106.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 126.61,
+        "high": 128.0,
+        "low": 123.3,
+        "close": 124.05,
+        "amount": 4748253184.0,
+        "volume": 37922476.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz002527.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 39840,
+      "n_records": 1245,
+      "sha256": "081e1123bf8fe6c51cdf8762a69b5a350d6ad23b6dea2b7ea59f41d24845db7b",
+      "first": {
+        "date": "2021-08-02",
+        "open": 8.5,
+        "high": 9.21,
+        "low": 8.5,
+        "close": 9.05,
+        "amount": 156878656.0,
+        "volume": 17679474.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 10.700000000000001,
+        "high": 11.06,
+        "low": 10.6,
+        "close": 10.75,
+        "amount": 93548776.0,
+        "volume": 8611062.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz002579.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "47d54a48c086a5a178839286098bca10c246299b0e1bd9b49870addfb2f9eba4",
+      "first": {
+        "date": "2021-08-02",
+        "open": 11.9,
+        "high": 12.040000000000001,
+        "low": 11.84,
+        "close": 12.0,
+        "amount": 185985248.0,
+        "volume": 15589568.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 18.68,
+        "high": 20.0,
+        "low": 18.68,
+        "close": 19.22,
+        "amount": 3361505536.0,
+        "volume": 173270064.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz002698.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "1d003f5f91895d3417c48c698578729fa0b8fa5114e54618da5a717e8f8b2d82",
+      "first": {
+        "date": "2021-08-02",
+        "open": 12.32,
+        "high": 13.17,
+        "low": 12.3,
+        "close": 13.17,
+        "amount": 114053872.0,
+        "volume": 8863812.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 11.36,
+        "high": 11.49,
+        "low": 11.32,
+        "close": 11.32,
+        "amount": 43684536.0,
+        "volume": 3835550.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz002798.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 39936,
+      "n_records": 1248,
+      "sha256": "513ce7723d021390b71e0fde4bf6f4733f6c2782c40bfaa287390c1cd03f986c",
+      "first": {
+        "date": "2021-08-02",
+        "open": 13.44,
+        "high": 13.55,
+        "low": 12.93,
+        "close": 13.13,
+        "amount": 72336888.0,
+        "volume": 5499963.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 6.66,
+        "high": 6.7,
+        "low": 6.53,
+        "close": 6.6000000000000005,
+        "amount": 65487336.0,
+        "volume": 9892900.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz002808.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 37152,
+      "n_records": 1161,
+      "sha256": "4fa874ca2cfa0a8334d7e0f4c63f27c001cfdf89664f6f20189249404d3ba0ba",
+      "first": {
+        "date": "2021-08-02",
+        "open": 7.22,
+        "high": 7.42,
+        "low": 7.16,
+        "close": 7.38,
+        "amount": 24246188.0,
+        "volume": 3312522.0
+      },
+      "last": {
+        "date": "2026-07-10",
+        "open": 0.19,
+        "high": 0.21,
+        "low": 0.19,
+        "close": 0.21,
+        "amount": 2382515.5,
+        "volume": 11618975.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz002846.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "3174039f904df76b84989206f86f7f3c2e59f9efd0a918b809313d9023dd5a10",
+      "first": {
+        "date": "2021-08-02",
+        "open": 7.57,
+        "high": 7.8500000000000005,
+        "low": 7.5200000000000005,
+        "close": 7.7700000000000005,
+        "amount": 24192062.0,
+        "volume": 3137352.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 11.38,
+        "high": 12.040000000000001,
+        "low": 11.17,
+        "close": 11.28,
+        "amount": 250513520.0,
+        "volume": 21779760.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz002957.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "810081951b060c4eb789bb2f2b8a97f5fa7b44e058dd9125c2c0332b35af84f9",
+      "first": {
+        "date": "2021-08-02",
+        "open": 27.29,
+        "high": 27.79,
+        "low": 26.11,
+        "close": 26.5,
+        "amount": 127185880.0,
+        "volume": 4778340.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 43.58,
+        "high": 43.660000000000004,
+        "low": 41.35,
+        "close": 41.4,
+        "amount": 914776384.0,
+        "volume": 21685676.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz123104.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "595bca303401cbdac8f226714f324d285fdbcf61d783fdb3d9b6a21c80c5dd10",
+      "first": {
+        "date": "2021-08-02",
+        "open": 11900.0,
+        "high": 12049.0,
+        "low": 11900.0,
+        "close": 12038.0,
+        "amount": 3540311.0,
+        "volume": 2952.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 12342.0,
+        "high": 12355.4,
+        "low": 12260.0,
+        "close": 12280.0,
+        "amount": 36646392.0,
+        "volume": 29798.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz123119.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 39904,
+      "n_records": 1247,
+      "sha256": "40910ecb2ebe4b9c9a128b97aca5f635dfeb1ad3010ad5c0bdedab2a7f853264",
+      "first": {
+        "date": "2021-08-05",
+        "open": 13000.0,
+        "high": 13500.0,
+        "low": 13000.0,
+        "close": 13500.0,
+        "amount": 640964608.0,
+        "volume": 481179.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 11800.0,
+        "high": 11830.800000000001,
+        "low": 11640.9,
+        "close": 11666.0,
+        "amount": 41312120.0,
+        "volume": 35315.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz123171.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 29312,
+      "n_records": 916,
+      "sha256": "f0817df829b49c696eb77b811852f3d06e1cefc0c1eca5a97124d8040fb5a8b0",
+      "first": {
+        "date": "2022-12-16",
+        "open": 13000.0,
+        "high": 15730.0,
+        "low": 13000.0,
+        "close": 15730.0,
+        "amount": 122131624.0,
+        "volume": 80501.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 12999.0,
+        "high": 13030.9,
+        "low": 12856.1,
+        "close": 12865.800000000001,
+        "amount": 28095628.0,
+        "volume": 21737.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz123235.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 20960,
+      "n_records": 655,
+      "sha256": "35e6e8999891f4178231a36c777f9da5ae59b5f0685c2ab1105c8aa480d5ea35",
+      "first": {
+        "date": "2024-01-12",
+        "open": 12300.0,
+        "high": 12484.0,
+        "low": 12080.1,
+        "close": 12100.0,
+        "amount": 781769152.0,
+        "volume": 636898.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 19514.600000000002,
+        "high": 20088.8,
+        "low": 18911.0,
+        "close": 19818.8,
+        "amount": 1404793984.0,
+        "volume": 714678.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz128044.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 23360,
+      "n_records": 730,
+      "sha256": "33d60ed45533634a332e8e9841938fc1754f98f2191140d7cd469c42a8c7a54c",
+      "first": {
+        "date": "2021-08-02",
+        "open": 9616.300000000001,
+        "high": 9649.9,
+        "low": 9616.300000000001,
+        "close": 9644.2,
+        "amount": 10967877.0,
+        "volume": 11387.0
+      },
+      "last": {
+        "date": "2024-08-09",
+        "open": 6060.0,
+        "high": 7137.2,
+        "low": 5900.0,
+        "close": 7137.2,
+        "amount": 1361733760.0,
+        "volume": 1972202.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz158042.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 32,
+      "n_records": 1,
+      "sha256": "38ba14bed9b0e2e63cc1a91564346a83420bd679b0bce0a4edafe1048b58454d",
+      "first": {
+        "date": "2026-09-24",
+        "open": 9.82,
+        "high": 9.950000000000001,
+        "low": 9.82,
+        "close": 9.86,
+        "amount": 60360780.0,
+        "volume": 61134376.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 9.82,
+        "high": 9.950000000000001,
+        "low": 9.82,
+        "close": 9.86,
+        "amount": 60360780.0,
+        "volume": 61134376.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz159070.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 2080,
+      "n_records": 65,
+      "sha256": "7ce6a5d6ce970a293b120342faffaf3111ba0b05ec4c4daa14cec08770294011",
+      "first": {
+        "date": "2026-06-26",
+        "open": 9.620000000000001,
+        "high": 9.69,
+        "low": 9.44,
+        "close": 9.450000000000001,
+        "amount": 47012456.0,
+        "volume": 49125936.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 8.8,
+        "high": 8.81,
+        "low": 8.73,
+        "close": 8.73,
+        "amount": 4150432.0,
+        "volume": 4738808.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz159130.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 6496,
+      "n_records": 203,
+      "sha256": "f14c307c4e6a827ec760e4d09fdebd42e12aaab111584bbe7bf4470e19320e81",
+      "first": {
+        "date": "2025-11-27",
+        "open": 10.08,
+        "high": 10.16,
+        "low": 10.01,
+        "close": 10.08,
+        "amount": 345046784.0,
+        "volume": 341822760.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 9.83,
+        "high": 9.83,
+        "low": 9.55,
+        "close": 9.56,
+        "amount": 3696462.75,
+        "volume": 3834007.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz159180.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 3840,
+      "n_records": 120,
+      "sha256": "95515fa7f348f1dec0bb62a51e95154049b6e9cb4daaec4ca50cca568f823e49",
+      "first": {
+        "date": "2026-04-03",
+        "open": 9.84,
+        "high": 9.88,
+        "low": 9.68,
+        "close": 9.72,
+        "amount": 41173820.0,
+        "volume": 42012828.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 9.85,
+        "high": 9.99,
+        "low": 9.77,
+        "close": 9.82,
+        "amount": 858977.5,
+        "volume": 871400.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz159222.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 11296,
+      "n_records": 353,
+      "sha256": "e9abe94269041263a2b2c4531a3fbe841fa3433de9e023d03e777d0b84aea041",
+      "first": {
+        "date": "2025-04-17",
+        "open": 9.98,
+        "high": 10.03,
+        "low": 9.96,
+        "close": 10.0,
+        "amount": 231898544.0,
+        "volume": 231696851.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 12.4,
+        "high": 12.44,
+        "low": 12.33,
+        "close": 12.33,
+        "amount": 92955280.0,
+        "volume": 75159696.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz159258.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 8992,
+      "n_records": 281,
+      "sha256": "3c47ae13555927e7f89128c1c6e48fc23b9745fba89066cbf1e944f84cf9f1d4",
+      "first": {
+        "date": "2025-08-01",
+        "open": 9.9,
+        "high": 10.040000000000001,
+        "low": 9.82,
+        "close": 9.92,
+        "amount": 30353336.0,
+        "volume": 30567492.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 10.47,
+        "high": 10.620000000000001,
+        "low": 10.41,
+        "close": 10.42,
+        "amount": 23723060.0,
+        "volume": 22613100.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz159362.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 14176,
+      "n_records": 443,
+      "sha256": "bd1c073d09116e5e723c251c4c9c6a25232010afbfcf78ac7f990c78ca0bad83",
+      "first": {
+        "date": "2024-12-02",
+        "open": 10.06,
+        "high": 10.19,
+        "low": 10.040000000000001,
+        "close": 10.16,
+        "amount": 499715392.0,
+        "volume": 493285838.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 12.83,
+        "high": 12.83,
+        "low": 12.620000000000001,
+        "close": 12.63,
+        "amount": 25709586.0,
+        "volume": 20244200.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz159660.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 26784,
+      "n_records": 837,
+      "sha256": "1733a9b8058d185ba5dbf6dfcae7015c9b8f870bd8cf4eb3454748fcd369e727",
+      "first": {
+        "date": "2023-04-17",
+        "open": 9.99,
+        "high": 10.0,
+        "low": 9.96,
+        "close": 9.99,
+        "amount": 179199088.0,
+        "volume": 179333358.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 24.59,
+        "high": 24.59,
+        "low": 24.41,
+        "close": 24.44,
+        "amount": 168573104.0,
+        "volume": 68852496.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz159690.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 25056,
+      "n_records": 783,
+      "sha256": "0eb211b1b2ffcbcad983b9cfa8bc014cc905d07fa7db97695abb98424cd505f5",
+      "first": {
+        "date": "2023-07-06",
+        "open": 10.27,
+        "high": 10.27,
+        "low": 10.03,
+        "close": 10.07,
+        "amount": 223747168.0,
+        "volume": 220723833.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 18.47,
+        "high": 18.59,
+        "low": 17.88,
+        "close": 17.91,
+        "amount": 19695342.0,
+        "volume": 10877500.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz159848.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "04f98fc1bbac7b18d13634cd4a527600d4d8341d72849e22f9048c35af48741d",
+      "first": {
+        "date": "2021-08-02",
+        "open": 8.06,
+        "high": 8.61,
+        "low": 8.03,
+        "close": 8.4,
+        "amount": 11778182.0,
+        "volume": 14237161.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 8.48,
+        "high": 8.48,
+        "low": 8.33,
+        "close": 8.34,
+        "amount": 3589768.0,
+        "volume": 4284576.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz159877.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 38048,
+      "n_records": 1189,
+      "sha256": "50b10d2515cbc0ad031e8d7e60c90eb8ee70d20107adb8b14f2584a4cf33dca6",
+      "first": {
+        "date": "2021-11-03",
+        "open": 9.870000000000001,
+        "high": 10.1,
+        "low": 9.870000000000001,
+        "close": 10.05,
+        "amount": 112448392.0,
+        "volume": 112004642.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 5.14,
+        "high": 5.18,
+        "low": 5.08,
+        "close": 5.08,
+        "amount": 929791.875,
+        "volume": 1804507.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz159915.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "16eab268dad32beb6e19775faab21a7986e300ba8fada78c3fb8d42cecdb365a",
+      "first": {
+        "date": "2021-08-02",
+        "open": 33.28,
+        "high": 33.96,
+        "low": 32.9,
+        "close": 33.93,
+        "amount": 934241792.0,
+        "volume": 278473600.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 33.82,
+        "high": 33.92,
+        "low": 33.06,
+        "close": 33.12,
+        "amount": 4434638336.0,
+        "volume": 1325332608.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz159981.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "1dda15c18732e98dcd35778977556b9289fa7a16d67e0df8f231947a730549dd",
+      "first": {
+        "date": "2021-08-02",
+        "open": 13.63,
+        "high": 13.74,
+        "low": 13.58,
+        "close": 13.69,
+        "amount": 8164884.5,
+        "volume": 5981200.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 17.12,
+        "high": 17.5,
+        "low": 17.12,
+        "close": 17.490000000000002,
+        "amount": 1110613760.0,
+        "volume": 641103680.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz160517.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 1440,
+      "n_records": 45,
+      "sha256": "37f6430f3ca05bd32ede5299c6cc80ea5be44caccad2bdcd80bb196cf5c44f0c",
+      "first": {
+        "date": "2026-06-05",
+        "open": 10.0,
+        "high": 10.0,
+        "low": 10.0,
+        "close": 10.0,
+        "amount": 0.0,
+        "volume": 0.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 10.0,
+        "high": 10.0,
+        "low": 10.0,
+        "close": 10.0,
+        "amount": 0.0,
+        "volume": 0.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz161607.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 35840,
+      "n_records": 1120,
+      "sha256": "4aecaa3e46b22b4933e8379b2ee8e35c35265aaa0d5ea590aadb67305f7bea7d",
+      "first": {
+        "date": "2021-08-02",
+        "open": 12.98,
+        "high": 13.76,
+        "low": 12.98,
+        "close": 13.76,
+        "amount": 60316.8984375,
+        "volume": 46000.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 11.83,
+        "high": 11.83,
+        "low": 11.83,
+        "close": 11.83,
+        "amount": 118.30000305175781,
+        "volume": 100.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz161811.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 34048,
+      "n_records": 1064,
+      "sha256": "48075f43f51d4b0a277e3b968ce469ef2b3bc10f13c45852206163767fbd6c92",
+      "first": {
+        "date": "2021-08-02",
+        "open": 10.21,
+        "high": 10.49,
+        "low": 10.21,
+        "close": 10.370000000000001,
+        "amount": 4287.37109375,
+        "volume": 4107.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 10.46,
+        "high": 10.46,
+        "low": 10.44,
+        "close": 10.44,
+        "amount": 2509.60009765625,
+        "volume": 2400.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz163412.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "f89c84ffb70b4ee8a717f53c86e87e86f3ebf56a45268c2edcda771d440a8122",
+      "first": {
+        "date": "2021-08-02",
+        "open": 39.0,
+        "high": 39.43,
+        "low": 38.83,
+        "close": 39.410000000000004,
+        "amount": 1731149.5,
+        "volume": 441365.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 39.81,
+        "high": 41.4,
+        "low": 39.300000000000004,
+        "close": 39.300000000000004,
+        "amount": 239396.09375,
+        "volume": 60400.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz300013.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 39776,
+      "n_records": 1243,
+      "sha256": "ee1148269847197c9e16b0a7479416cd2047083ff70faa00df131aaef765ddab",
+      "first": {
+        "date": "2021-08-02",
+        "open": 3.91,
+        "high": 4.1,
+        "low": 3.88,
+        "close": 4.08,
+        "amount": 37712932.0,
+        "volume": 9366365.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 4.32,
+        "high": 4.3500000000000005,
+        "low": 4.29,
+        "close": 4.33,
+        "amount": 49316076.0,
+        "volume": 11411000.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz300045.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "f46118998bbadee0ad8f7e128ed6196ddc4695bb4d53f0a2df4d1c6cc8223ee8",
+      "first": {
+        "date": "2021-08-02",
+        "open": 10.92,
+        "high": 11.5,
+        "low": 10.82,
+        "close": 11.44,
+        "amount": 349168896.0,
+        "volume": 31058743.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 11.89,
+        "high": 12.25,
+        "low": 11.6,
+        "close": 11.66,
+        "amount": 242677136.0,
+        "volume": 20486424.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz300081.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 39968,
+      "n_records": 1249,
+      "sha256": "6084651262ce02becf2428b8b1dd73c1f942fc65e8433f586fadda71024eca89",
+      "first": {
+        "date": "2021-08-02",
+        "open": 7.96,
+        "high": 8.07,
+        "low": 7.84,
+        "close": 8.06,
+        "amount": 44030664.0,
+        "volume": 5512500.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 3.38,
+        "high": 3.5100000000000002,
+        "low": 3.38,
+        "close": 3.47,
+        "amount": 23988620.0,
+        "volume": 6969600.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz300162.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "2de82315a8b48435ee3de4b8882cf2fb5df19f2dc39f37836f1ad18fc2c2e3ed",
+      "first": {
+        "date": "2021-08-02",
+        "open": 8.59,
+        "high": 8.82,
+        "low": 8.51,
+        "close": 8.64,
+        "amount": 139628128.0,
+        "volume": 16139025.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 7.98,
+        "high": 8.03,
+        "low": 7.65,
+        "close": 7.68,
+        "amount": 271264608.0,
+        "volume": 34835452.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz300275.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "bcd1c2e6ddf6ca2a16f60ae9c93fd66ac767d5ef6083eece65098700ef1436d2",
+      "first": {
+        "date": "2021-08-02",
+        "open": 9.64,
+        "high": 10.06,
+        "low": 9.56,
+        "close": 9.92,
+        "amount": 49104016.0,
+        "volume": 4966800.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 8.99,
+        "high": 9.13,
+        "low": 8.92,
+        "close": 8.96,
+        "amount": 24150192.0,
+        "volume": 2676280.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz300399.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "62b563d0b3f7a26951e2c0d8d1612af204cf3cca961e13e331728e3d862d2e80",
+      "first": {
+        "date": "2021-08-02",
+        "open": 10.81,
+        "high": 11.26,
+        "low": 10.81,
+        "close": 11.22,
+        "amount": 17550448.0,
+        "volume": 1583710.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 19.5,
+        "high": 19.8,
+        "low": 19.23,
+        "close": 19.3,
+        "amount": 57498544.0,
+        "volume": 2955535.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz300501.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "a886212307cdf91e80827432dba651c6add0d3b7d5c5a230d3dabad974e0c3e8",
+      "first": {
+        "date": "2021-08-02",
+        "open": 16.61,
+        "high": 17.28,
+        "low": 16.54,
+        "close": 16.96,
+        "amount": 30275994.0,
+        "volume": 1782335.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 9.52,
+        "high": 9.540000000000001,
+        "low": 9.41,
+        "close": 9.450000000000001,
+        "amount": 24925206.0,
+        "volume": 2630808.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz300603.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "93af300b8d44576269ad2542e2ed398117d2fd130a6a37743cd0e036a09421d6",
+      "first": {
+        "date": "2021-08-02",
+        "open": 10.94,
+        "high": 11.08,
+        "low": 10.71,
+        "close": 11.06,
+        "amount": 155899584.0,
+        "volume": 14291680.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 8.13,
+        "high": 8.2,
+        "low": 8.05,
+        "close": 8.05,
+        "amount": 50978504.0,
+        "volume": 6284678.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz300695.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "727918a9b022fe1a7b97d9883eafce7324fd0796b5c137392243b3a5748167e3",
+      "first": {
+        "date": "2021-08-02",
+        "open": 47.78,
+        "high": 49.33,
+        "low": 47.61,
+        "close": 49.0,
+        "amount": 14879016.0,
+        "volume": 307500.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 53.7,
+        "high": 53.7,
+        "low": 51.03,
+        "close": 51.13,
+        "amount": 44655720.0,
+        "volume": 855700.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz300750.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "224e26461ba473ab86d9d4e114a88ab8f0c7ab758565c7437780e5b0616a8cb5",
+      "first": {
+        "date": "2021-08-02",
+        "open": 557.0,
+        "high": 574.99,
+        "low": 532.88,
+        "close": 552.0,
+        "amount": 10131831808.0,
+        "volume": 18297279.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 300.0,
+        "high": 302.0,
+        "low": 293.0,
+        "close": 293.5,
+        "amount": 8290901504.0,
+        "volume": 28008500.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz300789.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "ba6d508a7dbb49ace5d0e623b962686d54c554105ada97ac1a66a53a4587e2a0",
+      "first": {
+        "date": "2021-08-02",
+        "open": 23.0,
+        "high": 23.88,
+        "low": 22.61,
+        "close": 23.68,
+        "amount": 17812652.0,
+        "volume": 759900.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 16.44,
+        "high": 16.8,
+        "low": 16.21,
+        "close": 16.39,
+        "amount": 39067056.0,
+        "volume": 2365700.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz300884.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "a5b001fcfd4c03873d1f9dc096121b136fd290b462809be263be3bb6958c6e28",
+      "first": {
+        "date": "2021-08-02",
+        "open": 22.19,
+        "high": 22.63,
+        "low": 21.8,
+        "close": 22.53,
+        "amount": 40546388.0,
+        "volume": 1819028.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 12.200000000000001,
+        "high": 12.3,
+        "low": 12.07,
+        "close": 12.200000000000001,
+        "amount": 37760760.0,
+        "volume": 3100074.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz300889.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 39680,
+      "n_records": 1240,
+      "sha256": "0e8f697aea1c50b357da75d49e6b7d2cd4b5bdd15f964f42aa26d6e82c55ff3a",
+      "first": {
+        "date": "2021-08-02",
+        "open": 20.76,
+        "high": 21.330000000000002,
+        "low": 20.7,
+        "close": 21.3,
+        "amount": 18473818.0,
+        "volume": 875887.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 22.64,
+        "high": 23.3,
+        "low": 22.55,
+        "close": 22.75,
+        "amount": 108583024.0,
+        "volume": 4732355.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz300959.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 39840,
+      "n_records": 1245,
+      "sha256": "019c9595d46847600a4fadeccc84e9e138ab56128b56abf6582376db12fd356d",
+      "first": {
+        "date": "2021-08-02",
+        "open": 49.89,
+        "high": 51.39,
+        "low": 49.53,
+        "close": 50.94,
+        "amount": 44396964.0,
+        "volume": 878640.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 95.42,
+        "high": 95.78,
+        "low": 91.0,
+        "close": 91.04,
+        "amount": 159971744.0,
+        "volume": 1726900.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz300980.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "9a54d80e80be59d4e77977fdaacf953f5f7546dcbbacd2df4eb56f07b54ec0dc",
+      "first": {
+        "date": "2021-08-02",
+        "open": 37.1,
+        "high": 38.38,
+        "low": 36.730000000000004,
+        "close": 38.01,
+        "amount": 29536658.0,
+        "volume": 784700.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 24.22,
+        "high": 24.45,
+        "low": 23.6,
+        "close": 23.69,
+        "amount": 63941328.0,
+        "volume": 2669300.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz301049.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 39488,
+      "n_records": 1234,
+      "sha256": "a331b8a848d9a316e909e10875b97a74e49f9c895b0a5a00796f6f604526d9a3",
+      "first": {
+        "date": "2021-08-24",
+        "open": 47.0,
+        "high": 49.0,
+        "low": 42.21,
+        "close": 42.300000000000004,
+        "amount": 681686528.0,
+        "volume": 15058109.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 20.36,
+        "high": 20.8,
+        "low": 20.31,
+        "close": 20.63,
+        "amount": 13732214.0,
+        "volume": 667400.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz301067.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 38880,
+      "n_records": 1215,
+      "sha256": "fd6e9c5c8f2fca869eea2fbe08b55be00a069b46c651a6d9920bbad69d3a00fe",
+      "first": {
+        "date": "2021-09-22",
+        "open": 81.0,
+        "high": 89.0,
+        "low": 70.57000000000001,
+        "close": 72.97,
+        "amount": 506924160.0,
+        "volume": 6444028.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 33.86,
+        "high": 35.83,
+        "low": 33.76,
+        "close": 34.61,
+        "amount": 160924192.0,
+        "volume": 4626017.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz301309.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 30880,
+      "n_records": 965,
+      "sha256": "58104b5c0d3278dcd27354515aefff886394c786e99fe8b11a64e0e1808c1512",
+      "first": {
+        "date": "2022-09-19",
+        "open": 32.7,
+        "high": 36.84,
+        "low": 32.3,
+        "close": 33.69,
+        "amount": 317310368.0,
+        "volume": 9373561.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 30.650000000000002,
+        "high": 30.96,
+        "low": 30.43,
+        "close": 30.43,
+        "amount": 14711688.0,
+        "volume": 479100.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz301565.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 17696,
+      "n_records": 553,
+      "sha256": "21d9ce26df3f22e526f84b3dda4f4e660b2274f7ba60d058271ee33f9c59c41f",
+      "first": {
+        "date": "2024-06-20",
+        "open": 50.0,
+        "high": 50.0,
+        "low": 38.88,
+        "close": 38.980000000000004,
+        "amount": 1799447808.0,
+        "volume": 41626195.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 20.19,
+        "high": 20.490000000000002,
+        "low": 19.81,
+        "close": 19.95,
+        "amount": 59935196.0,
+        "volume": 2993868.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz399001.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "6d1d16ba8314b2a1bf506009cb3ad5537aee344414146935826f731255166304",
+      "first": {
+        "date": "2021-08-02",
+        "open": 14463.210000000001,
+        "high": 14806.86,
+        "low": 14395.33,
+        "close": 14798.16,
+        "amount": 854947004416.0,
+        "volume": 507567735.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 13575.07,
+        "high": 13577.86,
+        "low": 13316.970000000001,
+        "close": 13316.970000000001,
+        "amount": 869744377856.0,
+        "volume": 526252664.0
+      }
+    },
+    {
+      "rel": "sz/lday/sz399303.day",
+      "market": "sz",
+      "kind": "day",
+      "size": 40000,
+      "n_records": 1250,
+      "sha256": "775f4bcee4fc884d993e32b99de448eda688276ed5a54e178b0ff66cba43a689",
+      "first": {
+        "date": "2021-08-02",
+        "open": 7985.84,
+        "high": 8143.400000000001,
+        "low": 7959.68,
+        "close": 8143.320000000001,
+        "amount": 397432848384.0,
+        "volume": 309452590.0
+      },
+      "last": {
+        "date": "2026-09-24",
+        "open": 10156.65,
+        "high": 10183.15,
+        "low": 9987.24,
+        "close": 9988.6,
+        "amount": 532572340224.0,
+        "volume": 315723624.0
+      }
+    },
+    {
+      "rel": "bj/minline/bj920035.lc1",
+      "market": "bj",
+      "kind": "min",
+      "size": 568320,
+      "n_records": 17760,
+      "sha256": "fe36a2ccd27cef2d902002c88ab91f910bf20d83d8a5859125e1490d941c9dcc",
+      "first": {
+        "date": "2026-06-12 09:31",
+        "open": 26.690000534057617,
+        "high": 26.690000534057617,
+        "low": 26.399999618530273,
+        "close": 26.65999984741211,
+        "amount": 44989.078125,
+        "volume": 1700.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-24 15:00",
+        "open": 23.860000610351562,
+        "high": 23.860000610351562,
+        "low": 23.860000610351562,
+        "close": 23.860000610351562,
+        "amount": 164204.515625,
+        "volume": 6800.0,
+        "hour": 15,
+        "minute": 0
+      }
+    },
+    {
+      "rel": "bj/minline/bj920096.lc1",
+      "market": "bj",
+      "kind": "min",
+      "size": 568320,
+      "n_records": 17760,
+      "sha256": "40aa5ae238d4ff632a4234a78c79d05f54cf5c3379e893167df3092a5bc75489",
+      "first": {
+        "date": "2026-06-12 09:31",
+        "open": 56.709999084472656,
+        "high": 59.86000061035156,
+        "low": 56.70000076293945,
+        "close": 58.97999954223633,
+        "amount": 6043793.0,
+        "volume": 103800.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-24 15:00",
+        "open": 30.5,
+        "high": 30.5,
+        "low": 30.5,
+        "close": 30.5,
+        "amount": 535519.0,
+        "volume": 17600.0,
+        "hour": 15,
+        "minute": 0
+      }
+    },
+    {
+      "rel": "bj/minline/bj920166.lc1",
+      "market": "bj",
+      "kind": "min",
+      "size": 568320,
+      "n_records": 17760,
+      "sha256": "37c2b32dbbd532bf4960e408b12008077ec1dec718127a9559d809718a02da3a",
+      "first": {
+        "date": "2026-06-12 09:31",
+        "open": 22.709999084472656,
+        "high": 23.860000610351562,
+        "low": 22.709999084472656,
+        "close": 22.989999771118164,
+        "amount": 258522.796875,
+        "volume": 11100.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-24 15:00",
+        "open": 19.479999542236328,
+        "high": 19.479999542236328,
+        "low": 19.479999542236328,
+        "close": 19.479999542236328,
+        "amount": 15584.0,
+        "volume": 800.0,
+        "hour": 15,
+        "minute": 0
+      }
+    },
+    {
+      "rel": "bj/minline/bj920201.lc1",
+      "market": "bj",
+      "kind": "min",
+      "size": 7680,
+      "n_records": 240,
+      "sha256": "e1bfe62157339f4e9ea742ea49428c8ef95cfeab7b5405ea9d6b752954e34ccd",
+      "first": {
+        "date": "2026-09-24 09:31",
+        "open": 75.0,
+        "high": 79.0,
+        "low": 75.0,
+        "close": 78.93000030517578,
+        "amount": 93318568.0,
+        "volume": 1219800.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-24 15:00",
+        "open": 72.3499984741211,
+        "high": 72.3499984741211,
+        "low": 72.3499984741211,
+        "close": 72.3499984741211,
+        "amount": 5141914.5,
+        "volume": 71100.0,
+        "hour": 15,
+        "minute": 0
+      }
+    },
+    {
+      "rel": "bj/minline/bj920221.lc1",
+      "market": "bj",
+      "kind": "min",
+      "size": 568320,
+      "n_records": 17760,
+      "sha256": "6d82aaae52d450696b5aae58216d4424290e21f7f8c4e24430e73abb5e5cf33d",
+      "first": {
+        "date": "2026-06-12 09:31",
+        "open": 14.34000015258789,
+        "high": 14.350000381469727,
+        "low": 14.199999809265137,
+        "close": 14.199999809265137,
+        "amount": 1234261.625,
+        "volume": 86300.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-24 15:00",
+        "open": 12.4399995803833,
+        "high": 12.4399995803833,
+        "low": 12.4399995803833,
+        "close": 12.4399995803833,
+        "amount": 238014.515625,
+        "volume": 19200.0,
+        "hour": 15,
+        "minute": 0
+      }
+    },
+    {
+      "rel": "bj/minline/bj920357.lc1",
+      "market": "bj",
+      "kind": "min",
+      "size": 568320,
+      "n_records": 17760,
+      "sha256": "4240ccbe9c9f52c053487d81060cb0e9058dc0cdc4bda9e1a58b20f4ded6ce58",
+      "first": {
+        "date": "2026-06-12 09:31",
+        "open": 20.5,
+        "high": 20.700000762939453,
+        "low": 20.25,
+        "close": 20.280000686645508,
+        "amount": 11349145.0,
+        "volume": 553200.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-24 15:00",
+        "open": 15.3100004196167,
+        "high": 15.3100004196167,
+        "low": 15.3100004196167,
+        "close": 15.3100004196167,
+        "amount": 503607.125,
+        "volume": 32900.0,
+        "hour": 15,
+        "minute": 0
+      }
+    },
+    {
+      "rel": "bj/minline/bj920471.lc1",
+      "market": "bj",
+      "kind": "min",
+      "size": 568320,
+      "n_records": 17760,
+      "sha256": "d0f476a1689221ca285a7694b3af099405859b4f02aaf8cbd4e4fac870ab9390",
+      "first": {
+        "date": "2026-06-12 09:31",
+        "open": 12.880000114440918,
+        "high": 12.920000076293945,
+        "low": 12.609999656677246,
+        "close": 12.649999618530273,
+        "amount": 5988152.5,
+        "volume": 467500.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-24 15:00",
+        "open": 11.319999694824219,
+        "high": 11.319999694824219,
+        "low": 11.319999694824219,
+        "close": 11.319999694824219,
+        "amount": 134583.484375,
+        "volume": 11900.0,
+        "hour": 15,
+        "minute": 0
+      }
+    },
+    {
+      "rel": "bj/minline/bj920592.lc1",
+      "market": "bj",
+      "kind": "min",
+      "size": 568320,
+      "n_records": 17760,
+      "sha256": "83d0fc92ee2bdfdc9ead4e9b0baf0a340e7009aeeef1bd931f75054527bf1dcf",
+      "first": {
+        "date": "2026-06-12 09:31",
+        "open": 23.979999542236328,
+        "high": 24.079999923706055,
+        "low": 23.75,
+        "close": 23.770000457763672,
+        "amount": 1523839.625,
+        "volume": 63700.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-24 15:00",
+        "open": 26.280000686645508,
+        "high": 26.280000686645508,
+        "low": 26.280000686645508,
+        "close": 26.280000686645508,
+        "amount": 1806066.75,
+        "volume": 68700.0,
+        "hour": 15,
+        "minute": 0
+      }
+    },
+    {
+      "rel": "bj/minline/bj920675.lc1",
+      "market": "bj",
+      "kind": "min",
+      "size": 522240,
+      "n_records": 16320,
+      "sha256": "3a7caeac7e34ef9c06d5d8590fc2e5eeb98052d68564afa7de663a23d91bfaa1",
+      "first": {
+        "date": "2026-06-23 09:31",
+        "open": 9.899999618530273,
+        "high": 9.899999618530273,
+        "low": 9.40999984741211,
+        "close": 9.850000381469727,
+        "amount": 13877124.0,
+        "volume": 1417300.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-24 15:00",
+        "open": 7.360000133514404,
+        "high": 7.360000133514404,
+        "low": 7.360000133514404,
+        "close": 7.360000133514404,
+        "amount": 15456.0,
+        "volume": 2100.0,
+        "hour": 15,
+        "minute": 0
+      }
+    },
+    {
+      "rel": "bj/minline/bj920729.lc1",
+      "market": "bj",
+      "kind": "min",
+      "size": 568320,
+      "n_records": 17760,
+      "sha256": "4faf6809895c4bf7f6c685410f858f4641f25ae52ff00d6e86debb20adfc0dab",
+      "first": {
+        "date": "2026-06-12 09:31",
+        "open": 7.039999961853027,
+        "high": 7.039999961853027,
+        "low": 7.0,
+        "close": 7.010000228881836,
+        "amount": 60941.1015625,
+        "volume": 8700.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-24 15:00",
+        "open": 6.550000190734863,
+        "high": 6.550000190734863,
+        "low": 6.550000190734863,
+        "close": 6.550000190734863,
+        "amount": 86597.546875,
+        "volume": 13200.0,
+        "hour": 15,
+        "minute": 0
+      }
+    },
+    {
+      "rel": "bj/minline/bj920870.lc1",
+      "market": "bj",
+      "kind": "min",
+      "size": 568320,
+      "n_records": 17760,
+      "sha256": "f69428c5a5d6c787641b3f6cce1243fa14be60ecf16efd0fc65b98bc2d2d05ea",
+      "first": {
+        "date": "2026-06-12 09:31",
+        "open": 13.819999694824219,
+        "high": 13.850000381469727,
+        "low": 13.670000076293945,
+        "close": 13.680000305175781,
+        "amount": 709735.4375,
+        "volume": 51600.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-24 15:00",
+        "open": 11.59000015258789,
+        "high": 11.59000015258789,
+        "low": 11.59000015258789,
+        "close": 11.59000015258789,
+        "amount": 406890.125,
+        "volume": 35100.0,
+        "hour": 15,
+        "minute": 0
+      }
+    },
+    {
+      "rel": "bj/minline/bj920992.lc1",
+      "market": "bj",
+      "kind": "min",
+      "size": 568320,
+      "n_records": 17760,
+      "sha256": "7a0d3adc42e6d6cf8da66a0634337342a9e7930d79f846da89cde1e2b12db18c",
+      "first": {
+        "date": "2026-06-12 09:31",
+        "open": 12.300000190734863,
+        "high": 12.479999542236328,
+        "low": 12.300000190734863,
+        "close": 12.479999542236328,
+        "amount": 140699.078125,
+        "volume": 11400.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-24 15:00",
+        "open": 12.979999542236328,
+        "high": 12.979999542236328,
+        "low": 12.979999542236328,
+        "close": 12.979999542236328,
+        "amount": 393579.5625,
+        "volume": 30300.0,
+        "hour": 15,
+        "minute": 0
+      }
+    },
+    {
+      "rel": "sh/minline/sh000001.lc1",
+      "market": "sh",
+      "kind": "min",
+      "size": 568320,
+      "n_records": 17760,
+      "sha256": "9ef0149203ba625b1a31dd262810c6992c2986664c8c538da43d27f460446c7a",
+      "first": {
+        "date": "2026-06-12 09:31",
+        "open": 4017.860107421875,
+        "high": 4020.85009765625,
+        "low": 4013.60009765625,
+        "close": 4013.60009765625,
+        "amount": 53820608512.0,
+        "volume": 538206064.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-24 15:00",
+        "open": 3888.3701171875,
+        "high": 3888.3701171875,
+        "low": 3888.3701171875,
+        "close": 3888.3701171875,
+        "amount": 9002277888.0,
+        "volume": 90022782.0,
+        "hour": 15,
+        "minute": 0
+      }
+    },
+    {
+      "rel": "sh/minline/sh501060.lc1",
+      "market": "sh",
+      "kind": "min",
+      "size": 568320,
+      "n_records": 17760,
+      "sha256": "b6d263d795384a5b80450071173d056f153f8a48419e8bfa04d1e135ab336d43",
+      "first": {
+        "date": "2026-06-12 09:31",
+        "open": 2.2929999828338623,
+        "high": 2.2929999828338623,
+        "low": 2.2929999828338623,
+        "close": 2.2929999828338623,
+        "amount": 229.0,
+        "volume": 100.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-24 15:00",
+        "open": 2.3540000915527344,
+        "high": 2.3540000915527344,
+        "low": 2.3540000915527344,
+        "close": 2.3540000915527344,
+        "amount": 0.0,
+        "volume": 0.0,
+        "hour": 15,
+        "minute": 0
+      }
+    },
+    {
+      "rel": "sh/minline/sh512470.lc1",
+      "market": "sh",
+      "kind": "min",
+      "size": 7680,
+      "n_records": 240,
+      "sha256": "305052ca2d37619849f0b6bd7df37ca55f440fa5385d92f52cbb51c8da0ad4e0",
+      "first": {
+        "date": "2026-09-24 09:31",
+        "open": 0.9850000143051147,
+        "high": 0.9850000143051147,
+        "low": 0.9819999933242798,
+        "close": 0.9850000143051147,
+        "amount": 4070589.0,
+        "volume": 4134100.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-24 15:00",
+        "open": 0.9649999737739563,
+        "high": 0.9649999737739563,
+        "low": 0.9649999737739563,
+        "close": 0.9649999737739563,
+        "amount": 77200.0,
+        "volume": 80000.0,
+        "hour": 15,
+        "minute": 0
+      }
+    },
+    {
+      "rel": "sh/minline/sh516110.lc1",
+      "market": "sh",
+      "kind": "min",
+      "size": 568320,
+      "n_records": 17760,
+      "sha256": "9e99c8416d31d4b22b7a4d578e1b5ac9246b7c9dbc1a17511839b822500ecd42",
+      "first": {
+        "date": "2026-06-12 09:31",
+        "open": 1.1660000085830688,
+        "high": 1.1729999780654907,
+        "low": 1.1660000085830688,
+        "close": 1.1720000505447388,
+        "amount": 67057.0,
+        "volume": 57300.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-24 15:00",
+        "open": 1.069000005722046,
+        "high": 1.069000005722046,
+        "low": 1.069000005722046,
+        "close": 1.069000005722046,
+        "amount": 156074.0,
+        "volume": 146000.0,
+        "hour": 15,
+        "minute": 0
+      }
+    },
+    {
+      "rel": "sh/minline/sh588230.lc1",
+      "market": "sh",
+      "kind": "min",
+      "size": 568320,
+      "n_records": 17760,
+      "sha256": "54a22f30033553988d4f5b9a7a51aae06e894891de04ed10ca882e61e8051801",
+      "first": {
+        "date": "2026-06-12 09:31",
+        "open": 2.007999897003174,
+        "high": 2.0190000534057617,
+        "low": 1.9900000095367432,
+        "close": 1.9900000095367432,
+        "amount": 5492995.0,
+        "volume": 2738100.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-24 15:00",
+        "open": 1.8519999980926514,
+        "high": 1.8519999980926514,
+        "low": 1.8519999980926514,
+        "close": 1.8519999980926514,
+        "amount": 846364.0,
+        "volume": 457000.0,
+        "hour": 15,
+        "minute": 0
+      }
+    },
+    {
+      "rel": "sh/minline/sh600460.lc1",
+      "market": "sh",
+      "kind": "min",
+      "size": 568320,
+      "n_records": 17760,
+      "sha256": "8f625633f09ca8682f92ba481fddd469997de469376fa27ac111f1b73b0c489c",
+      "first": {
+        "date": "2026-06-12 09:31",
+        "open": 34.20000076293945,
+        "high": 34.4900016784668,
+        "low": 34.0099983215332,
+        "close": 34.310001373291016,
+        "amount": 90377760.0,
+        "volume": 2638200.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-24 15:00",
+        "open": 32.720001220703125,
+        "high": 32.720001220703125,
+        "low": 32.720001220703125,
+        "close": 32.720001220703125,
+        "amount": 17501928.0,
+        "volume": 534900.0,
+        "hour": 15,
+        "minute": 0
+      }
+    },
+    {
+      "rel": "sh/minline/sh600519.lc1",
+      "market": "sh",
+      "kind": "min",
+      "size": 568320,
+      "n_records": 17760,
+      "sha256": "3a328d1931554deb80e8800ec8435232f910d60be3030cd5939e1a5f9b3b77a2",
+      "first": {
+        "date": "2026-06-12 09:31",
+        "open": 1271.1800537109375,
+        "high": 1274.6500244140625,
+        "low": 1268.1500244140625,
+        "close": 1268.199951171875,
+        "amount": 146966192.0,
+        "volume": 115600.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-24 15:00",
+        "open": 1237.0,
+        "high": 1237.0,
+        "low": 1237.0,
+        "close": 1237.0,
+        "amount": 34219132.0,
+        "volume": 27600.0,
+        "hour": 15,
+        "minute": 0
+      }
+    },
+    {
+      "rel": "sh/minline/sh601098.lc1",
+      "market": "sh",
+      "kind": "min",
+      "size": 568320,
+      "n_records": 17760,
+      "sha256": "8106958afb6869cc96cb1c9d9510c5707cea4cb0bb6ddbca9bca8d67748d43a6",
+      "first": {
+        "date": "2026-06-12 09:31",
+        "open": 10.789999961853027,
+        "high": 10.800000190734863,
+        "low": 10.729999542236328,
+        "close": 10.729999542236328,
+        "amount": 2435834.0,
+        "volume": 226100.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-24 15:00",
+        "open": 10.180000305175781,
+        "high": 10.180000305175781,
+        "low": 10.180000305175781,
+        "close": 10.180000305175781,
+        "amount": 644394.0,
+        "volume": 63300.0,
+        "hour": 15,
+        "minute": 0
+      }
+    },
+    {
+      "rel": "sh/minline/sh603318.lc1",
+      "market": "sh",
+      "kind": "min",
+      "size": 568320,
+      "n_records": 17760,
+      "sha256": "ec6afdd3a98660ca3ce753ae9caf98e4d26f5f5bf9ff394da4a9e21082fd5823",
+      "first": {
+        "date": "2026-06-12 09:31",
+        "open": 9.399999618530273,
+        "high": 9.680000305175781,
+        "low": 9.399999618530273,
+        "close": 9.619999885559082,
+        "amount": 73550208.0,
+        "volume": 7728800.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-24 15:00",
+        "open": 8.859999656677246,
+        "high": 8.859999656677246,
+        "low": 8.859999656677246,
+        "close": 8.859999656677246,
+        "amount": 3299464.0,
+        "volume": 372400.0,
+        "hour": 15,
+        "minute": 0
+      }
+    },
+    {
+      "rel": "sh/minline/sh605377.lc1",
+      "market": "sh",
+      "kind": "min",
+      "size": 568320,
+      "n_records": 17760,
+      "sha256": "4f64f8fd623b7aafa55c85c2e08dbf927c71922c6758cb337d3e07c4e60cdb23",
+      "first": {
+        "date": "2026-06-12 09:31",
+        "open": 8.119999885559082,
+        "high": 8.149999618530273,
+        "low": 8.109999656677246,
+        "close": 8.109999656677246,
+        "amount": 734930.0,
+        "volume": 90500.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-24 15:00",
+        "open": 8.0600004196167,
+        "high": 8.0600004196167,
+        "low": 8.0600004196167,
+        "close": 8.0600004196167,
+        "amount": 853554.0,
+        "volume": 105900.0,
+        "hour": 15,
+        "minute": 0
+      }
+    },
+    {
+      "rel": "sh/minline/sh688558.lc1",
+      "market": "sh",
+      "kind": "min",
+      "size": 568320,
+      "n_records": 17760,
+      "sha256": "06d551b73631216b08ec9f8f15e95a7c54ee19abcfb5f57a65fbed9529e17fb4",
+      "first": {
+        "date": "2026-06-12 09:31",
+        "open": 32.20000076293945,
+        "high": 32.959999084472656,
+        "low": 32.20000076293945,
+        "close": 32.81999969482422,
+        "amount": 1467200.0,
+        "volume": 45200.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-24 15:00",
+        "open": 34.08000183105469,
+        "high": 34.08000183105469,
+        "low": 34.08000183105469,
+        "close": 34.08000183105469,
+        "amount": 1351033.0,
+        "volume": 39700.0,
+        "hour": 15,
+        "minute": 0
+      }
+    },
+    {
+      "rel": "sh/minline/sh880563.lc1",
+      "market": "sh",
+      "kind": "min",
+      "size": 568320,
+      "n_records": 17760,
+      "sha256": "cfe251f8bbd8686e6119ebf5c82ecc69db8cde13a63b6fbea706bdcb468bb862",
+      "first": {
+        "date": "2026-06-12 09:31",
+        "open": 3117.989990234375,
+        "high": 3122.300048828125,
+        "low": 3113.89990234375,
+        "close": 3115.5400390625,
+        "amount": 917632576.0,
+        "volume": 9176316.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-24 15:00",
+        "open": 3273.530029296875,
+        "high": 3273.530029296875,
+        "low": 3273.0400390625,
+        "close": 3273.199951171875,
+        "amount": 158464912.0,
+        "volume": 1584648.0,
+        "hour": 15,
+        "minute": 0
+      }
+    },
+    {
+      "rel": "sh/minline/sh881070.lc1",
+      "market": "sh",
+      "kind": "min",
+      "size": 568320,
+      "n_records": 17760,
+      "sha256": "388d0098c82bc4d6668ed63279f14b8b677fa6034b3e6b1c15fb9070c258669f",
+      "first": {
+        "date": "2026-06-12 09:31",
+        "open": 1631.530029296875,
+        "high": 1634.6800537109375,
+        "low": 1629.3599853515625,
+        "close": 1634.6800537109375,
+        "amount": 13370496000.0,
+        "volume": 133704960.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-24 15:00",
+        "open": 1463.4599609375,
+        "high": 1463.4599609375,
+        "low": 1463.3399658203125,
+        "close": 1463.3399658203125,
+        "amount": 887779456.0,
+        "volume": 8877794.0,
+        "hour": 15,
+        "minute": 0
+      }
+    },
+    {
+      "rel": "sh/minline/sh999999.lc1",
+      "market": "sh",
+      "kind": "min",
+      "size": 568320,
+      "n_records": 17760,
+      "sha256": "9ef0149203ba625b1a31dd262810c6992c2986664c8c538da43d27f460446c7a",
+      "first": {
+        "date": "2026-06-12 09:31",
+        "open": 4017.860107421875,
+        "high": 4020.85009765625,
+        "low": 4013.60009765625,
+        "close": 4013.60009765625,
+        "amount": 53820608512.0,
+        "volume": 538206064.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-24 15:00",
+        "open": 3888.3701171875,
+        "high": 3888.3701171875,
+        "low": 3888.3701171875,
+        "close": 3888.3701171875,
+        "amount": 9002277888.0,
+        "volume": 90022782.0,
+        "hour": 15,
+        "minute": 0
+      }
+    },
+    {
+      "rel": "sz/minline/sz000001.lc1",
+      "market": "sz",
+      "kind": "min",
+      "size": 568320,
+      "n_records": 17760,
+      "sha256": "2a904723eda843ba4eaac099dad0982f873d6e83bebb6edbb97b3bd4c2edc3ac",
+      "first": {
+        "date": "2026-06-12 09:31",
+        "open": 11.0,
+        "high": 11.020000457763672,
+        "low": 10.880000114440918,
+        "close": 10.90999984741211,
+        "amount": 116089392.0,
+        "volume": 10598400.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-24 15:00",
+        "open": 11.300000190734863,
+        "high": 11.300000190734863,
+        "low": 11.300000190734863,
+        "close": 11.300000190734863,
+        "amount": 15291160.0,
+        "volume": 1353200.0,
+        "hour": 15,
+        "minute": 0
+      }
+    },
+    {
+      "rel": "sz/minline/sz000030.lc1",
+      "market": "sz",
+      "kind": "min",
+      "size": 568320,
+      "n_records": 17760,
+      "sha256": "c027811dc2fe6fa0bacb474c58dbdded715ba8b4e21b059a730bfb982b4547b1",
+      "first": {
+        "date": "2026-06-12 09:31",
+        "open": 4.320000171661377,
+        "high": 4.329999923706055,
+        "low": 4.300000190734863,
+        "close": 4.300000190734863,
+        "amount": 2249646.0,
+        "volume": 521100.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-24 15:00",
+        "open": 3.9200000762939453,
+        "high": 3.9200000762939453,
+        "low": 3.9200000762939453,
+        "close": 3.9200000762939453,
+        "amount": 437864.0,
+        "volume": 111700.0,
+        "hour": 15,
+        "minute": 0
+      }
+    },
+    {
+      "rel": "sz/minline/sz001217.lc1",
+      "market": "sz",
+      "kind": "min",
+      "size": 568320,
+      "n_records": 17760,
+      "sha256": "fb7dc5199075faad951e1e80ab0ebbcd40ee4de9cd6e9fd55110cb15b853bb18",
+      "first": {
+        "date": "2026-06-12 09:31",
+        "open": 9.59000015258789,
+        "high": 9.600000381469727,
+        "low": 9.489999771118164,
+        "close": 9.550000190734863,
+        "amount": 3747934.0,
+        "volume": 392800.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-24 15:00",
+        "open": 11.029999732971191,
+        "high": 11.029999732971191,
+        "low": 11.029999732971191,
+        "close": 11.029999732971191,
+        "amount": 392668.0,
+        "volume": 35600.0,
+        "hour": 15,
+        "minute": 0
+      }
+    },
+    {
+      "rel": "sz/minline/sz002327.lc1",
+      "market": "sz",
+      "kind": "min",
+      "size": 568320,
+      "n_records": 17760,
+      "sha256": "23a8001d5ac95512ad971b99e31aa8ee532c952efcfb18c9416983a7c197e5e5",
+      "first": {
+        "date": "2026-06-12 09:31",
+        "open": 6.989999771118164,
+        "high": 7.0,
+        "low": 6.940000057220459,
+        "close": 6.96999979019165,
+        "amount": 599741.0,
+        "volume": 86000.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-24 15:00",
+        "open": 6.139999866485596,
+        "high": 6.139999866485596,
+        "low": 6.139999866485596,
+        "close": 6.139999866485596,
+        "amount": 351822.0,
+        "volume": 57300.0,
+        "hour": 15,
+        "minute": 0
+      }
+    },
+    {
+      "rel": "sz/minline/sz002774.lc1",
+      "market": "sz",
+      "kind": "min",
+      "size": 568320,
+      "n_records": 17760,
+      "sha256": "de00558da9231443eab6ffc1891e29a76a8590714b0fce73dca4b19ef4a4ddb6",
+      "first": {
+        "date": "2026-06-12 09:31",
+        "open": 11.0,
+        "high": 11.029999732971191,
+        "low": 10.800000190734863,
+        "close": 10.979999542236328,
+        "amount": 892258.0,
+        "volume": 81300.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-24 15:00",
+        "open": 17.459999084472656,
+        "high": 17.459999084472656,
+        "low": 17.459999084472656,
+        "close": 17.459999084472656,
+        "amount": 1831554.0,
+        "volume": 104900.0,
+        "hour": 15,
+        "minute": 0
+      }
+    },
+    {
+      "rel": "sz/minline/sz159013.lc1",
+      "market": "sz",
+      "kind": "min",
+      "size": 568320,
+      "n_records": 17760,
+      "sha256": "da5aeba8686be39d2b49140ae876db7d62ba46c302b4a3db2c5bd9b4065c39ce",
+      "first": {
+        "date": "2026-06-12 09:31",
+        "open": 1.0579999685287476,
+        "high": 1.0750000476837158,
+        "low": 1.0579999685287476,
+        "close": 1.0740000009536743,
+        "amount": 19004.19921875,
+        "volume": 17700.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-24 15:00",
+        "open": 0.9679999947547913,
+        "high": 0.9679999947547913,
+        "low": 0.9679999947547913,
+        "close": 0.9679999947547913,
+        "amount": 0.0,
+        "volume": 0.0,
+        "hour": 15,
+        "minute": 0
+      }
+    },
+    {
+      "rel": "sz/minline/sz159638.lc1",
+      "market": "sz",
+      "kind": "min",
+      "size": 568320,
+      "n_records": 17760,
+      "sha256": "7789ad300d8f6040931cf4bc7866a98aa0988c90c8446feb1c0ee521624ecc01",
+      "first": {
+        "date": "2026-06-12 09:31",
+        "open": 0.9179999828338623,
+        "high": 0.925000011920929,
+        "low": 0.9169999957084656,
+        "close": 0.9240000247955322,
+        "amount": 3177028.5,
+        "volume": 3447800.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-24 15:00",
+        "open": 0.8220000267028809,
+        "high": 0.8220000267028809,
+        "low": 0.8220000267028809,
+        "close": 0.8220000267028809,
+        "amount": 272164.1875,
+        "volume": 331100.0,
+        "hour": 15,
+        "minute": 0
+      }
+    },
+    {
+      "rel": "sz/minline/sz163001.lc1",
+      "market": "sz",
+      "kind": "min",
+      "size": 568320,
+      "n_records": 17760,
+      "sha256": "1e21b952bd1e2f10a6f3003862e0d0c623fb3c422a15c04f034f962c430c2d05",
+      "first": {
+        "date": "2026-06-12 09:31",
+        "open": 1.2230000495910645,
+        "high": 1.2230000495910645,
+        "low": 1.2230000495910645,
+        "close": 1.2230000495910645,
+        "amount": 0.0,
+        "volume": 0.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-24 15:00",
+        "open": 1.4450000524520874,
+        "high": 1.4450000524520874,
+        "low": 1.4450000524520874,
+        "close": 1.4450000524520874,
+        "amount": 0.0,
+        "volume": 0.0,
+        "hour": 15,
+        "minute": 0
+      }
+    },
+    {
+      "rel": "sz/minline/sz180307.lc1",
+      "market": "sz",
+      "kind": "min",
+      "size": 32,
+      "n_records": 1,
+      "sha256": "61e96938cf19fdbf3a735aeeac4e5a12c387249521612f19caa581c821f913d6",
+      "first": {
+        "date": "2026-09-21 09:31",
+        "open": 2.9800000190734863,
+        "high": 2.9800000190734863,
+        "low": 2.9800000190734863,
+        "close": 2.9800000190734863,
+        "amount": 0.0,
+        "volume": 0.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-21 09:31",
+        "open": 2.9800000190734863,
+        "high": 2.9800000190734863,
+        "low": 2.9800000190734863,
+        "close": 2.9800000190734863,
+        "amount": 0.0,
+        "volume": 0.0,
+        "hour": 9,
+        "minute": 31
+      }
+    },
+    {
+      "rel": "sz/minline/sz300322.lc1",
+      "market": "sz",
+      "kind": "min",
+      "size": 568320,
+      "n_records": 17760,
+      "sha256": "03e330e4e8f6d12e8865de88d65c6b996f68f961665605871e6650d8688fd157",
+      "first": {
+        "date": "2026-06-12 09:31",
+        "open": 28.200000762939453,
+        "high": 28.579999923706055,
+        "low": 28.079999923706055,
+        "close": 28.559999465942383,
+        "amount": 42370564.0,
+        "volume": 1497100.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-24 15:00",
+        "open": 17.729999542236328,
+        "high": 17.729999542236328,
+        "low": 17.729999542236328,
+        "close": 17.729999542236328,
+        "amount": 5818986.0,
+        "volume": 328200.0,
+        "hour": 15,
+        "minute": 0
+      }
+    },
+    {
+      "rel": "sz/minline/sz300755.lc1",
+      "market": "sz",
+      "kind": "min",
+      "size": 568320,
+      "n_records": 17760,
+      "sha256": "3c6f9f7ee6d83b75a67e15b1f25205d50fed4631d2321af00208f81d140cef59",
+      "first": {
+        "date": "2026-06-12 09:31",
+        "open": 15.300000190734863,
+        "high": 15.34000015258789,
+        "low": 15.0600004196167,
+        "close": 15.3100004196167,
+        "amount": 3341789.0,
+        "volume": 219400.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-24 15:00",
+        "open": 11.380000114440918,
+        "high": 11.380000114440918,
+        "low": 11.380000114440918,
+        "close": 11.380000114440918,
+        "amount": 670282.0,
+        "volume": 58900.0,
+        "hour": 15,
+        "minute": 0
+      }
+    },
+    {
+      "rel": "sz/minline/sz301189.lc1",
+      "market": "sz",
+      "kind": "min",
+      "size": 568320,
+      "n_records": 17760,
+      "sha256": "674ef656d3f0390e84ed4dab2c3d87c3357667d4ce31433d3891d5db747be967",
+      "first": {
+        "date": "2026-06-12 09:31",
+        "open": 68.5,
+        "high": 68.80999755859375,
+        "low": 67.62000274658203,
+        "close": 67.62000274658203,
+        "amount": 10194304.0,
+        "volume": 149100.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-24 15:00",
+        "open": 75.79000091552734,
+        "high": 75.79000091552734,
+        "low": 75.79000091552734,
+        "close": 75.79000091552734,
+        "amount": 8688566.0,
+        "volume": 114700.0,
+        "hour": 15,
+        "minute": 0
+      }
+    },
+    {
+      "rel": "sz/minline/sz399624.lc1",
+      "market": "sz",
+      "kind": "min",
+      "size": 599040,
+      "n_records": 18720,
+      "sha256": "a0a15c23afdfc22e75cfcff37400b8d8a3a88cd59f7d1dae24e0c0f93bfd83bd",
+      "first": {
+        "date": "2026-03-18 09:31",
+        "open": 2742.5400390625,
+        "high": 2746.090087890625,
+        "low": 2737.590087890625,
+        "close": 2737.590087890625,
+        "amount": 10404337664.0,
+        "volume": 104043366.0,
+        "hour": 9,
+        "minute": 31
+      },
+      "last": {
+        "date": "2026-09-24 15:00",
+        "open": 2585.93994140625,
+        "high": 2585.93994140625,
+        "low": 2585.889892578125,
+        "close": 2585.889892578125,
+        "amount": 2605728256.0,
+        "volume": 26057283.0,
+        "hour": 15,
+        "minute": 0
+      }
+    }
+  ]
+}

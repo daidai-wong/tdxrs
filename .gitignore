@@ -99,3 +99,6 @@ examples/test_output/
 Thumbs.db
 CLAUDE.md
 
+
+# 基准测试输出(可复现, 不入库; 入库的是 tests/golden/golden_local.json 采样清单)
+bench_local.json
