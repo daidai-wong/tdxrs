@@ -25,6 +25,9 @@ from tdxrs.server_health import screen_servers, best_server
 # 混合数据层 (本地 vipdoc 优先 + 服务器补缺 + 双源验证)
 from tdxrs.hybrid import HybridClient, get_daily_bars
 
+# Arrow 列存缓存 (分片 + 增量更新; 仅 pyarrow 涉及的部分为可选依赖)
+from tdxrs.arrow_cache import ArrowCache, build_cache, open_cache
+
 __version__ = "0.6.7"
 __all__ = [
     "DailyBarReader", "MinBarReader", "LcMinBarReader", "BlockReader", "FinancialReader",
@@ -32,4 +35,5 @@ __all__ = [
     "PRIMARY_SERVERS", "ALL_KNOWN_SERVERS",
     "screen_servers", "best_server",
     "HybridClient", "get_daily_bars",
+    "ArrowCache", "build_cache", "open_cache",
 ]

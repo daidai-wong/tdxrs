@@ -37,6 +37,10 @@ quotes = client.get_security_quotes([
 
 ## 性能
 
+> **开发提示**：纯 Python 模块（`local.py` / `boundary.py` / `arrow_cache.py` …）改了之后，
+> 若未走 `maturin develop`，`import tdxrs` 拿到的仍是 site-packages 里的**旧副本**。
+> 用 `python tests/sync_purepy.py` 秒级同步（`--check` 只报告差异）；Rust 侧改动仍需重新编译。
+
 > **口径说明（重要）**：本节的本地解析数字全部可用 `tests/bench_local.py` 复现，并同时给出
 > **「耗时 ÷ 同轮纯 IO 地板」的归一化比值**。原因是本机 IO 地板实测在 **0.889 s ~ 5.4 s** 之间漂移（**5.7×**）——
 > 同一个「零拷贝对现状 4.80×」与「1.76×」都是真数字，差别只在落在哪个 IO 窗口。
@@ -82,6 +86,58 @@ CPython 3.13 · numpy 2.5 · pandas 3.0。复现：`python tests/bench_local.py 
 
 回本点 **n ≈ 1.8**：缓存用到第 2 次即回本。完整实测见 `ARROW_BOUNDARY_REPORT.html`。
 
+### Arrow 列存缓存（`tdxrs.arrow_cache`）
+
+把上面那「一次转置」**产品化**：`manifest.json` + 内容寻址分片 + 源文件指纹，支持增量更新。
+
+```python
+from tdxrs.arrow_cache import ArrowCache, open_cache
+
+c = ArrowCache("D:/cache/sh_lday", shard_size=512)
+c.build(r"D:/TDX/vipdoc/sh/lday")            # 建一次
+c.update()                                    # 之后每天：只重写指纹变了的那个分片
+
+tb   = c.open_table(columns=["close"])        # 列裁剪
+df   = c.to_pandas()                          # split_blocks -> 零拷贝
+panel = c.to_panel(sort=True)                 # 还原成 DailyPanel（可 .grid()）
+con, name = c.duckdb()                        # DuckDB 直读 Parquet
+
+c.status(); c.stale_files(); c.verify()       # 新鲜度 / 差异清单 / 完整性
+```
+
+全市场实测（9585 文件 / 1021 万条 / 311.6 MiB，19 分片，Feather lz4）：
+
+| 操作 | 耗时 | 说明 |
+|------|-----:|------|
+| 重扫 vipdoc（`scan_daily`，基线） | 1.212 s | 每次都要付 |
+| **建缓存**（扫描 + 转置 + 落盘） | **1.97 s** | 一次性，**192.5 MiB（0.62× 源）** |
+| 重开：全列 | **0.140 s** | **8.7×** 于重扫 |
+| 重开：单列（列裁剪） | 0.037 s | **32.6×** 于重扫 |
+| 重开 → DataFrame（3 列） | 0.098 s | 12.3× |
+| DuckDB 直读 Parquet | 0.004 s | 点查/聚合下推 |
+| 还原 `DailyPanel`（含逆向重排） | 0.330 s | 3.7×，之后可正常用 `grid()` |
+
+**增量更新**（把每只股票都追加一根 K 线来模拟日线常态）：
+
+| 变更 | 耗时 | 脏分片 | 重读源文件 | 备注 |
+|------|-----:|------:|-----------:|------|
+| 无变更 | 0.178 s | 0/19 | 0 | 只 stat 全量源文件 |
+| **只改 1 个文件** | **0.607 s** | **1/19** | **507 / 9585（5.3%）** | 省 **94.7%** 重读 |
+| 全部文件都变 | 1.945 s | 19/19 | 9585 | `is_full_rebuild=True` —— **日线每日常态**，如实上报 |
+
+**分片大小是「读快」与「增量省」的取舍**（同窗口归一化，全市场）：
+
+| `shard_size` | 分片数 | 建一次 | 重开全列 | 改 1 个文件要重读 |
+|-------------:|-------:|-------:|---------:|------------------:|
+| 256 | 38 | 4.32 s | 0.156 s | ~2.7% 源文件 |
+| **512（默认）** | **19** | **1.97 s** | **0.140 s** | **~5%** |
+| 1024 | 10 | 3.98 s | 0.133 s | ~11% |
+| 4096 | 3 | 3.92 s | 0.118 s | ~43% |
+
+> 上表按各自窗口记录（IO 地板漂移 5.7×），只用于看**趋势**：分片越少，重开略快、增量越贵。
+> **缓存重开几乎不受 IO 窗口影响**（读 192 MiB 压缩列存，不是扫 312 MiB + 解析），
+> 因此「比重扫快几倍」在快窗口是 8.7×、在 IO 慢窗口会涨到 20× 以上 —— 引用哪个数字都要带上窗口。
+
 ### 网络 API (连接池模式)
 
 | 操作 | tdxrs | tdxpy | 加速比 |
@@ -107,6 +163,9 @@ CPython 3.13 · numpy 2.5 · pandas 3.0。复现：`python tests/bench_local.py 
 | 编译参数调优 | **已评估，收益不可测** | `codegen-units=1` / `target-cpu=native` / `panic=abort` 五组配置在真实数据微基准上差异 **≤2%**，而**同一二进制连跑三次的噪声达 +59%（IO）/ ±12%（计算核）** —— 收益无法与噪声区分。`lto=true` 已开启，`codegen-units` 基本冗余；解码核是内存带宽瓶颈的标量循环，不吃指令集。因此**未启用**（`panic="abort"` 另有语义问题：会把 pyo3 本可转成 Python 异常的 panic 变成进程 abort） |
 | `memory_map=True` 非零拷贝 | 已实测确认 | `feather.read_table(memory_map=True)` 两次读取 buffer 地址不同，即 pyarrow 仍拷出数据。真实收益是**免重扫 + 列裁剪** |
 | `Table.to_pandas()` 默认拷贝 | 已确认 | pandas BlockManager 会把同 dtype 多列合并成二维 block。需 `split_blocks=True` 或 `types_mapper=pd.ArrowDtype` |
+| 列存缓存的「每日全量」 | 设计使然 | 日线数据每天几乎每个文件都会变（每只股票多一根 K 线），此时所有分片都脏，`update()` 退化为全量重建（1.9 s）。返回值的 `is_full_rebuild` 会如实报告。要避免每日全量需要「按文件追加」的存储形态，那不是 Arrow/Parquet 的模型 |
+| 缓存 `to_panel()` 的内存 | 高水位 ~1.1 GB | 要把列式还原成行主序必须再持有一份 `n×32B`（1021 万条 ≈ 330 MB）+ 一次转置。已改为**逐分片填充**（不驻留整张列表），峰值从 1.53 GB 降到 1.07 GB；pyarrow 的内存池不会把释放的缓冲还给 OS，所以 RSS 高水位不会回落 |
+| 构建时传**文件列表** | 来源不可回放 | `build([p1, p2, ...])` 无法记录「可重新扫描的来源」，此时 `status()['fresh']` 返回 `None`、`stale_files()` 返回空，`update()` 要求显式传 `source=`。传目录则一切自动 |
 | 交易日历 | **未实现** | 请求限流按**时钟**判断交易日，**节假日会误判为 trading** |
 | `async_client` 实时分时 | 走回退路径 | 同步客户端已接真实 `0x051d`；异步客户端仍走历史接口回退（功能正常，非实时） |
 | `quote` 服务器时间 | 乱码 | `servertime` 字段解析未对齐（P2，不影响行情数据） |
@@ -211,6 +270,14 @@ client.set_phase("trading")  # trading / prepost / closed
 | `.lc5` `.lc1` 分钟线 | `MinBarReader` `LcMinBarReader` | 同上 |
 | `.dat` 板块 | `BlockReader` | flat / group 两种模式 |
 | `gpcw*.dat` 财务 | `FinancialReader` | f32 字段数组 |
+
+纯 Python 的极速读取路径与列存缓存（无 PyO3 依赖）：
+
+| 模块 | 作用 |
+|------|------|
+| `tdxrs.local` | 零拷贝矩阵读取器：`read_daily` / `read_tail` / `read_range` / `scan_daily` → `DailyPanel`（`grid()` 直出筛查网格） |
+| `tdxrs.boundary` | Arrow / Parquet / DuckDB 边界互操作（`to_arrow` / `write_feather` / `register_duckdb`） |
+| `tdxrs.arrow_cache` | 分片列存缓存：`ArrowCache.build/update/open_table/to_panel`，增量只重写脏分片 |
 
 ### 批量下载 (`tdxrs.downloader`)
 

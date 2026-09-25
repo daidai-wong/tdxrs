@@ -35,6 +35,7 @@ RUNNERS = [
     ("test_dataframe_dtype.py", "LOCAL", []),
     ("test_cli_auto_market.py", "LOCAL", []),
     ("test_hybrid.py", "LOCAL", []),
+    ("test_arrow_cache.py", "LOCAL", []),      # 合成语料; 无 pyarrow 自动 SKIP
     ("test_local_parity.py", "VIPDOC", []),
     ("test_tail_range.py", "VIPDOC", []),
     ("test_scan_panel.py", "VIPDOC", []),
