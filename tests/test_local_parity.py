@@ -75,12 +75,20 @@ def view_from_matrix(m, kind: str) -> dict:
     """候选实现输出 (tdxrs.local.Matrix) -> 统一视图。"""
     n = int(m.n)
     out = {"n": n, "kind": kind}
-    out["dates"] = [_date_str_day(int(d)) for d in np.asarray(m.dates_raw)]
-    for f in DAY_FIELDS:
-        out[f] = np.asarray(getattr(m, f), dtype=np.float64)
-    if kind == "min":
-        out["hour"] = np.asarray(m.hour, dtype=np.int64)
-        out["minute"] = np.asarray(m.minute, dtype=np.int64)
+    if kind == "day":
+        out["dates"] = m.date_str
+        for f in DAY_FIELDS:
+            out[f] = np.asarray(getattr(m, f), dtype=np.float64)
+    else:
+        # 参考实现的分钟线 date 形如 "YYYY-MM-DD HH:MM"
+        base = m.date_str
+        hh = np.asarray(m.hour)
+        mm = np.asarray(m.minute)
+        out["dates"] = [f"{base[i]} {hh[i]:02d}:{mm[i]:02d}" for i in range(n)]
+        for f in DAY_FIELDS:
+            out[f] = np.asarray(getattr(m, f), dtype=np.float64)
+        out["hour"] = hh.astype(np.int64)
+        out["minute"] = mm.astype(np.int64)
     return out
 
 

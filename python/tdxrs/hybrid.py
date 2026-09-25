@@ -42,6 +42,7 @@ from pathlib import Path
 
 from tdxrs._internal import DailyBarReader, TdxHqClient
 from tdxrs.constants import MARKET_BJ, MARKET_SH, MARKET_SZ
+from tdxrs.local import RECORD_SIZE, read_tail
 
 # 常见通达信客户端 vipdoc 路径 (自动探测用)
 _VIPDOC_CANDIDATES = (
@@ -79,9 +80,16 @@ def locate_vipdoc(extra_candidates=None) -> Path | None:
 
 
 def market_of(code: str) -> int:
-    """股票代码 -> 市场常量 (与 cli.auto_market 同规则)。"""
+    """股票代码 -> 市场常量 (与 cli.auto_market 同规则)。
+
+    注意 000xxx 段沪深二义 (000001 既是上证指数也是平安银行),
+    这类代码必须显式传 market 参数。
+
+    北交所代码段按本机 vipdoc 实测补齐: bj/lday 下只有 81/89/92 三种前缀
+    (sh 与 sz 目录均无 81/89 前缀, 故无冲突); 43/83/87 为北交所既有段。
+    """
     code = str(code)
-    if code.startswith(("43", "83", "87", "920")):
+    if code.startswith(("43", "83", "87", "920", "81", "89")):
         return MARKET_BJ
     if code.startswith(("6", "5", "9")):
         return MARKET_SH
@@ -301,12 +309,30 @@ class HybridClient:
         # ---------- 本地读取 ----------
         local: list[dict] = []
         path = local_day_path(self.vipdoc_dir, code, market) if self.vipdoc_dir else None
+        result["path"] = str(path) if path else None
+
         if path is not None and path.exists():
+            # ---- 快路径: 本地条数足够 -> 只读尾部 count 条 ----
+            # 零语义变化依据: 现状代码在 len(local) >= count 分支里只用了 local[-count:],
+            # 前面 (total - count) 条的解析结果从未被使用。
+            # 边界保持与旧实现一致: count <= 0 或文件非 32 整数倍时退回慢路径
+            # (旧实现 count=0 会返回全部记录; 非 32 倍数会在解析时报错 -> local=[])。
+            if count > 0:
+                try:
+                    size = path.stat().st_size
+                    total = size // RECORD_SIZE
+                    if size % RECORD_SIZE == 0 and total >= count:
+                        m = read_tail(path, count)
+                        if m.n >= count:
+                            result["local_count"] = total
+                            result.update(source="local", bars=m.to_bars())
+                            return result
+                except Exception:
+                    pass
             try:
                 local = read_local_day(path)
             except Exception:
                 local = []
-        result["path"] = str(path) if path else None
         result["local_count"] = len(local)
 
         # ---------- 本地足够: 纯本地, 不碰网络 ----------

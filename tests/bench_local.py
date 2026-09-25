@@ -183,15 +183,40 @@ def sc_scan_daily(files: list[Path], vipdoc: Path) -> dict:
     return {"rows": int(res.n), "codes": len(files)}
 
 
+def _screen_target(f: Path) -> tuple[int, str]:
+    """文件路径 -> (market, code)。直接由目录决定市场, 不走代码前缀推断。
+
+    000xxx 段沪深二义 (000001 既是上证指数也是平安银行), 靠前缀会把
+    sh000001 读成 sz000001, 导致两类筛查场景读的不是同一批文件、条数不可比。
+    """
+    from tdxrs.constants import MARKET_BJ, MARKET_SH, MARKET_SZ
+    mkt = {"sh": MARKET_SH, "sz": MARKET_SZ, "bj": MARKET_BJ}[f.parent.parent.name]
+    return mkt, f.stem[2:]
+
+
+def sc_screen_legacy(files: list[Path], vipdoc: Path) -> dict:
+    """改造前的行为锚点: 全量解析 -> list[dict] -> 切片。
+
+    必须在基准里保留这条路径 —— 一旦 HybridClient 改走快路径,
+    就再也测不到「旧行为有多慢」, 前后对比会失去基准。
+    """
+    from tdxrs.hybrid import read_local_day
+    n = 0
+    for f in files:
+        n += len(read_local_day(f)[-30:])
+    return {"rows": n, "codes": len(files), "note": "旧逻辑: 全量解析+切片"}
+
+
 def sc_screen_hybrid(files: list[Path], vipdoc: Path) -> dict:
+    """改造后的 HybridClient (dict 输出形态保持不变)。"""
     from tdxrs.hybrid import HybridClient
     hc = HybridClient()
-    codes = [f.stem[2:] for f in files]
     n = 0
-    for c in codes:
-        r = hc.get_daily_bars(c, count=30, persist=False, validate=False)
+    for f in files:
+        mkt, code = _screen_target(f)
+        r = hc.get_daily_bars(code, count=30, market=mkt, persist=False, validate=False)
         n += len(r["bars"])
-    return {"rows": n, "codes": len(codes), "note": "全量解析整个文件后切片"}
+    return {"rows": n, "codes": len(files), "note": "P3 快路径, 输出仍为 list[dict]"}
 
 
 def sc_screen_tail(files: list[Path], vipdoc: Path) -> dict:
@@ -212,6 +237,7 @@ SCENARIOS = {
     "mmap_1t":        (sc_mmap_1t,        "零拷贝 np.memmap 1 线程"),
     "zc_batch":       (sc_zc_batch,       "零拷贝 + concat 批量拼装"),
     "scan_daily":     (sc_scan_daily,     "批量并行扫描 scan_daily"),
+    "screen_legacy":  (sc_screen_legacy,  "筛查(旧行为锚点): 全量解析+切片"),
     "screen_hybrid":  (sc_screen_hybrid,  "筛查: HybridClient(count=30)"),
     "screen_tail":    (sc_screen_tail,    "筛查: read_tail(30)"),
 }
@@ -219,7 +245,7 @@ SCENARIOS = {
 # 需要 tdxrs.local 的场景(P2 之后才有)
 NEEDS_LOCAL = {"zc_1t", "zc_8t", "mmap_1t", "zc_batch", "scan_daily", "screen_tail"}
 # 用筛查样本(300 长历史文件)而非全市场样本的场景
-SCREEN_SCENARIOS = {"screen_hybrid", "screen_tail"}
+SCREEN_SCENARIOS = {"screen_legacy", "screen_hybrid", "screen_tail"}
 
 
 # ============================================================
